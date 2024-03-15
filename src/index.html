@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="/src/style.css" />
+	
+</head>
+<body>
+
+	<div class="localApp">
+		<div class="localContent">
+			<div class="login-container">
+						<form class="login-form">
+							<div class="title">
+								<h2>Connect to VM </h2>
+							</div>
+							<div class="form-group">
+								<input
+									placeholder="IP address"
+									type="text"
+									id="address"
+									required
+								/>
+							</div>
+							<div class="ctn-btn">
+								<button
+									class="btn-login"
+									onClick={handleMoonlight}
+								>
+									Moonlight
+								</button>
+								<button
+									class="btn-login"
+									onClick={handleThinkmay}
+								>
+									Thinkmay
+								</button>
+								<button
+									class="btn-login"
+									onClick={handleConfigure}
+								>
+									Configure
+								</button>
+							</div>
+	
+						</form>
+				
+			</div>
+	
+			<div class="logs">
+	
+				<div class="log">
+					<h6 class="logTitle">Server log</h6>
+					<div class="logContent">
+						<p>
+							Tôi dại dột.
+						</p>
+					</div>
+				</div>
+				<div class="log">
+					<h6 class="logTitle">Monlight log</h6>
+					<div class="logContent">
+	
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+</body>
+</html>
