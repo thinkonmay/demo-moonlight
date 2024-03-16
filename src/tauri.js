@@ -46,20 +46,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConfigureDaemon = exports.CloseSession = exports.StartMoonlight = exports.StartThinkmay = exports.GetRequest = exports.WS_PORT = void 0;
-var http_1 = require("@tauri-apps/api/http");
-var shell_1 = require("@tauri-apps/api/shell");
+
+export default StartThinkmay;
+// exports.__esModule = true;
+// exports.ConfigureDaemon = exports.CloseSession = exports.StartMoonlight = exports.StartThinkmay = exports.GetRequest = exports.WS_PORT = void 0;
+// var http_1 = require("@tauri-apps/api/http");
+// import * as http_1 from '/tauri-apps/api/http';
+import * as http_1 from './tauri-apps/api/http.js';
+// var shell_1 = require("@tauri-apps/api/shell");
+import * as shell_1 from  './tauri-apps/api/shell.js';
 // TODO /log & /info
 // TODO log moonlight
 // TODO api call status
 // TODO loading
-exports.WS_PORT = 60000;
+// exports.WS_PORT = 60000;
 var map = new Map();
 function GetRequest(uuid) {
     return map.get(uuid).req;
 }
-exports.GetRequest = GetRequest;
+// exports.GetRequest = GetRequest;
 function StartThinkmay(computer) {
     return __awaiter(this, void 0, void 0, function () {
         var client, address, turn, webrtc_config, thinkmay, display, id, req, resp, ret;
@@ -120,7 +125,7 @@ function StartThinkmay(computer) {
         });
     });
 }
-exports.StartThinkmay = StartThinkmay;
+// exports.StartThinkmay = StartThinkmay;
 ;
 function StartMoonlight(computer, options, callback) {
     return __awaiter(this, void 0, void 0, function () {
@@ -190,7 +195,7 @@ function StartMoonlight(computer, options, callback) {
         });
     });
 }
-exports.StartMoonlight = StartMoonlight;
+// exports.StartMoonlight = StartMoonlight;
 ;
 function CloseSession(uuid) {
     return __awaiter(this, void 0, void 0, function () {
@@ -218,7 +223,7 @@ function CloseSession(uuid) {
         });
     });
 }
-exports.CloseSession = CloseSession;
+// exports.CloseSession = CloseSession;
 function ConfigureDaemon(address, reset) {
     return __awaiter(this, void 0, void 0, function () {
         var computer, client, _a, sessions, index, element;
@@ -268,7 +273,7 @@ function ConfigureDaemon(address, reset) {
         });
     });
 }
-exports.ConfigureDaemon = ConfigureDaemon;
+// exports.ConfigureDaemon = ConfigureDaemon;
 function getRandomInt(min, max) {
     var minCeiled = Math.ceil(min);
     var maxFloored = Math.floor(max);
