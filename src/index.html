@@ -19,15 +19,25 @@
 						<h2>Connect to VM </h2>
 					</div>
 					<div class="form-group">
+						<label for="ipAddress">IP address</label>
 						<input placeholder="IP address" type="text" id="ipAddress" required />
+						<div class="form-group">
+							<label for="bitrate">Bitrate (MBps)</label>
+							<input placeholder="Bitrate (MBps)" type="number" id="bitrate" required value="6"/>
+							<label for="height">Height</label>
+							<input placeholder="Height" type="number" id="height" required value="1080"/>
+							<label for="width">Width</label>
+							<input placeholder="Width" type="number" id="width" required value="1920" />
+						</div>
 					</div>
+					
 					<div class="ctn-btn">
 						<button class="btn-login" id="Moonlight-btn" >
 							Moonlight
 						</button>
-						<button class="btn-login" id="Thinkmay-btn" >
+						<!-- <button class="btn-login" id="Thinkmay-btn" >
 							Thinkmay
-						</button>
+						</button> -->
 						<button class="btn-login" id="Configure-btn" >
 							Configure
 						</button>
@@ -42,16 +52,15 @@
 				<div class="log">
 					<h6 class="logTitle">Server log</h6>
 					<div class="logContent">
-						<p class="logText">
-							Tôi dại dột.
+						<p class="logText" id="serverLog">
 						</p>
 					</div>
 				</div>
 				<div class="log">
-					<h6 class="logTitle">Monlight log</h6>
+					<h6 class="logTitle">Moonlight log</h6>
 					<div class="logContent">
-						<p class="logText">
-							Tôi dại dột.
+						<p class="logText" id="moonlightLog">
+							
 						</p>
 					</div>
 				</div>
