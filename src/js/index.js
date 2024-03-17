@@ -9,14 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const bitrate = document.getElementById("bitrate").value;
     const height = document.getElementById("height").value;
     const width = document.getElementById("width").value;
-    StartMoonlight(ip, {
-      bitrate: bitrate,
-      width: width * 1000,  
+    StartMoonlight({
+        address: ip,
+      }
+      , {
+      bitrate: bitrate * 1000,
+      width: width,  
       height: height
-    }, 
-    (data) => {
-      const logDiv = document.getElementById("moonlightLog");
-      logDiv.innerHTML = logDiv.innerHTML + data + "<br>";
+      }, 
+      (data, log) => {
+        const logDiv = document.getElementById("moonlightLog");
+        logDiv.innerHTML = logDiv.innerHTML + data + "|" +  log + "<br>"  + "<hr class='solid'></hr>";
     })
   }
 
