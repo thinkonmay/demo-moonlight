@@ -1,252 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-
-	<link rel="stylesheet" href="/src/style.css" />
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright App</title>
+<link rel="icon" type="image/png" href="https://hub.grupobright.com/wp-content/uploads/2023/11/512.png">
+<link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-	<div class="localApp">
-		<div class="localContent">
-			<div class="login-container">
-				<div class="login-form">
-					<div class="title">
-						<h2>Connect to VM </h2>
-					</div>
-					<div class="form-group">
-						<label for="ipAddress">IP address</label>
-						<input placeholder="IP address" type="text" id="ipAddress" required />
-						<div class="form-group">
-							<label for="bitrate">Bitrate (MBps)</label>
-							<input placeholder="Bitrate (MBps)" type="number" id="bitrate" required value="6"/>
-							<label for="height">Height</label>
-							<input placeholder="Height" type="number" id="height" required value="1080"/>
-							<label for="width">Width</label>
-							<input placeholder="Width" type="number" id="width" required value="1920" />
-						</div>
-					</div>
-					
-					<div class="ctn-btn">
-						<button class="btn-login" id="Moonlight-btn" >
-							Moonlight
-						</button>
-						<!-- <button class="btn-login" id="Thinkmay-btn" >
-							Thinkmay
-						</button> -->
-						<button class="btn-login" id="Configure-btn" >
-							Configure
-						</button>
-					</div>
 
-				</div>
+<div class="login-container">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="https://hub.grupobright.com/wp-content/uploads/2023/11/512.png" alt="BRIGHT Logo">
+    </div>
+    <input type="text" placeholder="IP" name="ip">
+    <input type="password" placeholder="SENHA" name="password">
+    <div class="spacer"></div>
+    <a href="#"><input type="submit" value="CONECTAR" class="btn"></a>
+    <a href="https://grupobright.com/dashboard" target="_blank"><input type="submit" value="CRIAR MAQUINA BRIGHT" class="btn"></a>
+  </div>
+</div>
 
-			</div>
-
-			<div class="logs">
-
-				<div class="log">
-					<h6 class="logTitle">Server log</h6>
-					<div class="logContent">
-						<p class="logText" id="serverLog">
-						</p>
-					</div>
-				</div>
-				<div class="log">
-					<h6 class="logTitle">Moonlight log</h6>
-					<div class="logContent">
-						<p class="logText" id="moonlightLog">
-							
-						</p>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
 </body>
-<script src="bundle.js"></script>
-
-<style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-
-
-
-	.localApp &[data-hide="true"] {
-		z-index: -1 !important;
-	}
-
-	.localApp &[data-size="mini"] {
-		top: 4%;
-		left: 8%;
-		width: 320px;
-		height: 500px;
-	}
-
-	.localApp {
-		--bg1: rgba(242, 242, 242, 0.9);
-		--bg2: rgba(255, 255, 255, 0.9);
-		--bg3: rgba(0, 0, 0, 0.033);
-		--bg4: #f7f7f7;
-		--rib-bg: #ffffffb8;
-
-		min-width: 550px;
-		background: var(--bg4);
-
-
-
-
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-			"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-			sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		width: 100vw;
-		height: 100vh;
-
-
-
-
-
-	}
-
-	.localContent {
-		padding: 24px;
-		padding-top: 50px;
-		display: flex;
-		gap: 10px;
-		justify-content: space-evenly;
-
-		width: 100%;
-		height: 100%;
-
-		color: var(--dark-txt);
-		overflow: hidden;
-		box-sizing: border-box;
-
-	}
-
-	.login-container {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition: all 0.1s ease-in;
-		transform: scale(1.1);
-
-	}
-
-	.login-container .login-form {
-
-		max-width: 320px;
-		width: 90%;
-		padding: 20px;
-		border-radius: 8px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.title {
-		margin-bottom: 16px;
-	}
-
-	.subTitle {
-		font-size: 14px;
-		color: gray;
-		padding-left: 8%;
-	}
-
-	.login-container .form-group {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-	}
-
-	.login-container label {
-		display: block;
-		margin-bottom: 5px;
-	}
-
-	.login-container input[type='text'],
-	.login-container input[type='password'] {
-		width: 100%;
-		border: 1px solid;
-		padding: 8px;
-		border-radius: 4px;
-	}
-
-	.ctn-btn {
-		margin-top: 32px;
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.login-container .btn-login {
-		width: 30%;
-		padding: 10px;
-		border: none;
-		border-radius: 4px;
-		background: #007bff;
-		color: #fff;
-		cursor: pointer;
-		transition: background-color 0.3s;
-
-
-	}
-
-	.login-container .btn-login :hover {
-		background-color: #0056b3;
-	}
-
-
-	.logs {
-		flex: 1;
-
-	}
-
-	.logTitle {
-		color: var(--dark-txt);
-		font-weight: bold;
-		margin-bottom: 8px;
-	}
-
-	.log {
-		height: 50%;
-		max-height: 50%;
-	}
-
-	.logTitle {
-		font-size: 16px;
-		text-transform: uppercase;
-	}
-
-	.logContent {
-		border: 4px solid;
-		height: 80%;
-		background-color: rgb(16, 16, 16);
-		padding: 8px;
-		border-radius: 12px;
-		overflow-y: scroll;
-		color: rgb(243 244 246);
-
-	}
-
-	body[data-theme="dark"] .localApp {
-
-		--bg1: #1c1c1c;
-		--bg2: #242424;
-		--bg3: #313131;
-		--bg4: #444;
-		--rib-bg: #2f2e30b8;
-
-	}
-</style>
-
 </html>
