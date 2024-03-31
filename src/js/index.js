@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
   moonlightBtn.onclick = async () => {
     if (child == null) {
       child = await StartMoonlight(info , config, (data, log) => console.log(`${data} : ${log}`))
-    } else if (child != null) {
-      child = null
+    } else {
       await CloseMoonlight(child)
+      child = null
     }
   }
 });
