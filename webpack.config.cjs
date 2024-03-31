@@ -94,6 +94,14 @@ module.exports = () => {
             {
               copy: [
                 {
+                  source: getDirectory('src/assets/img/**'),
+                  destination: 'dist/img'
+                }
+              ]
+            },
+            {
+              copy: [
+                {
                   source: getDirectory('src/assets/favicon/**'),
                   destination: 'dist/favicon'
                 }

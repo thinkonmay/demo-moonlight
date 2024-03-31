@@ -16,16 +16,15 @@
     <div class="login-logo">
       <img src="https://hub.grupobright.com/wp-content/uploads/2023/11/512.png" alt="BRIGHT Logo">
     </div>
-    <input type="text" placeholder="IP" name="ip">
-    <input type="password" placeholder="SENHA" name="password">
+    <input type="iptext" placeholder="IP" name="ip" id="IP">
     <div class="spacer"></div>
-    <a href="#"><input type="submit" value="CONECTAR" class="btn"></a>
+    <a href="#"><input type="submit" value="CONECTAR" class="btn" id="connectBtn"></a>
     <a href="https://grupobright.com/dashboard" target="_blank"><input type="submit" value="CRIAR MAQUINA BRIGHT" class="btn"></a>
   </div>
   
   <!-- Ícone de engrenagem para configurações -->
   <div class="settings-icon" id="toggleSettings">
-    <img src="gear_icon.png" alt="Configurações" href="#">
+    <img src="/img/settings.png" alt="Configurações" href="#">
   </div>
 
   <!-- Campos adicionais ocultos -->
@@ -38,7 +37,7 @@
   
     <label for="width">Width</label>
     <input type="text" id="width" name="width" placeholder="1920">
-    <a href="#"><input type="submit" value="APLICAR" class="btn-small"></a>
+    <a href="#"><input type="submit" value="APLICAR" id="submitBtn" class="btn-small"></a>
   </div>
   
 </div>
@@ -88,7 +87,7 @@
     position: relative;
   }
   
-  input[type="text"], input[type="password"] {
+  input[type="iptext"], input[type="password"] {
     background: #2F2F2F;
     color: white;
     padding: 15px;

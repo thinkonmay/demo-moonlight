@@ -3,11 +3,17 @@ import {CloseMoonlight, GetInfo, StartMoonlight } from "../../src-tauri/tauri.ts
 
 document.addEventListener('DOMContentLoaded', () => {
   const moonlightBtn = document.getElementById("connectBtn");
-  const inputIP = document.getElementById("inputIP");
+  const submitBtn = document.getElementById("submitBtn");
+  const inputIP = document.getElementById("IP");
 
   let info = {}
   let ip = ''
   let child = null
+  let config = {
+    bitrate: 6000,
+    width: 1920,  
+    height: 1080 
+  }
   setInterval(async () => {
     const new_ip = inputIP.value
     if (new_ip == ip) 
@@ -21,30 +27,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+  submitBtn.onclick = async () => {
+    const bitrate = document.getElementById("bitrate").value;
+    const height = document.getElementById("height").value;
+    const width = document.getElementById("width").value;
+
+    if (bitrate != undefined && bitrate > 1 && bitrate < 100)
+      config.bitrate = bitrate * 1000
+    if (height != undefined && height > 100 && height < 5000)
+      config.height = height
+    if (width != undefined && width > 100 && width < 5000)
+      config.width = width
+
+    console.log(config)
+  };
+
 
 
   moonlightBtn.onclick = async () => {
-    console.log(info,child,moonlightBtn.value)
-    if (moonlightBtn.value == "connect") {
-      // const bitrate = document.getElementById("bitrate").value;
-      // const height = document.getElementById("height").value;
-      // const width = document.getElementById("width").value;
-      const bitrate = 6;
-      const height = 1080;
-      const width = 1920;
-      child = await StartMoonlight(info , {
-        bitrate: bitrate * 1000,
-        width: width,  
-        height: height
-        }, 
-        (data, log) => {
-          console.log(log)
-      })
-      moonlightBtn.value = "close"
+    if (child == null) {
+      child = await StartMoonlight(info , config, (data, log) => console.log(`${data} : ${log}`))
     } else if (child != null) {
-      await CloseMoonlight(child)
-      moonlightBtn.value = "connect"
       child = null
+      await CloseMoonlight(child)
     }
   }
 });
