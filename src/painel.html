@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <title>Painel</title>
+    <link rel="stylesheet" type="text/css" href="./css/panel.css">
+	
+</head>
+
+<body style="color: #3b0a96;">
+	
+	<header>
+		<img class="logo" src="./images/logobcg.png" width="60" height="60" alt="logo">	
+
+		<div class="machine-type">
+			<input id="google" type="radio" name="machine-type" class="radio-field" checked> 
+			<label for="google" class="radio-label">Google</label>
+		</div>
+
+		<div class="machine-type">
+			<input id="azure" type="radio" name="machine-type" class="radio-field">
+			<label for="azure" class="radio-label">Azure</label>
+		</div>	
+
+	</header>
+
+
+
+	<nav>
+		
+		<h2 id="tit-senha"></h2>
+	</nav>
+
+
+	
+
+	<div class="container-vm" id="carambolas">
+		<div id="reemodiv"></div>
+
+
+		<div class="loader loader--hidden">
+			<div class="body">
+				<span>
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				</span>
+
+				<div class="base">
+				  <span></span>
+				  <div class="face"></div>
+				</div>
+
+			</div>
+			  <div class="longfazers">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			  </div>
+
+			  <h1>Inicializando VM</h1>			  
+		</div>
+	</div>
+
+    <div class="container" id="catapombas">
+
+		<!--ELDEN RING CARD-->
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/EldenRing.png">
+            </div>
+			<div class="content">
+				<div class="games">
+					<div id="steam-container">
+						<div class="radio-tile">
+							<img class="steam" src="./images/icons/steam.png">
+						</div>
+					</div>	
+
+
+				</div>
+
+				<h3>Elden Ring</h3>
+
+				<a href="#" onclick="changePage('eldenring')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/GTAV.png">
+            </div>
+			<div class="content">
+				<div class="games">
+
+					<div id="steam-container">
+						<input id="steam" type="radio" name="gtav" checked> 
+						<div class="radio-tile">
+							<img class="steam" src="./images/icons/steam.png">
+						</div>
+					</div>	
+
+					<div id="epicgames-container">
+						<input id="epic" type="radio" name="gtav">
+						<div class="radio-tile">
+							<img class="epicgames" src="./images/icons/epicgames.png">
+						</div>
+					</div>	
+
+
+				</div>
+
+				<h3>Grand Theft Auto V</h3>
+
+				<a href="#" onclick="changePage('gtav')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/RL.png">
+            </div>
+			<div class="content">
+				<div class="games">
+
+					<div id="steam-container">
+						<input id="steam" type="radio" name="rl" checked>
+						<div class="radio-tile">
+							<img class="steam" src="./images/icons/steam.png">
+						</div>
+					</div>	
+
+					<div id="epicgames-container">
+						<input id="epic" type="radio" name="rl">
+						<div class="radio-tile">
+							<img class="epicgames" src="./images/icons/epicgames.png">
+						</div>
+					</div>	
+
+				</div>
+
+				<h3>Rocket League</h3>
+
+				<a href="#" onclick="changePage('rleague')">Jogar</a>
+			</div>
+		</div>
+
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/GOW.png">
+            </div>
+			<div class="content">
+
+				<h3>God of War</h3>
+				<p>GOF OF</p>
+				<a href="#" onclick="changePage('god-of-war')">Jogar</a>
+			</div>
+		</div>
+
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/LOL.png">
+            </div>
+			<div class="content">
+				
+
+				<h3>League of Legends</h3>
+				<p>GOF OF</p>
+				<a href="#" onclick="changePage('lol')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/WARZONE.png">
+            </div>
+			<div class="content">
+				<div class="games">
+
+					<div id="steam-container">
+						<div class="radio-tile">
+							<img class="steam" src="./images/icons/battlenet.png">
+						</div>
+					</div>	
+				</div>
+				<h3>COD: Warzone</h3>
+				<a href="#" onclick="changePage('cod')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/LA.png">
+            </div>
+			<div class="content">
+				<div class="games">
+
+					<div id="steam-container">
+						<div class="radio-tile">
+							<img class="steam" src="./images/icons/steam.png">
+						</div>
+					</div>	
+				</div>
+				<h3>Lost Ark</h3>
+				<a href="#" onclick="changePage('lostark')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/BDO.png">
+            </div>
+			<div class="content">
+
+				<h3>Black Desert</h3>
+				<a href="#" onclick="changePage('blackdesert')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="">
+            </div>
+			<div class="content">
+
+				<h3>Launchers</h3>
+				<a href="#" onclick="changePage('bcg')">Jogar</a>
+			</div>
+		</div>
+
+		<div class="card">
+            <div class="front">
+                <img class="fotin" src="./images/games_imgs/RedDead2.png">
+            </div>
+			<div class="content">
+
+				<h3>Red Dead Redemption 2</h3>
+				<a href="#" onclick="changePage('reddead')">Jogar</a>
+			</div>
+		</div>
+	</div>
+
+
+    
+	<script src="vanilla-tilt.js"></script>
+	<script src="https://static.reemo.io/reemo.min.js"></script> 
+	<script src="/socket.io/socket.io.js"></script>
+
+	<script>
+
+		const socket = io.connect();
+		socket.on('connect', function (msg) {
+			console.log("CONECTADO")    
+			
+		});
+
+		socket.on("private",function(msg){
+    		window.location.href="https://4.228.193.142/painel"
+    		console.log(socket)
+		})
+
+		socket.on("cookie",function(msg){
+    		console.log("Cookie> ",msg)
+    		document.cookie=`info=${msg};`
+		})
+
+		const myNode = document.getElementById("catapombas");
+
+		xhr1=new XMLHttpRequest();
+		
+		xhr1.open("GET","/vmcontrol/statusVm_reemo")
+		xhr1.onload = function () {
+			if (xhr1.status==200){
+				var json = JSON.parse(xhr1.responseText);
+				document.getElementById('tit-senha').textContent=`Senha: BrightCloud**`
+				myNode.innerHTML = '';
+				const reemo = new Reemo.WebClient(); 
+				reemo.init('reemodiv'); 
+				reemo.connect(json);
+			}else {console.log("SEM VM ATIVA")}
+		}
+
+		xhr1.send()
+
+		
+		const backupInner=myNode.innerHTML;
+		let selecrl=''
+		let selecgta=''
+		let vm=''
+
+		function getValueRL(){
+			return document.querySelector(`input[name="rl"]:checked`).id;
+		}
+
+		function getValueGTA(){
+			return document.querySelector(`input[name="gtav"]:checked`).id;
+		}
+
+		function changePage(game){
+			let t=game
+
+			if (game=="gtav")
+			{
+				selecgta=getValueGTA()
+				t=(`gtav-${selecgta}`)
+			}
+
+
+			if (game=="rleague")
+			{
+				selecrl=getValueRL()
+				t=(`rleague-${selecrl}`)
+			}
+
+			myNode.innerHTML = '';
+			document.querySelector(".loader").classList.remove("loader--hidden")
+			tryLaunch(t)
+		}
+
+		function tryLaunch(game){
+			const vmType=document.querySelector('input[name="machine-type"]:checked').id
+
+			if (vmType=="google"){
+
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "/vmcontrol/vmList", true);
+				const delay = ms => new Promise(res => setTimeout(res, ms));
+
+				xhr.onload = async function () {
+					console.log(xhr.status)
+					if (xhr.status === 200) {
+						var json = JSON.parse(xhr.responseText);
+						console.log(json)
+						console.log(json.paradas[0])
+						
+							vm=(json.paradas[0])
+							var data={
+								"instances":json.paradas,
+								"game":game
+							}
+							var createVMxhr=xhr
+							createVMxhr.open("POST", "/vmcontrol/createVm", true);
+
+							createVMxhr.onload=async function(){
+								if (createVMxhr.status===200){
+									var result=JSON.parse(createVMxhr.responseText)
+									console.log(result)
+									document.querySelector(".loader").classList.add("loader--hidden")
+									document.getElementById('tit-senha').textContent=`Senha: BrightCloud**`
+									const reemo = new Reemo.WebClient(); 
+									reemo.init('reemodiv'); 
+									reemo.connect(result.pc);
+								}else{
+									if (createVMxhr.status==418){
+										await delay(5000);
+										var data1={
+										"instances":json.paradas,
+										"game":game
+										}
+										refreshxhr=xhr
+										refreshxhr.open("POST","/vmcontrol/createVm")
+										refreshxhr.onload=createVMxhr.onload
+										refreshxhr.send(JSON.stringify(data))
+									}else{
+										window.location.href = "/painel"
+									}
+
+									
+									//console.log("ERROR!! REFRESHING PAGE..")
+									//window.location.href = "https://4.228.193.142/"
+								}
+
+							}
+							
+							createVMxhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+							createVMxhr.send(JSON.stringify(data))
+						
+					}else{
+						var newXhr=xhr
+						newXhr.open("GET", "/vmcontrol/vmList", true);
+						newXhr.onload = xhr.onload;
+						newXhr.send()
+					}
+				}	
+
+				xhr.send()	
+			}else if (vmType=="azure"){
+
+				socket.on("created",function(msg){
+    				document.querySelector(".loader").classList.add("loader--hidden")
+					document.getElementById('tit-senha').textContent=`Senha: ${msg.password}`
+					const reemo = new Reemo.WebClient(); 
+					reemo.init('reemodiv'); 
+					reemo.connect(msg.pc);
+				})
+
+				socket.on("vms",function(msg){
+    				console.log(msg[0])
+    				socket.emit("vmCommand",{"event":"createVm","game":game})
+				})
+
+				socket.emit("vmCommand",{"event":"list"})
+			}
+		}
+
+
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styleBACKUP.css" />
+    <title>Bright 4.0 - Login</title>
+    <link rel="shortcut icon" href="./images/favicon.ico">
+
+    <style>
+        @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&family=Silkscreen:wght@700&display=swap');
+body {
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    background: #0d052c
+}
+
+.main-login{
+    width: 69vw;
+    height: 100vh;
+    background: #0d052c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-login{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left-login > h1{
+    color: #f3f3f3;
+    text-shadow: 2px 3px #a80e6d;
+    font-size: 50px;
+    width: 50%;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.left-login > lottie-player{
+    display: flex;
+    justify-content: center;
+    height: auto;
+    position: absolute;
+    width: 100%;
+    right: 55%;
+    bottom: 35vw;
+}
+
+.right-login{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #07075091;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.247);
+}
+
+@media(max-width:768px) {
+    .card-login{padding: 30px 55px;}
+}
+
+.card-login > h1 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    text-shadow: 2px 2px #af0aa1;
+    margin: 0;
+}
+
+.textfield{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+@media(max-width:768px) {
+    .textfield{width: 150%;}
+}
+
+.textfield > input{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: #04042b91;
+    color:rgb(255, 255, 255);
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.247);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.textfield > label {
+    color:rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+.textfield > input::placeholder{
+    color:rgb(233, 233, 233);
+}
+
+.btn-login{
+    border: none;
+    outline: none;
+    width: 100%;
+    border-radius: 8px;
+    padding: 16px 0px;
+    background: #ffffff;
+    box-shadow: 0px 10px 40px -12px #af0aa1;
+    margin: 25px;
+    cursor:pointer;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+    </style>
+
+</head>
+<body>
+    <div class="main-login">
+        <div class="left-login">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                
+               <!--... <h1>Painel Login</h1>  -->
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="lf30_xwo73ffu.json" mode="normal" background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
+                <div class="textfield">
+                    <label for="usuario">Usuário</label>
+                    <input id="user" type="text" name="usuario" placeholder="Usuário">
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input id="pass" type="password" name="senha" placeholder="Senha">
+                </div>
+
+
+                <div class="error error--hidden">
+                    Error:
+                </div>
+
+                <button onclick="logar()" class="btn-login" id="btn-login">Login</button>
+                
+                <!--<button onclick="logar()" class="btn-login" id="btn-login"><div class="btnloader"></div></button> 
+                <div class="btnloader"></div> -->
+
+                <script>
+
+                    log_btn=document.querySelector(".btn-login")
+                    const bak_inner=log_btn.innerHTML
+
+                    log_btn.onclick=function(){
+                        logar()
+                        log_btn.disabled=true
+                        this.innerHTML='<div class="btnloader"></div>'
+                    }
+
+                    function logar(){
+                        var login=document.getElementById("user").value;
+                        var senha=document.getElementById("pass").value;
+
+                        var xhr = new XMLHttpRequest();
+                        var url = "/auth/login";
+                        xhr.open("POST", url, true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            var json = JSON.parse(xhr.responseText);
+                            if (xhr.status === 200) {
+                                if (json.success!=true){
+                                    
+                                    const err_obj=document.querySelector(".error")
+                                    log_btn.innerHTML=bak_inner
+                                    log_btn.disabled=false
+                                    
+                                    err_obj.innerHTML=`\n                    Error: Usuário não existe/Sem assinatura válida\n                `
+                                    return err_obj.classList.remove("error--hidden")
+                                
+                                }
+                                window.location.href = "/painel"
+                            }else{
+                                const err_obj=document.querySelector(".error")
+                                console.log(json.error)
+                                log_btn.innerHTML=bak_inner
+                                log_btn.disabled=false
+                                
+                                err_obj.innerHTML=`\n                    Error: ${json.error}\n                `
+                                err_obj.classList.remove("error--hidden")
+                            }
+                        };
+                        var data = JSON.stringify({"username": login, "password": senha});
+                        xhr.send(data);
+
+                        console.log(login,senha)
+                    }
+                </script>
+            </div>
+        </div>        
+    </div>
+</body>
+</html> 

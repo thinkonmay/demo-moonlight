@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="en-US">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Bright 4.1 - Bright Cloud Gaming</title>
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="images/favicon.ico" />
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+      <!-- Typography CSS -->
+      <link rel="stylesheet" href="css/typography.css">
+      <!-- Style -->
+      <link rel="stylesheet" href="css/style.css" />
+      <!-- Responsive -->
+      <link rel="stylesheet" href="css/responsive.css" />
+      <style>
+.card-login > h1 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: 42px;
+    text-shadow: 2px 2px #af0aa1;
+    margin: 0;
+}
+
+      </style>
+   </head>
+   <body>
+      <!-- loader Start -->
+      <div id="loading">
+         <div id="loading-center">
+         </div>
+      </div>
+
+      
+
+      <!-- loader END -->
+      <!-- Header -->
+      <header id="main-header">
+         <div class="main-header">
+
+           
+
+
+            <div class="container-fluid">
+               <div class="row">
+
+
+
+
+                  <div class="col-sm-12">
+                     <nav class="navbar navbar-expand-lg navbar-light p-0">
+                        <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
+                           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                           aria-expanded="false" aria-label="Toggle navigation">
+                           <div class="navbar-toggler-icon" data-toggle="collapse">
+                              <span class="navbar-menu-icon navbar-menu-icon--top"></span>
+                              <span class="navbar-menu-icon navbar-menu-icon--middle"></span>
+                              <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
+                           </div>
+                        </a>
+                        <a class="navbar-brand" href="/"> <img class="img-fluid logo" src="images/logo.png"
+                           alt="streamit" /> </a>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                           <div class="menu-main-menu-container">
+<!--                             <ul id="top-menu" class="navbar-nav ml-auto">
+                                 <li class="menu-item">
+                                    <a href="/">Bright 4.0
+                                    
+                                    </a>
+                                 -->
+                                </li>
+                                 <div class="login-canto">
+                                    <a href="#" onclick="document.cookie = 'token=; max-age=0;'; window.location.href='/'"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                                     </div>
+
+<!--                                 <li class="menu-item">
+                                    <a href="show-category.html">Documentação</a>
+                                 </li>
+                                 <li class="menu-item">
+                                    <a href="movie-category.html">Status</a>
+                                 </li>
+                              </ul>-->
+                           </div>
+                        </div>
+<!--                         <div class="mobile-more-menu">
+                           <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
+                              data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
+                           <i class="ri-more-line"></i>
+                           </a>
+                           <div class="more-menu" aria-labelledby="dropdownMenuButton">
+                              <div class="navbar-right position-relative">
+
+
+                                 <ul class="d-flex align-items-center justify-content-end list-inline m-0">
+
+                                    <li class="nav-item nav-icon">
+                                       <a href="#" class="search-toggle position-relative">
+                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
+                                             height="22" class="noti-svg">
+                                             <path fill="none" d="M0 0h24v24H0z" />
+                                             <path
+                                                d="M18 10a6 6 0 1 0-12 0v8h12v-8zm2 8.667l.4.533a.5.5 0 0 1-.4.8H4a.5.5 0 0 1-.4-.8l.4-.533V10a8 8 0 1 1 16 0v8.667zM9.5 21h5a2.5 2.5 0 1 1-5 0z" />
+                                          </svg>
+                                          <span class="bg-danger dots"></span>
+                                       </a>
+                                       <div class="iq-sub-dropdown">
+                                          <div class="iq-card shadow-none m-0">
+                                             <div class="iq-card-body">
+                                                <a href="#" class="iq-sub-card">
+                                                   <div class="media align-items-center">
+                                                      <img src="images/notify/thumb-1.jpg" class="img-fluid mr-3"
+                                                         alt="streamit" />
+                                                      <div class="media-body">
+                                                         <h6 class="mb-0 ">Grand Theft Auto V</h6>
+                                                         <small class="font-size-12"> just now</small>
+                                                      </div>
+                                                   </div>
+                                                </a>
+                                                
+                                                <a href="#" class="iq-sub-card">
+                                                   <div class="media align-items-center">
+                                                      <img src="images/notify/thumb-3.jpg" class="img-fluid mr-3"
+                                                         alt="streamit" />
+                                                      <div class="media-body">
+                                                         <h6 class="mb-0 ">The Hero Camp</h6>
+                                                         <small class="font-size-12">1 hour ago</small>
+                                                      </div>
+                                                   </div>
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <li>
+                                       <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
+                                       <img src="images/user/user.jpg" class="img-fluid avatar-40 rounded-circle"
+                                          alt="user">
+                                       </a>
+                                       <div class="iq-sub-dropdown iq-user-dropdown">
+                                          <div class="iq-card shadow-none m-0">
+                                             <div class="iq-card-body p-0 pl-3 pr-3">
+                                                <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
+                                                   <div class="media align-items-center">
+                                                      <div class="right-icon">
+                                                         <i class="ri-file-user-line text-primary"></i>
+                                                      </div>
+                                                      <div class="media-body ml-3">
+                                                         <h6 class="mb-0 ">Manage Profile</h6>
+                                                      </div>
+                                                   </div>
+                                                </a>
+                                                <a href="setting.html" class="iq-sub-card setting-dropdown">
+                                                   <div class="media align-items-center">
+                                                      <div class="right-icon">
+                                                         <i class="ri-settings-4-line text-primary"></i>
+                                                      </div>
+                                                      <div class="media-body ml-3">
+                                                         <h6 class="mb-0 ">Settings</h6>
+                                                      </div>
+                                                   </div>
+                                                </a>
+                                                <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
+                                                   <div class="media align-items-center">
+                                                      <div class="right-icon">
+                                                         <i class="ri-settings-4-line text-primary"></i>
+                                                      </div>
+                                                      <div class="media-body ml-3">
+                                                         <h6 class="mb-0 ">Pricing Plan</h6>
+                                                      </div>
+                                                   </div>
+                                                </a>
+                                                <a href="login.html" class="iq-sub-card setting-dropdown">
+                                                   <div class="media align-items-center">
+                                                      <div class="right-icon">
+                                                         <i class="ri-logout-circle-line text-primary"></i>
+                                                      </div>
+                                                      <div class="media-body ml-3">
+                                                         <h6 class="mb-0">Logout</h6>
+                                                      </div>
+                                                   </div>
+                                                </a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="navbar-right menu-right">
+                           <ul class="d-flex align-items-center list-inline m-0">
+
+                                 </a>
+                                 <div class="iq-sub-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                       <div class="iq-card-body">
+                                          <a href="#" class="iq-sub-card">
+                                             <div class="media align-items-center">
+                                                <img src="images/notify/thumb-1.jpg" class="img-fluid mr-3"
+                                                   alt="streamit" />
+                                                <div class="media-body">
+                                                   <h6 class="mb-0 ">Boot Bitty</h6>
+                                                   <small class="font-size-12"> just now</small>
+                                                </div>
+                                             </div>
+                                          </a>
+                                         
+                                          <a href="#" class="iq-sub-card">
+                                             <div class="media align-items-center">
+                                                <img src="images/notify/thumb-3.jpg" class="img-fluid mr-3"
+                                                   alt="streamit" />
+                                                <div class="media-body">
+                                                   <h6 class="mb-0 ">The Hero Camp</h6>
+                                                   <small class="font-size-12">1 hour ago</small>
+                                                </div>
+                                             </div>
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                                 </a>
+                                 <div class="iq-sub-dropdown iq-user-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                       <div class="iq-card-body p-0 pl-3 pr-3">
+                                          <a href="manage-profile.html" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-file-user-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Manage Profile</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="setting.html" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-settings-4-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Settings</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                          <a href="pricing-plan.html" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-settings-4-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Pricing Plan</h6>
+                                                </div>
+                                             </div>
+                                          </a>
+                                        
+                                    <href="login.html" class="iq-sub-card setting-dropdown">
+                                             <div class="media align-items-center">
+                                                <div class="right-icon">
+                                                   <i class="ri-logout-circle-line text-primary"></i>
+                                                </div>
+                                                <div class="media-body ml-3">
+                                                   <h6 class="mb-0 ">Logout</h6>
+                                           -->     </div>
+                                             </div>
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </nav>
+                     <div class="nav-overlay"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- Header End -->
+      <!-- Slider Start -->
+      
+      <!-- Slider End -->
+      <!-- MainContent -->
+
+      
+
+
+      <div class="loader loader--hidden">
+         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+         <lottie-player class="lottieplayer" src="lf30_xwo73ffu.json" mode="normal" background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+         <h1 id="status_text">Maquina será iniciada em média de 15 minutos</h1>
+         <div class="interromper">
+            <a href="#" onclick="socket.emit('sair','sairFila')"><i class="fa fa-stop" aria-hidden="true"></i> Interromper</a>
+         </div>
+         <div class="deletar">
+            <a href="#" onclick="socket.emit('deletar','delete'); alert('VM está sendo deletada. O processo levará de 5 a 10 minutos. Quando finalizado você voltará para o painel automaticamente.')"><i class="fa fa-stop" aria-hidden="true"></i> Deletar VM</a>
+         </div>
+
+
+
+      </div>
+      <div id="reemodiv"></div>
+
+      
+      
+    
+
+
+
+      <div class="infoVM infoVM--hidden">
+        <div class="card-login">
+        <h1>SUA MÁQUINA</h1></div>
+<p>&nbsp;</p>
+         <label for="ip-add"><i class="fa fa-server" aria-hidden="true"></i> Endereço IP:</label><br>
+         <input type="text" id="ip-add" name="ip-add" value="0.0.0.0" readonly><br><br>
+         
+         <label for="user"><i class="fa fa-user" aria-hidden="true"></i> Usuário: </label><br>
+         <input type="text" id="user" name="user" value="BCG" readonly><br><br>
+
+         <label for="cheese"><i class="fa fa-key" aria-hidden="true"></i> Senha</label> <br>
+         <input type="text" id="pass" name="pass" value="BrightCloud**" readonly><button onclick="myFunction()"><i class="fa fa-copy"></i></button><br><br>
+
+
+         <span class="btn btn-hover" data-loading-text="Loading..." id="desligavm" onclick="socket.emit('interromper','sair')"><a href="#"><i class="fa fa-stop" aria-hidden="true"></i> Desligar VM</a></span>
+         <span class="btn btn-hover btn-hover--hidden" data-loading-text="Loading..." id="deletarvm" onclick="socket.emit('deletar','delete'); alert('VM está sendo deletada. O processo levará de 5 a 10 minutos.')"><a href="#" ><i class="fa fa-trash" aria-hidden="true"></i> Deletar VM</a></span>
+<script>
+         $('#desligavm').button();
+
+         $('#desligavm').click(function(){
+         
+           $('#desligavm').button('loading');
+           
+           /* perform processing then reset button when done */
+           setTimeout(function() {
+                $('#desligavm').button('reset');
+           }, 1000);
+           
+           
+         });
+</script>         
+      </div>
+
+
+
+
+
+      <div id="main-content" class="main-content">
+         
+
+         <div class="radio-tile-group">
+            <label>
+               <input type="radio" id="google" name="machine-type" onclick="showOthers()" checked>
+               <span>Google</span>
+            </label>
+
+
+            <label>
+               <input type="radio" id="azure" name="machine-type" onclick="showOthers()">
+               <span>Azure</span>
+            </label>
+         
+            
+            <label>
+               <input type="radio" id="fisica" name="machine-type" onclick="showFisica()" >
+               <span>Bright</span>
+            </label>
+         </div> 
+
+
+
+         <section id="iq-upcoming-movie">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">                        
+                        <h4 class="main-title"><a>Jogos</a></h4>
+                     </div>
+                     <div class="upcoming-contens">
+                        <ul class="favorites-slider list-inline row p-0 mb-0">
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/07.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Launchers</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">Livre</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="bcg" onclick="changePage('bcg')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                      
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                 
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/eldenringg.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Elden Ring</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">17+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="lol" onclick="changePage('eldenring')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                      
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+
+                           <li class="slide-item">
+                              <a>
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/gow.jpg"  class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>God of War</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">18+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="gow" onclick="changePage('god-of-war')" class="hover-buttons">
+                                          <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+
+                           <li class="slide-item">
+                              <a>
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/02.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>COD: Warzone</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">18+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="cod" onclick="changePage('cod')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/03.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Grand Theft Auto V</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">18+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div onclick="changePage('gtav')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+
+                                       <ul class="list-inline p-0 m-2 music-play-lists">
+                                          <label>
+                                             <input type="radio" id="epic" name="gtavLauncher" onclick="console.log('EpicGames')">
+                                             <span><img src="./images/icons/epicgames.png"></i></span>
+                                          </label>
+                                       </ul>
+
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+                                          <label>
+                                             <input type="radio" id="steam" name="gtavLauncher" onclick="console.log('Steam')">
+                                             <span><img src="./images/icons/steam.png"></i></span>
+                                          </label>
+                                       </ul>
+
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+
+                           <li class="slide-item">
+                              <a>
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/rdr2.jpg"  class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Red Dead Redemption 2</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">18+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="reddead" onclick="changePage('reddead')" class="hover-buttons">
+                                          <span class="btn btn-hover"><i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+                           <li class="slide-item">
+                              <a>
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/06.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Rocket League</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">Livre</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div onclick="changePage('rleague')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       <ul class="list-inline p-0 m-2 music-play-lists">
+                                          <label>
+                                             <input type="radio" id="epic" name="rlLauncher" onclick="console.log('EpicGames')">
+                                             <span><img src="./images/icons/epicgames.png"></i></span>
+                                          </label>
+                                       </ul>
+
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+                                          <label>
+                                             <input type="radio" id="steam" name="rlLauncher" onclick="console.log('Steam')">
+                                             <span><img src="./images/icons/steam.png"></i></span>
+                                          </label>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/04.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Lost Ark</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">16+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="lostark" onclick="changePage('lostark')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/05.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>League of Legends</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">14+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="lol" onclick="changePage('lol')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                      
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <section id="iq-fisica">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="radio-tile-group"><a>VM Física</a></h4>                      
+                     </div>
+                     <div class="favorites-contens">
+                        <ul class="favorites-slider list-inline  row p-0 mb-0">
+
+                           <li class="slide-item">
+                              <a>
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="https://brightcloudgames.com.br/wp-content/uploads/2022/12/fisica.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>MÁQUINAS FÍSICAS</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">Com salvamento de arquivos</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div onclick="checarAssinatura()" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Iniciar
+                                          </span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+
+                           
+                          
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+
+
+
+ <!--        <section id="iq-rpg">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title"><a>RPG</a></h4>                      
+                     </div>
+                     <div class="favorites-contens">
+                        <ul class="favorites-slider list-inline  row p-0 mb-0">
+
+
+
+                            <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/04.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Lost Ark</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">16+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="lostark" onclick="changePage('lostark')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           
+                          
+
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/05.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>League of Legends</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">14+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="lol" onclick="changePage('lol')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                      
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/eldenringg.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Elden Ring</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">17+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="lol" onclick="changePage('eldenring')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                      
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+                           <li class="slide-item">
+                              <a >
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/blackdesert.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Black Desert</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">12+</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div id="blackdesert" onclick="changePage('blackdesert')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                      
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+
+                          
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+
+         <section id="iq-esporte">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12 overflow-hidden">
+                     <div class="iq-main-header d-flex align-items-center justify-content-between">
+                        <h4 class="main-title"><a>Esportes</a></h4>                      
+                     </div>
+                     <div class="favorites-contens">
+                        <ul class="favorites-slider list-inline  row p-0 mb-0">
+
+                           <li class="slide-item">
+                              <a>
+                                 <div class="block-images position-relative">
+                                    <div class="img-box">
+                                       <img src="images/upcoming/06.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="block-description">
+                                       <h6>Rocket League</h6>
+                                       <div class="movie-time d-flex align-items-center my-2">
+                                          <div class="badge badge-secondary p-1 mr-2">Livre</div>
+                                          <span class="text-white"></span>
+                                       </div>
+                                       <div onclick="changePage('rleague')" class="hover-buttons">
+                                          <span class="btn btn-hover">
+                                          <i class="fa fa-play mr-1" aria-hidden="true"></i>
+                                          Jogar
+                                          </span>
+                                       </div>
+                                    </div>
+                                    <div class="block-social-info">
+                                       <ul class="list-inline p-0 m-2 music-play-lists">
+                                          <label>
+                                             <input type="radio" id="epic" name="rlLauncher" onclick="console.log('EpicGames')">
+                                             <span><img src="./images/icons/epicgames.png"></i></span>
+                                          </label>
+                                       </ul>
+
+                                       <ul class="list-inline p-0 m-0 music-play-lists">
+                                          <label>
+                                             <input type="radio" id="steam" name="rlLauncher" onclick="console.log('Steam')">
+                                             <span><img src="./images/icons/steam.png"></i></span>
+                                          </label>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+
+
+                           
+                          
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+        -->
+         
+
+
+
+
+
+
+         
+
+
+         
+        
+     
+      <!-- MainContent End-->
+      <!-- back-to-top -->
+      <div id="back-to-top">
+         <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
+      </div>
+      <!-- back-to-top End -->
+      <!-- jQuery, Popper JS -->
+      <script src="js/jquery-3.4.1.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <!-- Bootstrap JS -->
+      <script src="js/bootstrap.min.js"></script>
+      <!-- Slick JS -->
+      <script src="js/slick.min.js"></script>
+      <!-- owl carousel Js -->
+      <script src="js/owl.carousel.min.js"></script>
+      <!-- select2 Js -->
+      <script src="js/select2.min.js"></script>
+      <!-- Magnific Popup-->
+      <script src="js/jquery.magnific-popup.min.js"></script>
+      <!-- Slick Animation-->
+      <script src="js/slick-animation.min.js"></script>
+      <!-- Custom JS-->
+      <script src="js/custom.js"></script>
+      <!--Reemo JS-->
+      <script src="https://brightcloudgames.com.br/reemo4.min.js"></script> 
+      <!--Socket.IO JS-->
+      <script src="/socket.io/socket.io.js"></script>
+
+
+      <script>
+
+
+function myFunction() {
+  // Get the text field
+  var copyText = document.getElementById("pass");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+      
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+
+      document.getElementById("steam").checked=true
+      const myNode = document.getElementById("main-content");
+
+      const socket = io.connect();
+		socket.on('connect', function (msg) {
+			console.log("CONECTADO")    
+			
+		});
+
+
+      socket.on("del",function(msg){
+         if (msg!=true){
+            document.cookie = 'token=; max-age=0;';
+            window.location.href='/'
+         } 
+      })
+      
+
+      socket.on("fisicaRec",function(msg){
+         myNode.innerHTML = '';
+         document.querySelector(".iframe").classList.remove("iframe--hidden")
+         alert(`Usuário: ${msg.user}\n Senha: ${msg.password}`)
+      })
+
+      socket.on('criado',function(msg){
+         myNode.innerHTML = '';
+         document.querySelector(".infoVM").classList.remove("infoVM--hidden")
+         document.getElementById("main-header").innerHTML=''
+         document.getElementById("ip-add").value=msg.ip
+         document.getElementById("pass").value=msg.password
+      })
+
+      socket.on("reconnect",function(msg){
+         if (msg!="NADA"){
+            myNode.innerHTML = '';
+            document.querySelector(".loader").classList.remove("loader--hidden")
+            document.getElementById("status_text").innerHTML=msg
+         }
+      })
+
+ 
+		socket.on("private",function(msg){
+    		window.location.href="/painel"
+    		console.log(socket)
+		})
+
+		socket.on("cookie",function(msg){
+    		console.log("Cookie> ",msg)
+    		document.cookie=`info=${msg};`
+		})
+
+      socket.on("error",async function(msg){
+         console.log("ERROR")      
+         console.log(msg)
+         if (msg.code==2828){
+            alert("Inicie outro jogo/tente mais tarde.")
+         }
+         window.location.href="/"
+               
+		})
+
+      socket.on("fisica2",async function(msg){
+            document.getElementById("status_text").innerHTML=`Carregando sua VM Física...`
+            socket.emit("vmCommand",{"event":"CreateVM"})
+         })
+
+         socket.on("fila",async function(msg){
+            document.getElementById("status_text").innerHTML=`Posição na fila: ${msg.position}`
+            await delay(10000)
+            await socket.emit("vmCommand",{"event":"List"})
+         })
+
+         socket.on("fisica2-error",async function(msg){
+            alert(msg)
+            window.location.href='/'
+         })
+
+      socket.on("RecCreated",async function(msg){
+         myNode.innerHTML=''
+    		document.querySelector(".loader").classList.add("loader--hidden")
+         document.querySelector(".infoVM").classList.remove("infoVM--hidden")
+         document.getElementById("main-header").innerHTML=''
+         document.getElementById("ip-add").value=msg.ip
+         document.getElementById("pass").value=msg.password
+         if (msg.node){
+            document.getElementsByClassName("btn btn-hover")[1].classList.remove("btn-hover--hidden")
+            document.getElementsByTagName('body')[0].style.background=""
+            document.getElementsByTagName('body')[0].style.backgroundImage = "url('https://play.brightcloudgames.com.br/images/vip_loading21.jpg')";
+            document.getElementsByTagName('body')[0].style.backgroundSize="cover"
+            document.getElementsByTagName('body')[0].style.backgroundRepeat="no-repeat"
+         }
+	   })
+
+
+      socket.on("created",async function(msg){
+    		document.querySelector(".loader").classList.add("loader--hidden")
+         document.querySelector(".infoVM").classList.remove("infoVM--hidden")
+         document.getElementById("main-header").innerHTML=''
+         document.getElementById("ip-add").value=msg.ip
+         document.getElementById("pass").value=msg.password
+	   })
+
+
+
+
+      socket.on("changePage",async function(msg){
+         
+      })
+		
+
+		
+
+		
+		const backupInner=myNode.innerHTML;
+		let selecrl=''
+		let selecgta=''
+		let vm=''
+
+		function getValueRL(){
+         try{
+			return document.querySelector(`input[name="rlLauncher"]:checked`).id;
+         }catch{
+            return "epic"
+            console.log("Sem launcher definido")
+         }
+		}
+
+		function getValueGTA(){
+			try{
+            return document.querySelector(`input[name="gtavLauncher"]:checked`).id;
+         }        
+         catch{
+            return "epic"
+            console.log("Sem launcher definido")
+         }
+		}
+
+		function changePage(game){
+			let t=game
+
+			if (game=="gtav")
+			{
+				selecgta=getValueGTA()
+				t=(`gtav-${selecgta}`)
+			}
+
+
+			if (game=="rleague")
+			{
+				selecrl=getValueRL()
+				t=(`rleague-${selecrl}`)
+			}
+
+         const vmType=document.querySelector('input[name="machine-type"]:checked').id;
+			myNode.innerHTML = '';
+			document.querySelector(".loader").classList.remove("loader--hidden")
+         
+			tryLaunch(t,vmType)
+		}
+
+
+      function checarAssinatura(){
+         socket.emit("checarAssinatura",'')
+
+         myNode.innerHTML=''
+         document.getElementsByClassName("lottieplayer")[0].load("loadingvip.json")
+         document.querySelector(".loader").classList.remove("loader--hidden")
+         document.getElementById("status_text").innerHTML=`Checando assinatura...`
+         document.getElementsByTagName('body')[0].style.background=""
+         document.getElementsByTagName('body')[0].style.backgroundImage = "url('https://play.brightcloudgames.com.br/images/vip_loading21.jpg')";
+         document.getElementsByTagName('body')[0].style.backgroundSize="cover"
+         document.getElementsByTagName('body')[0].style.backgroundRepeat="no-repeat"
+
+         socket.on("assinatura",async function(msg){
+            if (msg==true){
+               fisicaLaunch()
+            }else{
+               window.location.href='/'
+            }
+         })
+      }
+
+
+      function fisicaLaunch(){
+         myNode.innerHTML=''
+         document.getElementsByClassName("btn btn-hover")[1].classList.remove("btn-hover--hidden")
+         //document.querySelector(".loader").classList.remove("loader--hidden")
+
+
+
+         socket.emit("choose","fisica")
+         socket.emit("vmCommand",{"event":"List"})
+
+         document.getElementById("status_text").innerHTML=`Carregando sua VM Física...`
+
+
+         
+
+        // document.querySelector(".iframe").classList.remove("iframe--hidden")
+      }
+
+
+
+		function tryLaunch(game,vmType){
+         console.log(vmType)
+
+			if (vmType=="google"){
+				
+
+            socket.emit("choose","google")
+
+
+            
+
+
+            
+
+				socket.on("vms",async function(msg){
+    				console.log(msg[0])
+    				socket.emit("vmCommand",{"event":"CreateVM","game":game})
+				})
+
+            socket.on("status",async function(msg){
+               document.getElementById("status_text").innerHTML=msg
+				})
+
+            socket.on("error",async function(msg){
+               console.log("ERROR")
+               
+               window.location.href="/"
+               
+				})
+
+            
+
+				socket.emit("vmCommand",{"event":"List"})
+			
+			}else if (vmType=="azure"){
+
+
+            socket.emit("choose","azure")
+
+				
+
+				socket.on("vms",async function(msg){
+    				console.log(msg[0])
+    				socket.emit("vmCommand",{"event":"CreateVM","game":game})
+				})
+
+            socket.on("status",async function(msg){
+               document.getElementById("status_text").innerHTML=msg
+				})
+
+            socket.on("error",async function(msg){
+               console.log("ERROR")
+               
+               window.location.href="/"
+               
+				})
+
+
+				socket.emit("vmCommand",{"event":"List"})
+			}
+		}
+
+      let xxx
+      let zzz
+
+      function showFisica(){
+         document.getElementById("iq-fisica").innerHTML=xxx
+         document.getElementById("iq-upcoming-movie").style.display='none'
+      }
+   
+
+      function showOthers(){
+         document.getElementById("iq-fisica").innerHTML=''
+         document.getElementById("iq-upcoming-movie").style.display='block'
+
+      }
+
+      window.onload=function(){
+        console.log("CARREGADO")
+         xxx=document.getElementById("iq-fisica").innerHTML
+         // zzz=document.getElementById('iq-upcoming-movie').innerHTML
+         document.getElementById("iq-fisica").innerHTML=''
+
+      }
+
+         
+
+      </script>
+
+   </body>
+</html>
