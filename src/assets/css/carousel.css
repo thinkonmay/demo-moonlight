@@ -1,0 +1,45 @@
+.tips-carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top:-40px;
+  }
+  
+  .prev-btn,
+.next-btn {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #fff;
+  height: 2em;
+ width: 2em;
+}
+  
+  .tip {
+    display: none;
+    flex-direction: column;
+    margin: 20px 50px 20px;
+    align-items: center;
+  }
+  
+  .prev-btn {
+    position: flex;
+    left: 0;
+  }
+  
+  .next-btn {
+    position: flex;
+    right: 0;
+  }
+  
+  .prev-btn:focus,
+  .next-btn:focus {
+    outline: none;
+  }
+  
+  .tip.active {
+    display: block;
+  }
+  

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright App</title>
+  <link rel="icon" type="image/png" href="https://hub.grupobright.com/wp-content/uploads/2023/11/512.png">
+</head>
+<body>
+
+<!-- Container do formulário de login -->
+<div class="login-container">
+  
+  <!-- Caixa do formulário de login -->
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="https://hub.grupobright.com/wp-content/uploads/2023/11/512.png" alt="BRIGHT Logo">
+    </div>
+    <input type="iptext" placeholder="IP" name="ip" id="IP">
+    <div class="spacer"></div>
+    <a href="#"><input type="submit" value="CONECTAR" class="btn" id="connectBtn"></a>
+    <a href="https://grupobright.com/dashboard" target="_blank"><input type="submit" value="CRIAR MAQUINA BRIGHT" class="btn"></a>
+  </div>
+  
+  <!-- Ícone de engrenagem para configurações -->
+  <div class="settings-icon" id="toggleSettings">
+    <img src="/img/settings.png" alt="Configurações" href="#">
+  </div>
+
+  <!-- Campos adicionais ocultos -->
+  <div class="additional-fields hidden">
+    <label for="bitrate">Bitrate (Mbps)</label>
+    <input type="text" id="bitrate" name="bitrate" placeholder="6">
+  
+    <label for="height">Height</label>
+    <input type="text" id="height" name="height" placeholder="1080">
+  
+    <label for="width">Width</label>
+    <input type="text" id="width" name="width" placeholder="1920">
+    <a href="#"><input type="submit" value="APLICAR" id="submitBtn" class="btn-small"></a>
+  </div>
+  
+</div>
+
+<script>
+    // Este script adicionará funcionalidade ao ícone de engrenagem
+    document.addEventListener('DOMContentLoaded', function() {
+      var settingsIcon = document.getElementById('toggleSettings'); // Certifique-se de que o ID seja 'toggleSettings'
+      var additionalFields = document.querySelector('.additional-fields');
+      
+      settingsIcon.addEventListener('click', function() {
+        // Isto alternará a visibilidade dos campos adicionais
+        additionalFields.classList.toggle('hidden');
+      });
+    });
+  </script>
+  
+
+</body>
+  <style>
+    :root {
+    --login-box-width: 350px; /* Adjust the width as needed */
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-container {
+    text-align: center;
+    color: white;
+  }
+  
+  .login-box {
+    width: var(--login-box-width);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+  }
+  
+  input[type="iptext"], input[type="password"] {
+    background: #2F2F2F;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    width: calc(100% - 30px);
+  }
+  
+  .btn {
+    background: #2F2F2F;
+    color: white;
+    cursor: pointer;
+    border: none;
+    padding: 15px;
+    width: calc(100% - 30px);
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+
+  .btn-pqna {
+    background: #2F2F2F;
+    color: rgb(128, 128, 128);
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    width: calc(100% - 30px);
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .btn:hover {
+    background: #1c1c1c;
+  }
+
+  .btn-pqna:hover {
+    background: #1c1c1c;
+  }
+  
+  .login-logo img {
+    width: 150px; /* Adjusted logo size */
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .spacer {
+    display: block;
+    height: 10px; /* Adjust the height to control space */
+  }
+
+  .additional-fields {
+    margin-top: 40px; /* Space from the previous elements */
+  }
+  
+  .additional-fields label {
+    font-size: 0.6em;
+    color: #777;
+    display: block;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+  
+  .additional-fields input {
+    margin-bottom: 8px; /* Space between each input */
+    width: calc(100% - 22px); /* Adjust the width as needed */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    align-content: baseline;
+  }
+  
+  /* Estilo do ícone de engrenagem */
+.settings-icon img {
+  cursor: pointer;
+  /* Ajusta o posicionamento conforme necessário */
+  width: 32px; /* Ou o tamanho que preferir */
+  height: 32px; /* Ou o tamanho que preferir */
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+/* Estilo para quando a classe 'hidden' é removida (campos visíveis) */
+.hidden {
+  display: none;
+}
+    </style>
+</html>
