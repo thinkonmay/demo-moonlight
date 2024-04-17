@@ -39,17 +39,17 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/custom.css?v=1.0.0" />
     <link rel="stylesheet" href="assets/css/stars.css" />
+    <link rel="stylesheet" href="assets/css/carousel.css" />
     <!-- END: Styles -->
     <!-- jQuery -->
     <script src="assets/vendor/jquery/dist/jquery.min.js?v=3.6.0"></script>
     <!-- Preloader -->
     <script src="assets/js/preloader.min.js?v=1.0.0"></script>
-    <script src="https://play.brightcloudgames.com.br/socket.io/socket.io.js"></script>
+    <script src="https://play.grupobright.com/socket.io/socket.io.js"></script>
     <script src="assets/js/play.js"></script>
 </head>
 
 <body id="page" class="flq-navbar-icons-existence">
-
     <!-- Preloader -->
     <div class="flq-preloader">
         <div class="flq-preloader-title display-1 h1">
@@ -62,17 +62,6 @@
         </div>
     </div>
     <div class="flq-preloader-bg"></div>
-
-
-
-
-
-
-
-
-
-
-
     <!-- / Preloader -->
     <!-- Navbar top -->
     <nav class="flq-navbar flq-navbar-top flq-navbar-top-cloud flq-navbar-top-fixed">
@@ -82,16 +71,19 @@
                     <img src="assets/images/logo.png" class="flq-logo" alt="">
                 </span>
             </a>
-            <ul class="nav nav-parent flex-grow-1 flq-navbar-nav justify-content-center d-lg-flex">
+            <ul class="nav nav-parent flex-grow-1 flq-navbar-nav justify-content-center d-none d-lg-flex">
                 <li class="nav-item active">
-                    <a class="nav-link">
-                        <span id="google-disponivies" class="nav-link-name">Google Disponíveis: Carregando...</span>
-                    </a>
-                    <a class="nav-link">
-                        <span id="azure-disponivies" class="nav-link-name">Azure Disponíveis: Carregando...</span>
-                    </a>
-                    <a class="nav-link">
-                        <span id="priority-disponivies" class="nav-link-name">Bright Disponíveis: Carregando...</span>
+                    <a class="nav-link"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_9qekka7a.json"  background="transparent"  speed="1"  style="width: 20px; height: 20px;"  loop  autoplay></lottie-player><img width="20px" height="20px" src="assets/images/server-logos/logo_google.svg">&nbsp;
+                        <span id="google-disponivies"> Carregando...</span>
+                    </a><a>&nbsp; </a><a>&nbsp; </a>
+                    <a class="nav-link"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_9qekka7a.json"  background="transparent"  speed="1"  style="width: 20px; height: 20px;"  loop  autoplay></lottie-player><img width="20px" height="20px" src="assets/images/server-logos/logo_azure.svg">&nbsp;
+                        <span id="azure-disponivies"> Carregando...</span>
+                    </a><a> &nbsp;</a><a> &nbsp;</a>
+                    <a class="nav-link"><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_9qekka7a.json"  background="transparent"  speed="1"  style="width: 20px; height: 20px;"  loop  autoplay></lottie-player><img width="20px" height="20px" src="https://brightcloudgames.com.br/wp-content/uploads/2021/11/fav2.png">&nbsp;
+                        <span id="priority-disponivies"> Carregando...</span>
                     </a>
                 </li>
             </ul>
@@ -119,11 +111,7 @@
                 </button>
                 <div class="dropdown-menu gy-2">
                     <ul class="nav">
-                        <li class="nav-item">
-                            <a href="https://brightcloudgames.com.br/minha-conta/assinaturas/" class="nav-link">
-                                <span class="nav-link-name">Assinaturas</span>
-                            </a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a href="https://brightcloudgames.com.br/minha-conta/pedidos/" class="nav-link">
                                 <span class="nav-link-name">Pedidos</span>
@@ -131,12 +119,12 @@
                         </li>
                         <li class="nav-item">
                             <a style='cursor:pointer' class="nav-link">
-                                <span onclick="document.cookie = 'token=; max-age=0;'; window.location.href='/'"
+                                <span onclick="document.cookie = 'token=; max-age=0;'; location.reload()"
                                     class="nav-link-name">Logout</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a id="oauthurl-a" href=<%=oauthurl %> style='cursor:pointer' class="nav-link">
+                            <a id="oauthurl-a" href=<%= oauthurl %> style='cursor:pointer' class="nav-link">
                                 <span id="oauthurl-span" class="nav-link-name">Conectar Discord</span>
                             </a>
                         </li>
@@ -146,7 +134,7 @@
 
         </div>
     </nav>
-
+    
     <!-- / Navbar top -->
 
     <div style="display: none; visibility:hidden;">
@@ -174,7 +162,6 @@
             data-fancybox="" data-src="#flq_popup_signin" data-base-class="flq-fancybox-signin"
             data-animation-duration="1000" data-keyboard="false" data-auto-focus="false" data-touch="false"
             data-close-existing="true" data-small-btn="false" data-toolbar="false" id="entrar-login"></button>
-
         <button style="display: none; visibility:hidden;" class="btn btn-xs btn-outline btn-white d-none d-md-flex"
             data-fancybox="" data-src="#flq_popup_feedback" data-base-class="flq-fancybox-signin"
             data-animation-duration="1000" data-keyboard="false" data-auto-focus="false" data-touch="false"
@@ -182,7 +169,7 @@
     </div>
     <style>
         .loader {
-            margin-top: 20rem;
+            margin-top: 15rem;
             margin-left: auto;
             margin-right: auto;
         }
@@ -210,7 +197,7 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 2rem;
-            height: 50px;
+            height: 40px;
             text-align: center;
         }
 
@@ -274,25 +261,29 @@
             }
         }
     </style>
-    <div id="conj-carregamento">
+    <div>
         <div class="loader loader-hide">
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
             <lottie-player class="lottieplayer" src="lf30_xwo73ffu.json" mode="normal" background="transparent"
                 speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
         </div>
         <div class="status_text status_text-hide">
-            <h1 id="status_text">Carregando...</h1>
-            <button id="interromper-btn interromper-btn-hide" onclick="socket.emit('sair','sairFila')"
-                class="btn btn-block interromper-btn interromper-btn-hide">Interromper</button>
-            <button id="deletar-btn deletar-btn-hide"
+            <span style="font-size:2rem; font-weight:bold; padding-right:5px; padding-left:5px" id="status_text">Carregando...</span><br>&nbsp;</br>
+            <div class="tips-carousel">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <span class="tip active">Está enfrentando quedas de FPS em sua máquina? Vá até o Gerenciador de Tarefas e experimente finalizar a tarefa "sunshine". OBS: Não faça isso se estiver usando o Moonlight disponibilizado através do nosso painel!</span>
+                <span class="tip">Está com algum problema relacionado ao serviço? Experimente visitar nosso servidor do Discord <a href="https://discord.gg/grupobright">clicando aqui</a> e por lá iremos te ajudar a resolver seu problema!</span>
+                <span class="tip">Se sua máquina estiver demorando muito para iniciar, a infraestrutura em questão pode estar instável, tente utilizando outra infraestrutura caso não queira aguardar.</span>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+              </div>
+          
+            <button style="display: inline;" id="interromper-btn interromper-btn-hide" onclick="socket.emit('sair','sairFila')"
+                class="btn btn-block interromper-btn interromper-btn-hide">Interromper</button>&nbsp;&nbsp;
+                &nbsp;&nbsp; <button style="display: inline;" id="deletar-btn deletar-btn-hide"
                 onclick="socket.emit('deletar','delete'); alert('VM está sendo deletada. O processo levará de 5 a 10 minutos. Quando finalizado você voltará para o painel automaticamente.')"
                 class="btn btn-block deletar-btn deletar-btn-hide">Deletar VM</button>
 
         </div>
-
-    </div>
-
-
     <div class="flq-swiper-wrapper flq-background">
         <div class="
       flq-background-overlay
@@ -319,10 +310,38 @@
             data-pagination=true>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
+                    
                     <div class="swiper-slide flq-background">
                         <div class="flq-background-image">
                             <span class="flq-image swiper-image" data-speed=0.7 data-swiper-parallax-x="40%">
-                                <img src="https://play.brightcloudgames.com.br/assets/images/movies/movie-1-3840x2160.jpg"
+                                <img src="https://play.grupobright.com/assets/images/movies/movie-2-3840x2160.jpg"
+                                    alt="">
+                            </span>
+                        </div>
+                        <div class="flq-background-overlay" style="background-color: hsla(var(--flq-color-black), 0.7)">
+                        </div>
+                        <div class="container py-7 min-vh-100 d-flex align-items-center">
+                            <div class="row">
+                                <div class="col-12 col-md-10 col-lg-8 col-xl-6 pt-navbar flq-vertical-rhythm">
+                                    <span class="flq-subtitle badge badge-white badge-glass badge-translucent"
+                                        data-animejs>Ação</span>
+                                    <h2 class="display-5 mb-0" data-animejs>Grand Theft Auto V</h2>
+                                    <p class="lead" data-animejs> Grand Theft Auto V é um jogo eletrônico de
+                                        ação-aventura desenvolvido pela Rockstar North e publicado pela Rockstar Games.
+                                        É o sétimo título principal da série Grand Theft Auto. </p>
+                                    <div>
+                                        <span class="badge badge-white badge-translucent badge-glass flq-color-title"
+                                            data-animejs>18+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide flq-background">
+                        <div class="flq-background-image">
+                            <span class="flq-image swiper-image" data-speed=0.7 data-swiper-parallax-x="40%">
+                                <img src="https://play.grupobright.com/assets/images/movies/movie-1-3840x2160.jpg"
                                     alt="">
                             </span>
                         </div>
@@ -337,7 +356,7 @@
           ">
                                     <div class="flq-subtitle badge badge-white badge-glass badge-translucent"
                                         data-animejs> Ação </div>
-                                    <h2 class="display-5 mb-0" data-animejs>Red Dead Redemption 2</h2>
+                                    <p style="font-size:45px" class="display-5 mb-0" data-animejs>Red Dead Redemption 2</p>
                                     <div class="flq-meta flq-color-opacity mt-3">
                                     </div>
                                     <p class="lead" data-animejs> Red Dead Redemption 2 é um jogo eletrônico de
@@ -356,7 +375,7 @@
                     <div class="swiper-slide flq-background">
                         <div class="flq-background-image">
                             <span class="flq-image swiper-image" data-speed=0.7 data-swiper-parallax-x="40%">
-                                <img src="https://play.brightcloudgames.com.br/assets/images/movies/movie-3-3840x2160.jpg"
+                                <img src="https://play.grupobright.com/assets/images/movies/movie-3-3840x2160.jpg"
                                     alt="">
                             </span>
                         </div>
@@ -383,32 +402,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide flq-background">
-                        <div class="flq-background-image">
-                            <span class="flq-image swiper-image" data-speed=0.7 data-swiper-parallax-x="40%">
-                                <img src="https://play.brightcloudgames.com.br/assets/images/movies/movie-2-3840x2160.jpg"
-                                    alt="">
-                            </span>
-                        </div>
-                        <div class="flq-background-overlay" style="background-color: hsla(var(--flq-color-black), 0.7)">
-                        </div>
-                        <div class="container py-7 min-vh-100 d-flex align-items-center">
-                            <div class="row">
-                                <div class="col-12 col-md-10 col-lg-8 col-xl-6 pt-navbar flq-vertical-rhythm">
-                                    <span class="flq-subtitle badge badge-white badge-glass badge-translucent"
-                                        data-animejs>Ação</span>
-                                    <h2 class="display-5 mb-0" data-animejs>Grand Theft Auto V</h2>
-                                    <p class="lead" data-animejs> Grand Theft Auto V é um jogo eletrônico de
-                                        ação-aventura desenvolvido pela Rockstar North e publicado pela Rockstar Games.
-                                        É o sétimo título principal da série Grand Theft Auto. </p>
-                                    <div>
-                                        <span class="badge badge-white badge-translucent badge-glass flq-color-title"
-                                            data-animejs>18+</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -416,7 +410,7 @@
     <div class="content-wrap">
 
 
-
+        
 
 
 
@@ -430,23 +424,6 @@
                 data-breakpoints=636:2,1072:3,1280:4>
                 <div class="swiper-container container">
                     <div class="swiper-wrapper">
-
-
-                        <div class="swiper-slide">
-                            <div class="card flq-card-blog">
-                                <div class="card-img-wrap">
-                                    <a href="javascript:void(0);"
-                                        onclick="$('#entrar-server').trigger('click'); game='stream-teste1';checkAll()">
-                                        <span class="flq-image flq-rounded-xl flq-responsive flq-responsive-sm-3x4">
-                                            <img src="assets/images/movies/perigo.png" alt="">
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a>SNAP TEST</a></h5>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="swiper-slide">
                             <div class="card flq-card-blog">
@@ -481,6 +458,60 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="swiper-slide">
+                            <div class="card flq-card-blog">
+                                <div class="card-img-wrap">
+                                    <a href="javascript:void(0);"
+                                        onclick="$('#entrar-server').trigger('click'); game='fifa23';checkAll()">
+                                        <span class="flq-image flq-rounded-xl flq-responsive
+    flq-responsive-sm-3x4">
+                                            <img src="assets/images/upcoming/fifa23.jpg" alt="">
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a>Fifa 23</a></h5>
+                                    <div class="flq-meta flq-meta-sm">
+                                        <ul>
+                                            <li>
+                                                <a class="card-category">Esporte</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="card flq-card-blog">
+                                <div class="card-img-wrap">
+                                    <a href="javascript:void(0);"
+                                        onclick="$('#entrar-server').trigger('click'); game='cs-go';checkAll()">
+                                        <span class="flq-image flq-rounded-xl flq-responsive
+    flq-responsive-sm-3x4">
+                                            <img src="assets/images/upcoming/csgo.jpg" alt="">
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><a>Counter Strike: Global Offensive</a></h5>
+                                    <div class="flq-meta flq-meta-sm">
+                                        <ul>
+                                            <li>
+                                                <a class="card-category">FPS</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
 
                         <div class="swiper-slide">
                             <div class="card flq-card-blog">
@@ -581,29 +612,8 @@
                             </div>
                         </div>
 
-                        <div class="swiper-slide">
-                            <div class="card flq-card-blog">
-                                <div class="card-img-wrap">
-                                    <a href="javascript:void(0);"
-                                        onclick="$('#entrar-server').trigger('click'); game='lol';checkAll()">
-                                        <span class="flq-image flq-rounded-xl flq-responsive
-    flq-responsive-sm-3x4">
-                                            <img src="assets/images/movies/movie-6-1290x1290.jpg" alt="">
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a>League of Legends</a></h5>
-                                    <div class="flq-meta flq-meta-sm">
-                                        <ul>
-                                            <li>
-                                                <a class="card-category">MOBA</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
+
                         <div class="swiper-slide">
                             <div class="card flq-card-blog">
                                 <div class="card-img-wrap">
@@ -802,7 +812,7 @@
                         </div>
 
 
-
+                     
 
 
                         <div class="swiper-slide">
@@ -819,7 +829,7 @@
                             </a>
                         </div>
 
-
+                        
 
                         <div class="swiper-slide">
                             <a class="card flq-card-movie flq-color-opacity" disabled>
@@ -931,7 +941,7 @@
   ">
             <div class="container text-center my-6" data-sr="start-30-days" data-sr-interval="100"
                 data-sr-duration="1000" data-sr-distance="10">
-                <h1 class="display-1 mb-4" data-sr-item="start-30-days"> Disponível na Web<br /> e Android. </h1>
+                <p style="font-size:45px" class="display-1 mb-4" data-sr-item="start-30-days"> Disponível na Web<br /> e Android. </p>
                 <div class="row justify-content-center g-3">
                     <div class="col-12 col-sm-auto" data-sr-item="start-30-days">
                         <a href="https://play.google.com/store/apps/details?id=br.com.app.gpu2858276.gpu87f2c78e489a0d75cbc7b9247e454a1b"
@@ -1423,11 +1433,10 @@
                             <button type="button" id="botn-logar" onclick="logar()" class="btn btn-block">Login</button>
                         </div>
                         <div class="col-12 gy-6">
-                            <a href=<%=oauthurl %> class="btn btn-block">Logar com Discord</a>
+                            <a href=<%= oauthurl %> class="btn btn-block">Logar com Discord</a>
                             <div class="col-12 mt-3 text-center">
-
-                                <span style='text-align: center;'>Necessário ter conectado sua conta
-                                    anteriormente</span>
+                                
+                            <span style='text-align: center;'>Necessário ter conectado sua conta anteriormente</span>
                             </div>
                         </div>
                         <div class="error error--hidden">
@@ -1494,8 +1503,9 @@
             </div>
         </div>
     </div>
-    <!-- feedback -->
+    <!-- / Popup signup -->
 
+    <!--Feedback-->
     <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_feedback">
         <div class="flq-feedback">
             <div class="flq-fancybox-head">
@@ -1523,7 +1533,7 @@
                                 <label class="star star-1" for="star-1-2"></label>
                                 <div class="rev-box">
                                     <textarea placeholder="Deixe aqui seu feedback..." class="review" col="30" name="review"></textarea>
-                                    <button style="margin-top:10px" class="btn review" for="review">Enviar feedback</label>
+                                    <button type="button" style="margin-top:10px" class="btn review" onclick="socket.emit('interromper',{'feedback':$(`[name='review']`)[0].value,'stars':document.querySelector(`input[name='star']:checked`).classList[1]})" for="review">Enviar feedback</label>
                                 </div>
                             </form>
                         </div>
@@ -1532,305 +1542,295 @@
         </div>
     </div>
 
-            <!-- LAUNCHER -->
-            <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_launcher">
-                <div class="flq-signin">
-                    <div class="flq-fancybox-head">
-                        <div class="container-fluid">
-                            <a href="/" class="flq-fancybox-brand me-auto">
-                                <span class="flq-image">
-                                    <img src="assets/images/logo.png" class="flq-logo" alt="">
-                                </span>
-                            </a>
-                            <button class="flq-fancybox-close btn btn-link ms-4" data-fancybox-close>
-                                <span></span>
+
+    <!-- LAUNCHER -->
+    <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_launcher">
+        <div class="flq-signin">
+            <div class="flq-fancybox-head">
+                <div class="container-fluid">
+                    <a href="/" class="flq-fancybox-brand me-auto">
+                        <span class="flq-image">
+                            <img src="assets/images/logo.png" class="flq-logo" alt="">
+                        </span>
+                    </a>
+                    <button class="flq-fancybox-close btn btn-link ms-4" data-fancybox-close>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            <div class="flq-fancybox-body pb-6">
+                <form action="#" class="flq-signin-content">
+                    <h4 class="mb-4 pb-1 text-center">Escolha o Launcher</h4>
+                    <div class="row justify-content-between gy-4">
+                        <div class="col-auto">
+                            <button class="btn btn-block" onclick="launcher='epic'; changePage()" data-fancybox-close>
+                                <img width="50px" height="50px" src="assets/images/icons/epicgames.png">
                             </button>
                         </div>
-                    </div>
-                    <div class="flq-fancybox-body pb-6">
-                        <form action="#" class="flq-signin-content">
-                            <h4 class="mb-4 pb-1 text-center">Escolha o Launcher</h4>
-                            <div class="row justify-content-between gy-4">
-                                <div class="col-auto">
-                                    <button class="btn btn-block" onclick="launcher='epic'; changePage()"
-                                        data-fancybox-close>
-                                        <img width="50px" height="50px" src="assets/images/icons/epicgames.png">
-                                    </button>
-                                </div>
-                                <div class="col-auto">
-                                    <button class="btn btn-block" onclick="launcher='steam'; changePage()"
-                                        data-fancybox-close>
-                                        <img width="50px" height="50px" src="assets/images/icons/steam.png">
-                                    </button>
-                                </div>
-                                <div class="col-12 mt-3 text-center">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- / LAUNCHER -->
-            <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_vm-created">
-                <div class="flq-vm-created">
-                    <div class="flq-fancybox-head">
-                        <div class="container-fluid">
-                            <a href="/" class="flq-fancybox-brand me-auto">
-                                <span class="flq-image">
-                                    <img src="assets/images/logo.png" class="flq-logo" alt="">
-                                </span>
-                            </a>
+                        <div class="col-auto">
+                            <button class="btn btn-block" onclick="launcher='steam'; changePage()" data-fancybox-close>
+                                <img width="50px" height="50px" src="assets/images/icons/steam.png">
+                            </button>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
                         </div>
                     </div>
-                    <div class="flq-fancybox-body pb-6">
-                        <form class="flq-signin-content">
-                            <div class="row justify-content-between gy-4">
-
-
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">IP:</h4><input type="text"
-                                        class="form-control flq-form-translucent" id="formdoip" readonly=""
-                                        placeholder="127.0.0.1">
-                                    <a style="cursor:pointer" onclick="copyFrom('formdoip')"
-                                        style="top:-32.9%; left:88%; position:relative; border-width:0; background-color:transparent;"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"
-                                            style="margin-top: -5rem; margin-left: 19.3rem;">
-                                            <path
-                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                            <path
-                                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                        </svg></a>
-                                </div>
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">Insira o PIN:</h4><input id="formdopin" type="text"
-                                        placeholder="PIN" class="form-control flq-form-message flq-form-translucent">
-                                </div>
-
-                                <div class="col-12">
-                                    <button type="button" onclick="authPin($('#formdopin')[0].value)"
-                                        class="btn btn-block">Autenticar</button>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <button type="button" onclick="$('#entar-feedback').click()//socket.emit('interromper','sair')"
-                                        class="btn btn-block">Desligar VM</button>
-                                </div>
-                                <div class="col-12 mt-5 text-center">
-                                    <h7>Baixe aqui o Moonlight:</h7>
-                                    <a href='https://github.com/moonlight-stream/moonlight-qt/releases/download/v3.2.0/MoonlightSetup-3.2.0.exe'
-                                        class="btn btn-block">Baixar</a>
-                                </div>
-
-                                <div class="col-12 mt-2 text-center">
-                                    <h7>Não consegue acessar pelo Moonlight?</h7>
-                                    <button type="button" onclick="transferData()" class="btn btn-block">Use o
-                                        RDP</button>
-                                </div>
-
-
-                            </div>
-                        </form>
-                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- / LAUNCHER -->
+    <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_vm-created">
+        <div class="flq-vm-created">
+            <div class="flq-fancybox-head">
+                <div class="container-fluid">
+                    <a href="/" class="flq-fancybox-brand me-auto">
+                        <span class="flq-image">
+                            <img src="assets/images/logo.png" class="flq-logo" alt="">
+                        </span>
+                    </a>
                 </div>
             </div>
-            <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_vm-created-fisica">
-                <div class="flq-vm-created-fisica">
-                    <div class="flq-fancybox-head">
-                        <div class="container-fluid">
-                            <a href="/" class="flq-fancybox-brand me-auto">
-                                <span class="flq-image">
-                                    <img src="assets/images/logo.png" class="flq-logo" alt="">
-                                </span>
-                            </a>
+            <div class="flq-fancybox-body pb-6">
+                <form class="flq-signin-content">
+                    <div class="row justify-content-between gy-4">
+
+
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">IP:</h4><input type="text"
+                                class="form-control flq-form-translucent" id="formdoip" readonly=""
+                                placeholder="127.0.0.1">
+                            <a style="cursor:pointer" onclick="copyFrom('formdoip')"
+                                style="top:-32.9%; left:88%; position:relative; border-width:0; background-color:transparent;"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-clipboard" viewBox="0 0 16 16"
+                                    style="margin-top: -5rem; margin-left: 19.3rem;">
+                                    <path
+                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                    <path
+                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                </svg></a>
                         </div>
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">Insira o PIN:</h4><input id="formdopin" type="text"
+                                placeholder="PIN" class="form-control flq-form-message flq-form-translucent">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" onclick="authPin($('#formdopin')[0].value)"
+                                class="btn btn-block">Autenticar</button>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button type="button" onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
+                                class="btn btn-block">Desligar VM</button>
+                        </div>
+
+                        <div class="col-12">
+                            <button id="beta-btn" type="button" onclick="" class="btn btn-block">Bright Streaming ᴮᴱᵀᴬ</button>
+                        </div>
+                        
+
+                        <div class="col-12 mt-2 text-center">
+                            <h7>Não consegue acessar pelo Moonlight?</h7>
+                            <button type="button" onclick="transferData()" class="btn btn-block">Use o RDP</button>
+                        </div>
+
+
                     </div>
-                    <div class="flq-fancybox-body pb-6">
-                        <form action="#" class="flq-signin-content">
-                            <div class="row justify-content-between gy-4">
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">IP:</h4><input type="text" placeholder="127.0.0.1"
-                                        class="form-control flq-form-translucent" id="formdoip-fisica" readonly="">
-                                    <a style="cursor:pointer" onclick="copyFrom('formdoip-fisica')"
-                                        style="top:-32.9%; left:88%; position:relative; border-width:0; background-color:transparent;"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"
-                                            style="margin-top: -5rem; margin-left: 19.3rem;">
-                                            <path
-                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                            <path
-                                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                        </svg></a>
-                                </div>
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">Usuário:</h4><input
-                                        class="form-control flq-form-user flq-form-translucent" type="text" value="BCG"
-                                        placeholder="Usuario" id="formdouser-fisica" readonly="">
-                                </div>
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">Senha:</h4><input id="formdasenha-fisica"
-                                        class="form-control flq-form-lock flq-form-translucent" type="text"
-                                        placeholder="Senha" readonly="">
-                                </div>
-                                <div class="col-12">
-                                    <button type="button" onclick="$('#entar-feedback').click()//socket.emit('interromper','sair')"
-                                        class="btn btn-block">Desligar VM</button>
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <button onclick="socket.emit('deletar','delete')" class="btn btn-block">Deletar
-                                        VM</button>
-                                </div>
-                                <div class="col-12 mt-3 text-center">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_vm-created-fisica">
+        <div class="flq-vm-created-fisica">
+            <div class="flq-fancybox-head">
+                <div class="container-fluid">
+                    <a href="/" class="flq-fancybox-brand me-auto">
+                        <span class="flq-image">
+                            <img src="assets/images/logo.png" class="flq-logo" alt="">
+                        </span>
+                    </a>
                 </div>
             </div>
-
-
-            <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_vm-created-back">
-                <div class="flq-vm-created-fisica">
-                    <div class="flq-fancybox-head">
-                        <div class="container-fluid">
-                            <a href="/" class="flq-fancybox-brand me-auto">
-                                <span class="flq-image">
-                                    <img src="assets/images/logo.png" class="flq-logo" alt="">
-                                </span>
-                            </a>
+            <div class="flq-fancybox-body pb-6">
+                <form action="#" class="flq-signin-content">
+                    <div class="row justify-content-between gy-4">
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">IP:</h4><input type="text" placeholder="127.0.0.1"
+                                class="form-control flq-form-translucent" id="formdoip-fisica" readonly="">
+                            <a style="cursor:pointer" onclick="copyFrom('formdoip-fisica')"
+                                style="top:-32.9%; left:88%; position:relative; border-width:0; background-color:transparent;"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-clipboard" viewBox="0 0 16 16"
+                                    style="margin-top: -5rem; margin-left: 19.3rem;">
+                                    <path
+                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                    <path
+                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                </svg></a>
+                        </div>
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">Usuário:</h4><input
+                                class="form-control flq-form-user flq-form-translucent" type="text" value="BCG"
+                                placeholder="Usuario" id="formdouser-fisica" readonly="">
+                        </div>
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">Senha:</h4><input id="formdasenha-fisica"
+                                class="form-control flq-form-lock flq-form-translucent" type="text" placeholder="Senha"
+                                readonly="">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
+                                class="btn btn-block">Desligar VM</button>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button onclick="socket.emit('deletar','delete')" class="btn btn-block">Deletar VM</button>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
                         </div>
                     </div>
-                    <div class="flq-fancybox-body pb-6">
-                        <form action="#" class="flq-signin-content">
-                            <div class="row justify-content-between gy-4">
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">IP:</h4><input type="text" placeholder="127.0.0.1"
-                                        class="form-control flq-form-translucent" id="formdoip-back" readonly="">
-                                    <a style="cursor:pointer" onclick="copyFrom('formdoip-back')"
-                                        style="top:-32.9%; left:88%; position:relative; border-width:0; background-color:transparent;"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"
-                                            style="margin-top: -5rem; margin-left: 19.3rem;">
-                                            <path
-                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                            <path
-                                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                        </svg></a>
-                                </div>
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">Usuário:</h4><input
-                                        class="form-control flq-form-user flq-form-translucent" type="text" value="BCG"
-                                        placeholder="Usuario" id="formdouser-fisica" readonly="">
-                                </div>
-                                <div class="col-12">
-                                    <h4 class="mb-2 text-left">Senha:</h4><input id="formdasenha"
-                                        class="form-control flq-form-lock flq-form-translucent" type="text"
-                                        placeholder="Senha" readonly="">
-                                </div>
-                                <div class="col-12">
-                                    <button type="button" onclick="$('#entar-feedback').click()//socket.emit('interromper','sair')"
-                                        class="btn btn-block">Desligar VM</button>
-                                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-                                <div class="col-12">
-                                    <button id="beta-btn" type="button" onclick="" class="btn btn-block">STREAMING
-                                        BETA</button>
-                                </div>
 
-                                <!--
+    <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_vm-created-back">
+        <div class="flq-vm-created-fisica">
+            <div class="flq-fancybox-head">
+                <div class="container-fluid">
+                    <a href="/" class="flq-fancybox-brand me-auto">
+                        <span class="flq-image">
+                            <img src="assets/images/logo.png" class="flq-logo" alt="">
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="flq-fancybox-body pb-6">
+                <form action="#" class="flq-signin-content">
+                    <div class="row justify-content-between gy-4">
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">IP:</h4><input type="text" placeholder="127.0.0.1"
+                                class="form-control flq-form-translucent" id="formdoip-back" readonly="">
+                            <a style="cursor:pointer" onclick="copyFrom('formdoip-back')"
+                                style="top:-32.9%; left:88%; position:relative; border-width:0; background-color:transparent;"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-clipboard" viewBox="0 0 16 16"
+                                    style="margin-top: -5rem; margin-left: 19.3rem;">
+                                    <path
+                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                    <path
+                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                </svg></a>
+                        </div>
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">Usuário:</h4><input
+                                class="form-control flq-form-user flq-form-translucent" type="text" value="BCG"
+                                placeholder="Usuario" id="formdouser-fisica" readonly="">
+                        </div>
+                        <div class="col-12">
+                            <h4 class="mb-2 text-left">Senha:</h4><input id="formdasenha"
+                                class="form-control flq-form-lock flq-form-translucent" type="text" placeholder="Senha"
+                                readonly="">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
+                                class="btn btn-block">Desligar VM</button>
+                        </div>
+
                         <div class="col-12 text-center">
                             <button type="button" onclick="$('#entrar-vm').trigger('click')"
                                 class="btn btn-block">Voltar</button>
-                        </div>-->
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_server">
-                <div class="flq-signin">
-                    <div class="flq-fancybox-head">
-                        <div class="container-fluid">
-                            <a href="/" class="flq-fancybox-brand me-auto">
-                                <span class="flq-image">
-                                    <img src="assets/images/logo.png" class="flq-logo" alt="">
-                                </span>
-                            </a>
-                            <button class="flq-fancybox-close btn btn-link ms-4" data-fancybox-close>
-                                <span></span>
-                            </button>
                         </div>
                     </div>
-                    <div class="flq-fancybox-body pb-6">
-                        <form action="#" class="flq-signin-content">
-                            <h4 class="mb-4 pb-1 text-center">Escolha o servidor</h4>
-                            <div class="row justify-content-between gy-4">
-                                <div class="col-auto">
-                                    <button class="btn btn-block"
-                                        onclick="server='google'; if (game=='rleague' || game=='gtav'){$('#entrar-launcher').trigger('click')}else{changePage()}"
-                                        data-fancybox-close>
-                                        <img width="50px" height="50px"
-                                            src="assets/images/server-logos/logo_google.svg">
-                                    </button>
-                                </div>
-                                <!--
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="flq-fancybox-content-signin fancybox-content" id="flq_popup_server">
+        <div class="flq-signin">
+            <div class="flq-fancybox-head">
+                <div class="container-fluid">
+                    <a href="/" class="flq-fancybox-brand me-auto">
+                        <span class="flq-image">
+                            <img src="assets/images/logo.png" class="flq-logo" alt="">
+                        </span>
+                    </a>
+                    <button class="flq-fancybox-close btn btn-link ms-4" data-fancybox-close>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            <div class="flq-fancybox-body pb-6">
+                <form action="#" class="flq-signin-content">
+                    <h4 class="mb-4 pb-1 text-center">Escolha o servidor</h4>
+                    <div class="row justify-content-between gy-4">
+                        <div class="col-auto">
+                            <button class="btn btn-block"
+                                onclick="server='google'; if (game=='rleague' || game=='gtav' || game=='reddead'){$('#entrar-launcher').trigger('click')}else{changePage()}"
+                                data-fancybox-close>
+                                <img width="50px" height="50px" src="assets/images/server-logos/logo_google.svg">
+                            </button>
+                        </div>
+                        <!--
             <div class="col-auto">
                 <button style="padding: 15px 15px 15px 15px" onclick="if (game=='rleague' || game=='gtav'){$('#entrar-launcher').trigger('click')}" class="btn btn-block" data-fancybox-close>
                     <img width="50px" height="50px" src="assets/images/server-logos/logo.png">
                 </button>
             </div>  -->
-                                <div class="col-auto">
-                                    <button class="btn btn-block"
-                                        onclick="server='azure'; if (game=='rleague' || game=='gtav'){$('#entrar-launcher').trigger('click')}else{changePage()}"
-                                        data-fancybox-close>
-                                        <img width="50px" height="50px" src="assets/images/server-logos/logo_azure.svg">
-                                    </button>
-                                </div>
-                                <div class="col-12 mt-3 text-center">
-                                </div>
-                            </div>
-                        </form>
+                        <div class="col-auto">
+                            <button class="btn btn-block"
+                                onclick="server='azure'; if (game=='rleague' || game=='gtav' || game=='reddead'){$('#entrar-launcher').trigger('click')}else{changePage()}"
+                                data-fancybox-close>
+                                <img width="50px" height="50px" src="assets/images/server-logos/logo_azure.svg">
+                            </button>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <!-- START: Scripts -->
-            <!-- Object Fit Polyfill -->
-            <script src="assets/vendor/object-fit-images/dist/ofi.min.js?v=3.2.4"></script>
-            <!-- Popper -->
-            <script src="assets/vendor/@popperjs/core/dist/umd/popper.min.js?v=2.10.2"></script>
-            <!-- ScrollReveal -->
-            <script src="assets/vendor/scrollreveal/dist/scrollreveal.min.js?v=4.0.9"></script>
-            <!-- Rellax -->
-            <script src="assets/vendor/rellax/rellax.min.js?v=1.12.1"></script>
-            <!-- Tilt -->
-            <script src="assets/vendor/vanilla-tilt/dist/vanilla-tilt.min.js?v=1.7.2"></script>
-            <!-- Animejs -->
-            <script src="assets/vendor/animejs/lib/anime.min.js?v=3.2.0"></script>
-            <!-- Bootstrap -->
-            <script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js?v=5.1.3"></script>
-            <!-- Jarallax -->
-            <script src="assets/vendor/jarallax/dist/jarallax.min.js?v=1.12.7"></script>
-            <!-- Swiper -->
-            <script src="assets/vendor/swiper/swiper-bundle.min.js?v=7.2.0"></script>
-            <!-- Fancybox -->
-            <script src="assets/vendor/fancybox/dist/jquery.fancybox.min.js?v=3.5.7"></script>
-            <!-- jQuery Countdown -->
-            <script src="assets/vendor/jquery-countdown/dist/jquery.countdown.min.js?v=2.2.0"></script>
-            <!-- Moment.js (needed for jquery countdown) -->
-            <script src="assets/vendor/moment/min/moment.min.js?v=2.29.1"></script>
-            <script src="assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js?v=0.5.34"></script>
-            <!-- ImagesLoaded -->
-            <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js?v=4.1.4"></script>
-            <!-- Isotope -->
-            <script src="assets/vendor/isotope-layout/dist/isotope.pkgd.min.js?v=3.0.6"></script>
-            <!-- Bootstrap Validator -->
-            <script src="assets/vendor/bootstrap-validator/dist/validator.min.js?v=0.11.9"></script>
-            <!-- Fliqs -->
-            <script src="assets/js/fliqs.min.js?v=1.0.0"></script>
-            <script src="assets/js/fliqs-init.js?v=1.0.0"></script>
-            <!-- END: Scripts -->
+        </div>
+    </div>
+    <!-- START: Scripts -->
+    <!-- Object Fit Polyfill -->
+    <script src="assets/vendor/object-fit-images/dist/ofi.min.js?v=3.2.4"></script>
+    <!-- Popper -->
+    <script src="assets/vendor/@popperjs/core/dist/umd/popper.min.js?v=2.10.2"></script>
+    <!-- ScrollReveal -->
+    <script src="assets/vendor/scrollreveal/dist/scrollreveal.min.js?v=4.0.9"></script>
+    <!-- Rellax -->
+    <script src="assets/vendor/rellax/rellax.min.js?v=1.12.1"></script>
+    <!-- Tilt -->
+    <script src="assets/vendor/vanilla-tilt/dist/vanilla-tilt.min.js?v=1.7.2"></script>
+    <!-- Animejs -->
+    <script src="assets/vendor/animejs/lib/anime.min.js?v=3.2.0"></script>
+    <!-- Bootstrap -->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js?v=5.1.3"></script>
+    <!-- Jarallax -->
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js?v=1.12.7"></script>
+    <!-- Swiper -->
+    <script src="assets/vendor/swiper/swiper-bundle.min.js?v=7.2.0"></script>
+    <!-- Fancybox -->
+    <script src="assets/vendor/fancybox/dist/jquery.fancybox.min.js?v=3.5.7"></script>
+    <!-- jQuery Countdown -->
+    <script src="assets/vendor/jquery-countdown/dist/jquery.countdown.min.js?v=2.2.0"></script>
+    <!-- Moment.js (needed for jquery countdown) -->
+    <script src="assets/vendor/moment/min/moment.min.js?v=2.29.1"></script>
+    <script src="assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js?v=0.5.34"></script>
+    <!-- ImagesLoaded -->
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js?v=4.1.4"></script>
+    <!-- Isotope -->
+    <script src="assets/vendor/isotope-layout/dist/isotope.pkgd.min.js?v=3.0.6"></script>
+    <!-- Bootstrap Validator -->
+    <script src="assets/vendor/bootstrap-validator/dist/validator.min.js?v=0.11.9"></script>
+    <!-- Fliqs -->
+    <script src="assets/js/fliqs.min.js?v=1.0.0"></script>
+    <script src="assets/js/fliqs-init.js?v=1.0.0"></script>
+    <script src="assets/js/carousel.js"></script>
+    <!-- END: Scripts -->
 </body>
 
 </html>
