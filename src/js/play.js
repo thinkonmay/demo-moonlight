@@ -53,13 +53,15 @@ $("#botn-logar").ready(function () {
   };
 });
 
+// FUNÇÃO DE LOGIN
+
 window.logar = function () {
   var login = $(".form-do-login1")[0].value;
   var senha = $(".form-do-login2")[0].value;
   const log_btn = $("#botn-logar")[0];
 
   var xhr = new XMLHttpRequest();
-  var url = "     /auth/login";
+  var url = "https://grupobright.com/auth/login";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function () {

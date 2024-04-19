@@ -59,7 +59,7 @@ window.logar = function () {
   const log_btn = $("#botn-logar")[0];
 
   var xhr = new XMLHttpRequest();
-  var url = "/auth/login";
+  var url = "https://grupobright.com/auth/login";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function () {
