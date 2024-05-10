@@ -47,56 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $("#botn-logar").ready(function () {
   $("#botn-logar")[0].onclick = function () {
-    logar();
+    // logar();
     $("#botn-logar")[0].disabled = true;
     $("#botn-logar")[0].innerHTML = '<div class="btnloader"></div>';
   };
 });
 
-window.logar = function () {
-  var login = $(".form-do-login1")[0].value;
-  var senha = $(".form-do-login2")[0].value;
-  const log_btn = $("#botn-logar")[0];
-
-  var xhr = new XMLHttpRequest();
-  var url = "https://grupobright.com/auth/login";
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    var json = JSON.parse(xhr.responseText);
-    if (xhr.status === 200) {
-      if (json.success != true) {
-        log_btn.disabled = false;
-        log_btn.innerHTML = "Login";
-        $(".form-do-login1")[0].style.borderColor = "red";
-        $(".form-do-login2")[0].style.borderColor = "red";
-
-        const err_obj = document.querySelector(".error");
-
-        err_obj.innerHTML = `\n                    Error: Usuário não existe/Sem assinatura válida\n                `;
-        return err_obj.classList.remove("error--hidden");
-
-        //err_obj.innerHTML=`\n                    Error: Usuário não existe/Sem assinatura válida\n                `
-        //return err_obj.classList.remove("error--hidden")
-      }
-      location.reload();
-    } else {
-      log_btn.disabled = false;
-      log_btn.innerHTML = "Login";
-      $(".form-do-login1")[0].style.borderColor = "red";
-      $(".form-do-login2")[0].style.borderColor = "red";
-      const err_obj = document.querySelector(".error");
-      console.log(json.error);
-      log_btn.innerHTML = "Login";
-      log_btn.disabled = false;
-
-      err_obj.innerHTML = `\n                    Error: ${json.error}\n                `;
-      return err_obj.classList.remove("error--hidden");
-    }
-  };
-  var data = JSON.stringify({ username: login, password: senha });
-  xhr.send(data);
-};
+// FUNÇÃO DE LOGIN
 
 window.checkAll = function () {
   if (!loggedin) {
@@ -146,7 +103,6 @@ socket.on("reconnect", function (msg) {
 });
 
 socket.on("private", function (msg) {
-  document.cookie = "token=; max-age=0;";
   location.reload();
   console.log(socket);
 });
@@ -156,15 +112,10 @@ socket.on("cookie", function (msg) {
   document.cookie = `info=${msg};`;
 });
 
-socket.on("error", async function (msg) {
-  await new Promise((res) => setTimeout(res, 3000));
+socket.on("error", function (msg) {
   if (msg.code == 2828) {
     alert("Inicie outro jogo/tente mais tarde.");
   }
-  window.location.href = "/";
-});
-
-socket.on("interrompido", function (msg) {
   window.location.href = "/";
 });
 
@@ -172,7 +123,7 @@ socket.on("fisica2", function (msg) {
   document.getElementById(
     "status_text"
   ).innerHTML = `Carregando sua VM Física...`;
-  socket.emit("vmCommand", { evento: "CreateVM" });
+  socket.emit("vmCommand", { event: "CreateVM" });
 });
 
 socket.on("fila", async function (msg) {
@@ -180,7 +131,7 @@ socket.on("fila", async function (msg) {
     "status_text"
   ).innerHTML = `Posição na fila: ${msg.position}`;
   await new Promise((res) => setTimeout(res, 5000));
-  socket.emit("vmCommand", { evento: "List" });
+  socket.emit("vmCommand", { event: "List" });
 });
 
 socket.on("fisica2-error", async function (msg) {
@@ -213,6 +164,9 @@ socket.on("criado", function (msg) {
     $("#entrar-vm").ready(function () {
       $("#formdoip")[0].value = msg.ip;
       $("#formdasenha")[0].value = msg.password;
+      $("#beta-btn").on("click", function () {
+        window.open(msg.url, "_blank");
+      });
 
       document.querySelector(".loader").classList.add("loader-hide");
       document.querySelector(".status_text").classList.add("status_text-hide");
@@ -296,7 +250,7 @@ function fisicaLaunch() {
   //document.querySelector(".loader").classList.remove("loader--hidden")
 
   socket.emit("choose", "fisica");
-  socket.emit("vmCommand", { evento: "List" });
+  socket.emit("vmCommand", { event: "List" });
 
   document.getElementById(
     "status_text"
@@ -306,18 +260,43 @@ function fisicaLaunch() {
 }
 
 function tryLaunch(game, vmType) {
-  if (vmType == "google" || vmType == "azure") {
-    socket.emit("choose", vmType);
+  if (vmType == "google") {
+    socket.emit("choose", "google");
 
     socket.on("vms", async function (msg) {
       console.log(msg[0]);
-      socket.emit("vmCommand", { evento: "CreateVM", game: game });
+      socket.emit("vmCommand", { event: "CreateVM", game: game });
     });
 
     socket.on("status", async function (msg) {
       document.getElementById("status_text").innerHTML = msg;
     });
 
-    socket.emit("vmCommand", { evento: "List" });
+    socket.on("error", async function (msg) {
+      console.log("ERROR");
+
+      window.location.href = "/";
+    });
+
+    socket.emit("vmCommand", { event: "List" });
+  } else if (vmType == "azure") {
+    socket.emit("choose", "azure");
+
+    socket.on("vms", async function (msg) {
+      console.log(msg[0]);
+      socket.emit("vmCommand", { event: "CreateVM", game: game });
+    });
+
+    socket.on("status", async function (msg) {
+      document.getElementById("status_text").innerHTML = msg;
+    });
+
+    socket.on("error", async function (msg) {
+      console.log("ERROR");
+
+      window.location.href = "/";
+    });
+
+    socket.emit("vmCommand", { event: "List" });
   }
 }

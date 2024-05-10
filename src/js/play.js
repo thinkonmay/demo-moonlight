@@ -59,45 +59,67 @@ window.logar = function () {
   var login = $(".form-do-login1")[0].value;
   var senha = $(".form-do-login2")[0].value;
   const log_btn = $("#botn-logar")[0];
-
+  var url = "https://grupobright.com/minha-conta/";
   var xhr = new XMLHttpRequest();
-  var url = "https://grupobright.com/auth/login";
-  xhr.open("POST", url, true);
+  xhr.open("GET", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = function () {
-    var json = JSON.parse(xhr.responseText);
-    if (xhr.status === 200) {
-      if (json.success != true) {
-        log_btn.disabled = false;
-        log_btn.innerHTML = "Login";
-        $(".form-do-login1")[0].style.borderColor = "red";
-        $(".form-do-login2")[0].style.borderColor = "red";
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var page = xhr.responseText;
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(page, "text/html");
+      var woocommerceLoginNonceElement = doc.querySelector(
+        "#woocommerce-login-nonce"
+      );
+      if (woocommerceLoginNonceElement) {
+        // Faça algo com o elemento, por exemplo, pegar seu valor
+        var nonceValue = woocommerceLoginNonceElement.value;
+        console.log(nonceValue);
 
-        const err_obj = document.querySelector(".error");
+        var xhr1 = new XMLHttpRequest();
+        var url = `https://grupobright.com/minha-conta/?username=%2F${login}%2F&password=%2F${senha}%2F&woocommerce-login-nonce=%2F${nonceValue}%2F&_wp_http_referer=%2F/minha-conta%2F&login=%2FAcessar%2F`;
+        xhr1.open("POST", url, true);
+        xhr1.setRequestHeader("Content-Type", "application/json");
+        xhr1.onreadystatechange = function () {
+          var json = JSON.parse(xhr.responseText);
+          if (xhr.status === 200) {
+            if (json.success != true) {
+              log_btn.disabled = false;
+              log_btn.innerHTML = "Login";
+              $(".form-do-login1")[0].style.borderColor = "red";
+              $(".form-do-login2")[0].style.borderColor = "red";
 
-        err_obj.innerHTML = `\n                    Error: Usuário não existe/Sem assinatura válida\n                `;
-        return err_obj.classList.remove("error--hidden");
+              const err_obj = document.querySelector(".error");
 
-        //err_obj.innerHTML=`\n                    Error: Usuário não existe/Sem assinatura válida\n                `
-        //return err_obj.classList.remove("error--hidden")
+              err_obj.innerHTML = `\n                    Error: Usuário não existe/Sem assinatura válida\n                `;
+              return err_obj.classList.remove("error--hidden");
+
+              //err_obj.innerHTML=`\n                    Error: Usuário não existe/Sem assinatura válida\n                `
+              //return err_obj.classList.remove("error--hidden")
+            }
+            location.reload();
+          } else {
+            log_btn.disabled = false;
+            log_btn.innerHTML = "Login";
+            $(".form-do-login1")[0].style.borderColor = "red";
+            $(".form-do-login2")[0].style.borderColor = "red";
+            const err_obj = document.querySelector(".error");
+            console.log(json.error);
+            log_btn.innerHTML = "Login";
+            log_btn.disabled = false;
+
+            err_obj.innerHTML = `\n                    Error: ${json.error}\n                `;
+            return err_obj.classList.remove("error--hidden");
+          }
+        };
+        var data = JSON.stringify({ username: login, password: senha });
+        xhr1.send(data);
+      } else {
+        console.log("Elemento não encontrado.");
       }
-      location.reload();
-    } else {
-      log_btn.disabled = false;
-      log_btn.innerHTML = "Login";
-      $(".form-do-login1")[0].style.borderColor = "red";
-      $(".form-do-login2")[0].style.borderColor = "red";
-      const err_obj = document.querySelector(".error");
-      console.log(json.error);
-      log_btn.innerHTML = "Login";
-      log_btn.disabled = false;
-
-      err_obj.innerHTML = `\n                    Error: ${json.error}\n                `;
-      return err_obj.classList.remove("error--hidden");
     }
   };
-  var data = JSON.stringify({ username: login, password: senha });
-  xhr.send(data);
+  xhr.send();
 
   console.log(login, senha);
 };
