@@ -2,6 +2,16 @@ window.game = "";
 window.server = "";
 window.launcher = "";
 
+// Função para verificar se a variável foi definida
+function verificarAuthToken() {
+  if (window.authToken !== undefined) {
+    socket.emit("authenticate", window.authToken);
+    clearInterval(verificarIntervalo);
+  }
+}
+// Intervalo de tempo para verificar a cada 100 milissegundos
+const verificarIntervalo = setInterval(verificarAuthToken, 1000);
+
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 window.parteCriar = function () {
   document
@@ -23,13 +33,28 @@ window.parteCriar = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (document.cookie.indexOf("token=") == -1) {
+  var cookies = parseCookies(document.cookie);
+  console.log(cookies);
+
+  if (
+    cookies.token === undefined ||
+    cookies.token === null ||
+    cookies.token === ""
+  ) {
     document.getElementById("user-logo").style.display = "none";
     window.loggedin = false;
   } else {
     window.loggedin = true;
+
+    const username = document.getElementById("username");
+    username.classList.remove("d-none");
+    username.innerHTML = cookies.username;
+    document.getElementById("user-icon").innerHTML =
+      cookies.username[0].toUpperCase();
+
     document.getElementById("botao-entrar").classList.remove("d-md-flex");
-    document.getElementById("botao-entrar").style.display = "none";
+    document.getElementById("botao-entrar").classList.add("d-none");
+    document.getElementById("icon-logar").classList.add("d-none");
   }
 
   if (document.cookie.indexOf("key=") != -1) {
@@ -70,6 +95,54 @@ socket.on("avaliable", function (msg) {
   $("#azure-disponivies")[0].innerHTML = " " + msg.azure;
   $("#priority-disponivies")[0].innerHTML = " " + msg.priority;
 });
+
+socket.on("error", function (msg) {
+  if (msg["code"] === "Sem assinatura ativada!") {
+    alert("Esse usuário não possui assinatura ativa!");
+    window.loggedin = true;
+    document.cookie = `token=${window.authToken}`;
+    document.cookie = `max-age=${60 * 60 * 24}`;
+    document.cookie = `expires=${new Date(
+      new Date().getTime() + 24 * 60 * 60 * 1000
+    )}`;
+    document.cookie = `username=${window.userName}`;
+    window.location.reload();
+  }
+});
+
+socket.on("autenticado", function (msg) {
+  window.loggedin = true;
+  document.cookie = `token=${window.authToken}`;
+  document.cookie = `max-age=${60 * 60 * 24}`;
+  document.cookie = `expires=${new Date(
+    new Date().getTime() + 24 * 60 * 60 * 1000
+  )}`;
+  document.cookie = `username=${window.userName}`;
+  window.location.reload();
+  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
+  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
+  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
+  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
+});
+
+function logout() {
+  document.cookie = "token=;";
+  document.cookie = "max-age=;";
+  document.cookie = "expires=;";
+  document.cookie = "username=;";
+  window.location.reload();
+}
+
+function parseCookies(cookies) {
+  var cookies = {};
+  document.cookie.split(";").forEach(function (cookie) {
+    var parts = cookie.split("=");
+    var key = parts[0].trim();
+    var value = decodeURIComponent(parts[1]);
+    cookies[key] = value;
+  });
+  return cookies;
+}
 
 window.copyFrom = function (idname) {
   var copyText = $(`#${idname}`)[0];
@@ -196,7 +269,10 @@ socket.on("created", async function (msg) {
   }
 });
 
-socket.on("changePage", async function (msg) {});
+socket.on("changePage", async function (msg) {
+  console.log("Change Page");
+  changePage();
+});
 
 let vm = "";
 

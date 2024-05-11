@@ -127,7 +127,8 @@
                         data-touch="false" data-close-existing="true"
                         data-small-btn="false" data-toolbar="false"> Entrar
                     </button>
-                    <button class="btn btn-link btn-icon-md d-md-none"
+                    <button id="icon-logar"
+                        class="btn btn-link btn-icon-md d-md-none"
                         data-fancybox data-src="#flq_popup_signin"
                         data-base-class="flq-fancybox-signin"
                         data-animation-duration="1000" data-keyboard="false"
@@ -146,26 +147,35 @@
                 </div>
                 <div
                     class="flq-dropdown flq-dropdown-nav ms-4 d-none d-sm-flex">
+                    <li class="nav-link d-none p-2" id="username"></li>
                     <button id="user-logo"
                         class="btn btn-link align-self-center">
-                        <span class="flq-image flq-navbar-top-user">
-                            <img src="assets/images/user-160x160.jpg" alt>
+                        <span
+                            class="flq-image flq-navbar-top-user d-flex"
+                            style="background-color: #111111; justify-content: center;">
+                            <p id="user-icon" class="align-self-center"></p>
                         </span>
                     </button>
                     <div class="dropdown-menu gy-2">
-                        <ul class="nav">
-
+                        <ul id="nav-dropdown" class="nav">
                             <li class="nav-item">
                                 <a
                                     href="https://grupobright.com/minha-conta/pedidos"
-                                    class="nav-link">
-                                    <span class="nav-link-name">Pedidos</span>
+                                    class="nav-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    <span class="nav-link-name">Pedidos <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="10" height="10"
+                                            style="filter: invert(100%);"
+                                            viewBox="0 0 24 24"><path
+                                                d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z" /></svg></span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a style='cursor:pointer' class="nav-link">
                                     <span
-                                        onclick="document.cookie = 'token=; max-age=0;'; location.reload()"
+                                        onclick=logout()
                                         class="nav-link-name">Logout</span>
                                 </a>
                             </li>

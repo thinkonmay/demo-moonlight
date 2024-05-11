@@ -4,12 +4,20 @@ import {
   StartMoonlight,
 } from "../../src-tauri/tauri.ts";
 
+function fireEvent(eventName, eventData) {
+  const event = new CustomEvent(eventName, {
+    detail: eventData,
+  });
+  document.dispatchEvent(event);
+}
+
 import { overrideGlobalXHR } from "tauri-xhr";
 overrideGlobalXHR();
 
 //import FormData from "form-data";
 
 import axios from "axios";
+import FormData from "form-data";
 
 document.addEventListener("DOMContentLoaded", async () => {
   document
@@ -20,43 +28,48 @@ document.addEventListener("DOMContentLoaded", async () => {
     var login = document.querySelector(".form-do-login1").value;
     var senha = document.querySelector(".form-do-login2").value;
 
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailRegex.test(login)) {
+      var params = `?email=${login}&password=${senha}`;
+    } else {
+      var params = `?username=${login}&password=${senha}`;
+    }
+
     axios
-      .get("https://grupobright.com/minha-conta/")
+      .get(`https://grupobright.com/api/user/generate_auth_cookie/${params}`)
       .then((response) => {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(response.data, "text/html");
-        var woocommerceLoginNonceElement = doc.querySelector(
-          "#woocommerce-login-nonce"
-        );
-
-        if (woocommerceLoginNonceElement) {
-          var nonceValue = woocommerceLoginNonceElement.value;
-          console.log(nonceValue);
-          var formData = new FormData();
-          formData.append("username", login);
-          formData.append("password", senha);
-          formData.append("woocommerce-login-nonce", nonceValue);
-          formData.append("_wp_http_referer", "/minha-conta/");
-          formData.append("login", "Acessar");
-
-          axios
-            .post("https://grupobright.com/minha-conta/", formData)
-            .then((response) => {
-              console.log("Login bem-sucedido!");
-              afterLogin(response);
-            });
-        } else {
-          console.log("Elemento não encontrado.");
-        }
+        afterLogin(response);
       })
       .catch((error) => {
-        console.error("Falha ao fazer a solicitação GET.", error);
+        alert("Ocorreu um erro no login");
+        document.querySelector("#botn-logar").disabled = false;
+        document.querySelector("#botn-logar").innerHTML = "Login";
       });
   }
 
   async function afterLogin(response) {
-    console.log(document.cookie);
-    console.log(response);
+    if (response.data.status == "error") {
+      alert("Usuário ou senha inválidos");
+      document.querySelector("#botn-logar").disabled = false;
+      document.querySelector("#botn-logar").innerHTML = "Login";
+    } else {
+      window.userName = `${response.data.user.displayname}`;
+      const config = {
+        method: "GET",
+        url: "https://grupobright.com/check.php",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: `${response.data.cookie_name}=${response.data.cookie};`,
+        },
+      };
+      axios.request(config).then((response2) => {
+        console.log(`${response.data.cookie_name}=${response.data.cookie};`);
+        console.log(response2);
+        alert("Logado com sucesso");
+        window.authToken = response2.data;
+      });
+    }
   }
 
   const moonlightBtn = document.getElementById("connectBtn");
