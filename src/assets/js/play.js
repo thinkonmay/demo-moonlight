@@ -9,7 +9,7 @@ function verificarAuthToken() {
     clearInterval(verificarIntervalo);
   }
 }
-// Intervalo de tempo para verificar a cada 100 milissegundos
+
 const verificarIntervalo = setInterval(verificarAuthToken, 1000);
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -55,6 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("botao-entrar").classList.remove("d-md-flex");
     document.getElementById("botao-entrar").classList.add("d-none");
     document.getElementById("icon-logar").classList.add("d-none");
+
+    socket.emit("authenticate", cookies.token);
   }
 
   if (document.cookie.indexOf("key=") != -1) {
@@ -96,40 +98,60 @@ socket.on("avaliable", function (msg) {
   $("#priority-disponivies")[0].innerHTML = " " + msg.priority;
 });
 
-socket.on("error", function (msg) {
-  if (msg["code"] === "Sem assinatura ativada!") {
-    alert("Esse usuário não possui assinatura ativa!");
-    window.loggedin = true;
+socket.on("error", async function (msg) {
+  var title;
+  var message;
+  if (msg["code"].includes("Erro inesperado")) {
+    title = "Erro inesperado:";
+    message = msg["code"];
+  } else if (msg["code"] === "Sem assinatura ativada!") {
+    title = "Sem assinatura:";
+    message =
+      "Esse usuário não possui assinatura ativa, crie um ticket ou adquira sua assinatura no site!";
+    new Promise((res) => setTimeout(res, 5000)).then(() => {
+      window.location.reload();
+    });
+  }
+  document.getElementById("modal-title").innerText = title;
+  document.getElementById("modal-message").innerText = message;
+  document.getElementById("messageModal").classList.remove("d-none");
+  document.getElementById("messageModal").classList.add("d-show");
+});
+
+function dimissMessageModal() {
+  document.getElementById("messageModal").classList.remove("d-show");
+  document.getElementById("messageModal").classList.add("d-none");
+}
+
+socket.on("autenticado", function (msg) {
+  setCookies();
+});
+
+function setCookies() {
+  window.loggedin = true;
+  let loginUI = false;
+  if (!document.cookie.includes("token")) {
+    loginUI = true;
+  }
+
+  if (loginUI) {
     document.cookie = `token=${window.authToken}`;
     document.cookie = `max-age=${60 * 60 * 24}`;
     document.cookie = `expires=${new Date(
       new Date().getTime() + 24 * 60 * 60 * 1000
     )}`;
     document.cookie = `username=${window.userName}`;
+
     window.location.reload();
   }
-});
-
-socket.on("autenticado", function (msg) {
-  window.loggedin = true;
-  document.cookie = `token=${window.authToken}`;
-  document.cookie = `max-age=${60 * 60 * 24}`;
-  document.cookie = `expires=${new Date(
-    new Date().getTime() + 24 * 60 * 60 * 1000
-  )}`;
-  document.cookie = `username=${window.userName}`;
-  window.location.reload();
-  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
-  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
-  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
-  console.log("é us guri"); // AQUI ----------------------------------------------------------------------------------------------
-});
+}
 
 function logout() {
   document.cookie = "token=;";
   document.cookie = "max-age=;";
   document.cookie = "expires=;";
   document.cookie = "username=;";
+  localStorage.clear();
   window.location.reload();
 }
 
@@ -175,6 +197,10 @@ socket.on("reconnect", function (msg) {
   });
 });
 
+socket.on("status", async function (msg) {
+  document.getElementById("status_text").innerHTML = msg;
+});
+
 socket.on("private", function (msg) {
   location.reload();
   console.log(socket);
@@ -188,15 +214,15 @@ socket.on("cookie", function (msg) {
 socket.on("error", function (msg) {
   if (msg.code == 2828) {
     alert("Inicie outro jogo/tente mais tarde.");
+    window.location.href = "/";
   }
-  window.location.href = "/";
 });
 
 socket.on("fisica2", function (msg) {
   document.getElementById(
     "status_text"
   ).innerHTML = `Carregando sua VM Física...`;
-  socket.emit("vmCommand", { event: "CreateVM" });
+  socket.emit("vmCommand", { evento: "CreateVM" });
 });
 
 socket.on("fila", async function (msg) {
@@ -204,11 +230,15 @@ socket.on("fila", async function (msg) {
     "status_text"
   ).innerHTML = `Posição na fila: ${msg.position}`;
   await new Promise((res) => setTimeout(res, 5000));
-  socket.emit("vmCommand", { event: "List" });
+  socket.emit("vmCommand", { evento: "List" });
 });
 
 socket.on("fisica2-error", async function (msg) {
   alert(msg);
+  window.location.href = "/";
+});
+
+socket.on("interrompido", async function (msg) {
   window.location.href = "/";
 });
 
@@ -310,11 +340,14 @@ socket.on("assinatura", async function (msg) {
   }
 });
 
-function checarAssinatura() {
-  socket.emit("checarAssinatura", "");
-
+async function checarAssinatura1() {
   parteCriar();
+
+  //console.log("Checando essa bucetinha.")
+
   document.getElementById("status_text").innerHTML = `Checando assinatura...`;
+  window.checarAssinatura();
+
   /*document.getElementsByTagName('body')[0].style.background = ""
     document.getElementsByTagName('body')[0].style.backgroundImage = "url('https://play.brightcloudgames.com.br/images/vip_loading21.jpg')";
     document.getElementsByTagName('body')[0].style.backgroundSize = "cover"
@@ -326,7 +359,7 @@ function fisicaLaunch() {
   //document.querySelector(".loader").classList.remove("loader--hidden")
 
   socket.emit("choose", "fisica");
-  socket.emit("vmCommand", { event: "List" });
+  socket.emit("vmCommand", { evento: "List" });
 
   document.getElementById(
     "status_text"
@@ -335,44 +368,52 @@ function fisicaLaunch() {
   // document.querySelector(".iframe").classList.remove("iframe--hidden")
 }
 
+function mudarZona(zona) {
+  socket.emit("region", `${zona}`);
+  socket.emit("choose", "google");
+  socket.emit("vmCommand", { evento: "List" });
+  document.getElementById("changeRegion").classList.remove("d-flex");
+  document.getElementById("changeRegion").classList.add("d-none");
+}
+
+function dimissChangeRegionModal() {
+  document.getElementById("changeRegion").style.display = "none";
+  socket.emit("sair", "sairFila");
+}
+
 function tryLaunch(game, vmType) {
-  if (vmType == "google") {
-    socket.emit("choose", "google");
+  // if (vmType == "google") {
+  socket.emit("choose", "google");
 
-    socket.on("vms", async function (msg) {
-      console.log(msg[0]);
-      socket.emit("vmCommand", { event: "CreateVM", game: game });
-    });
+  socket.on("vms", async function (msg) {
+    console.log(msg[0]);
+    socket.emit("vmCommand", { evento: "CreateVM", game: game });
+  });
 
-    socket.on("status", async function (msg) {
-      document.getElementById("status_text").innerHTML = msg;
-    });
+  socket.on("changeRegion", async function (msg) {
+    document.getElementById("changeRegion").classList.remove("d-none");
+    document.getElementById("changeRegion").classList.add("d-flex");
+  });
 
-    socket.on("error", async function (msg) {
-      console.log("ERROR");
+  socket.emit("vmCommand", { evento: "List" });
+  // } else if (vmType == "azure") {
+  //   socket.emit("choose", "azure");
 
-      window.location.href = "/";
-    });
+  //   socket.on("vms", async function (msg) {
+  //     console.log(msg[0]);
+  //     socket.emit("vmCommand", { evento: "CreateVM", game: game });
+  //   });
 
-    socket.emit("vmCommand", { event: "List" });
-  } else if (vmType == "azure") {
-    socket.emit("choose", "azure");
+  //   socket.on("status", async function (msg) {
+  //     document.getElementById("status_text").innerHTML = msg;
+  //   });
 
-    socket.on("vms", async function (msg) {
-      console.log(msg[0]);
-      socket.emit("vmCommand", { event: "CreateVM", game: game });
-    });
+  //   socket.on("error", async function (msg) {
+  //     console.log("ERROR");
 
-    socket.on("status", async function (msg) {
-      document.getElementById("status_text").innerHTML = msg;
-    });
+  //     window.location.href = "/";
+  //   });
 
-    socket.on("error", async function (msg) {
-      console.log("ERROR");
-
-      window.location.href = "/";
-    });
-
-    socket.emit("vmCommand", { event: "List" });
-  }
+  //   socket.emit("vmCommand", { evento: "List" });
+  // }
 }

@@ -19,6 +19,9 @@ overrideGlobalXHR();
 import axios from "axios";
 import FormData from "form-data";
 
+let cookie_name;
+let cookie_val;
+
 document.addEventListener("DOMContentLoaded", async () => {
   document
     .getElementById("botn-logar")
@@ -42,18 +45,38 @@ document.addEventListener("DOMContentLoaded", async () => {
         afterLogin(response);
       })
       .catch((error) => {
-        alert("Ocorreu um erro no login");
+        document.getElementById("modal-title").innerText =
+          "Credenciais Inválidas";
+        document.getElementById("modal-message").innerText =
+          "O usuário ou senha inseridos estão incorretos. Por favor, tente novamente.";
+        document.getElementById("modal-info").innerText =
+          "Se o erro persistir, crie um ticket no suporte!";
+        document.getElementById("messageModal").classList.remove("d-none");
+        document.getElementById("messageModal").classList.add("d-show");
         document.querySelector("#botn-logar").disabled = false;
         document.querySelector("#botn-logar").innerHTML = "Login";
+        new Promise((res) => setTimeout(res, 5000)).then(() => {
+          return;
+        });
       });
   }
 
   async function afterLogin(response) {
     if (response.data.status == "error") {
-      alert("Usuário ou senha inválidos");
+      document.getElementById("modal-title").innerText =
+        "Credenciais Inválidas";
+      document.getElementById("modal-message").innerText =
+        "O usuário ou senha inseridos estão incorretos. Por favor, tente novamente.";
+      document.getElementById("messageModal").classList.remove("d-none");
+      document.getElementById("messageModal").classList.add("d-show");
       document.querySelector("#botn-logar").disabled = false;
       document.querySelector("#botn-logar").innerHTML = "Login";
+      new Promise((res) => setTimeout(res, 5000)).then(() => {
+        return;
+      });
     } else {
+      localStorage.setItem("cookie_name", response.data.cookie_name);
+      localStorage.setItem("cookie_value", response.data.cookie);
       window.userName = `${response.data.user.displayname}`;
       const config = {
         method: "GET",
@@ -66,7 +89,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       axios.request(config).then((response2) => {
         console.log(`${response.data.cookie_name}=${response.data.cookie};`);
         console.log(response2);
-        alert("Logado com sucesso");
         window.authToken = response2.data;
       });
     }
@@ -119,3 +141,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 });
+
+function checarAssinatura() {
+  const config = {
+    method: "GET",
+    url: "https://grupobright.com/checkpriority.php",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Cookie: `${localStorage.getItem("cookie_name")}=${localStorage.getItem(
+        "cookie_value"
+      )};`,
+    },
+  };
+  axios.request(config).then((response) => {
+    socket.emit("checarAssinatura", response.data);
+  });
+  return;
+}
+
+window.checarAssinatura = checarAssinatura;
