@@ -246,7 +246,7 @@
         </div>
         <style>
         .loader {
-            margin-top: 15rem;
+            margin-top: 7rem;
             margin-left: auto;
             margin-right: auto;
         }
@@ -381,9 +381,12 @@
                             aria-label="Close"
                             onclick=dimissMessageModal()></button>
                     </div>
-                    <div class="modal-body">
-                        <p id="modal-message"></p>
-                        <small id="modal-info"></small>
+                    <div class="modal-body d-flex flex-column"
+                        style="gap: .5rem;">
+                        <div id="modal-message" class="d-flex"
+                            style="flex-direction: column; gap: .5rem;"></div>
+                        <small id="modal-info"
+                            style="margin-top: 1rem;"></small>
                     </div>
                 </div>
             </div>
@@ -427,6 +430,15 @@
             margin-top: 20px;
             gap: 10px;
         }
+
+        .action-buttons {
+            margin-bottom: 5rem;
+        }
+
+        .loadingscreen {
+            align-items: center;
+            align-content: center;
+        }
     </style>
         <!-- Modal de mudar a região-->
         <div class="d-none" id="changeRegion">
@@ -462,56 +474,58 @@
             </div>
         </div>
         <div>
-            <div class="loader loader-hide">
-                <lottie-player class="lottieplayer"
-                    src="lf30_xwo73ffu.json"
-                    mode="normal" background="transparent"
-                    speed="1" style="width: 200px; height: 200px;" loop
-                    autoplay></lottie-player>
-            </div>
-            <div class="status_text status_text-hide">
-                <span
-                    style="font-size:2rem; font-weight:bold; padding-right:5px; padding-left:5px"
-                    id="status_text">Carregando...</span><br>&nbsp;</br>
-            <div class="tips-carousel">
-                <button class="prev-btn"><i
-                        class="fas fa-chevron-left"></i></button>
-                <span class="tip active">Está enfrentando quedas de FPS
-                    em sua
-                    máquina? Vá até o Gerenciador de Tarefas e
-                    experimente
-                    finalizar a tarefa "sunshine". OBS: Não faça isso se
-                    estiver
-                    usando o Moonlight disponibilizado através do nosso
-                    painel!</span>
-                <span class="tip">Está com algum problema relacionado ao
-                    serviço? Experimente visitar nosso servidor do
-                    Discord <a
-                        href="https://discord.gg/grupobright">clicando
-                        aqui</a>
-                    e por lá iremos te ajudar a resolver seu
-                    problema!</span>
-                <span class="tip">Se sua máquina estiver demorando muito
-                    para
-                    iniciar, a infraestrutura em questão pode estar
-                    instável,
-                    tente utilizando outra infraestrutura caso não
-                    queira
-                    aguardar.</span>
-                <button class="next-btn"><i
-                        class="fas fa-chevron-right"></i></button>
-            </div>
+            <div class="loadingscreen">
+                <div class="loader loader-hide">
+                    <iframe
+                        src="https://widgets.commoninja.com/iframe/07eb1fd0-ce4f-4da5-85cd-5d95d3b2b96f"
+                        width="100%" height="100%" frameborder="0"
+                        scrolling="no"></iframe>
+                </div>
+                <div class="status_text status_text-hide">
+                    <span
+                        style="font-size:2rem; font-weight:bold; padding-right:5px; padding-left:5px"
+                        id="status_text">Carregando...</span><br>&nbsp;</br>
+                <div class="tips-carousel">
+                    <button class="prev-btn"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <span class="tip active">Está enfrentando quedas de FPS
+                        em sua
+                        máquina? Vá até o Gerenciador de Tarefas e
+                        experimente
+                        finalizar a tarefa "sunshine". OBS: Não faça isso se
+                        estiver
+                        usando o Moonlight disponibilizado através do nosso
+                        painel!</span>
+                    <span class="tip">Está com algum problema relacionado ao
+                        serviço? Experimente visitar nosso servidor do
+                        Discord <a
+                            href="https://discord.gg/grupobright">clicando
+                            aqui</a>
+                        e por lá iremos te ajudar a resolver seu
+                        problema!</span>
+                    <span class="tip">Se sua máquina estiver demorando muito
+                        para
+                        iniciar, a infraestrutura em questão pode estar
+                        instável,
+                        tente utilizando outra infraestrutura caso não
+                        queira
+                        aguardar.</span>
+                    <button class="next-btn"><i
+                            class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="action-buttons">
+                    <button style="display: inline;"
+                        id="interromper-btn interromper-btn-hide"
+                        onclick="socket.emit('sair','sairFila')"
+                        class="btn btn-block interromper-btn interromper-btn-hide">Interromper</button>&nbsp;&nbsp;
+                    &nbsp;&nbsp; <button style="display: inline;"
+                        id="deletar-btn deletar-btn-hide"
+                        onclick="deletarVM();"
+                        class="btn btn-block deletar-btn deletar-btn-hide">Deletar
+                        VM</button>
+                </div>
 
-            <button style="display: inline;"
-                id="interromper-btn interromper-btn-hide"
-                onclick="socket.emit('sair','sairFila')"
-                class="btn btn-block interromper-btn interromper-btn-hide">Interromper</button>&nbsp;&nbsp;
-            &nbsp;&nbsp; <button style="display: inline;"
-                id="deletar-btn deletar-btn-hide"
-                onclick="socket.emit('loadingreset',''); alert('VM está sendo deletada. O processo levará de 5 a 10 minutos. Quando finalizado você voltará para o painel automaticamente.')"
-                class="btn btn-block deletar-btn deletar-btn-hide">Deletar
-                VM</button>
-
+            </div>
         </div>
         <div class="flq-swiper-wrapper flq-background">
             <div class="
@@ -2074,7 +2088,9 @@
                             </div>
                             <div class="col-auto">
                                 <a
-                                    href="https://grupobright.com/wp-login.php?action=lostpassword"
+                                    href="https://grupobright.com/minha-conta/senha-perdida/"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                                     class="flq-color-meta flq-color-title-hover">Esqueci
                                     a senha</a>
                             </div>
@@ -2405,19 +2421,23 @@
                                     placeholder="PIN"
                                     class="form-control flq-form-message flq-form-translucent">
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 d-flex"
+                                style="flex-direction: column;
+                            gap: .5rem;">
                                 <button type="button"
                                     onclick="authPin($('#formdopin')[0].value)"
                                     class="btn btn-block">Autenticar</button>
-                            </div>
-                            <div class="col-12 mt-3">
                                 <button type="button"
                                     onclick="socket.emit('interromper','sair'); window.location.reload();"
                                     class="btn btn-block">Desligar
                                     VM</button>
                             </div>
-                            <div class="buttonsConnectApp d-flex">
+                            <div class="buttonsConnectApp d-flex mt-2" style="
+                            flex-direction: column;
+                            gap: .5rem;
+                        ">
                                 <div class="col-12">
+                                    <h5 class="mb-1">Conexão via App:</h5>
                                     <button id="connectBtn" type="button"
                                         onclick="iniciarAppPainel()"
                                         class="btn btn-block">Conectar via
@@ -2502,7 +2522,7 @@
                             </div>
                             <div class="col-12">
                                 <button type="button"
-                                    onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
+                                    onclick="socket.emit('interromper','sair'); windoe.location.reload()"
                                     class="btn btn-block">Desligar
                                     VM</button>
                             </div>

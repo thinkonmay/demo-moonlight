@@ -17,7 +17,6 @@ overrideGlobalXHR();
 import axios from "axios";
 
 async function iniciarApp(computer, streamConfig) {
-  console.log("Iniciando app...");
   if (child == null) {
     child = await StartMoonlight(computer, streamConfig, (data, log) =>
       console.log(`${data} : ${log}`)
@@ -98,8 +97,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         },
       };
       axios.request(config).then((response2) => {
-        console.log(`${response.data.cookie_name}=${response.data.cookie};`);
-        console.log(response2);
         window.authToken = response2.data;
       });
     }
@@ -122,24 +119,6 @@ let child = null;
 //     ip = new_ip;
 //   } catch (e) {}
 // }, 1000);
-
-submitBtn.onclick = async () => {
-  const bitrate = document.getElementById("bitrate").value;
-  const height = document.getElementById("height").value;
-  const width = document.getElementById("width").value;
-
-  if (bitrate != undefined && bitrate > 1 && bitrate < 100)
-    config.bitrate = bitrate * 1000;
-  if (height != undefined && height > 100 && height < 5000)
-    config.height = height;
-  if (width != undefined && width > 100 && width < 5000) config.width = width;
-
-  console.log(config);
-};
-
-document.getElementById("connectBtn").click = async () => {
-  console.log("teste");
-};
 
 function checarAssinatura() {
   const config = {

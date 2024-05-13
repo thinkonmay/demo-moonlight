@@ -34,7 +34,6 @@ window.parteCriar = function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   var cookies = parseCookies(document.cookie);
-  console.log(cookies);
 
   if (
     cookies.token === undefined ||
@@ -253,7 +252,6 @@ socket.on("RecCreated", async function (msg) {
 });
 
 socket.on("criado", function (msg) {
-  console.log("CRIANDOO");
   if (msg.fisica) {
     $("#entrar-vm-fisica").ready(function () {
       $("#formdasenha-fisica")[0].value = msg.password;
@@ -300,7 +298,6 @@ socket.on("created", async function (msg) {
 });
 
 socket.on("changePage", async function (msg) {
-  console.log("Change Page");
   changePage();
 });
 
@@ -352,15 +349,27 @@ async function checarAssinatura1() {
     document.getElementsByTagName('body')[0].style.backgroundRepeat = "no-repeat"*/
 }
 
+function deletarVM() {
+  socket.emit("loadingreset", "");
+  document.getElementById("modal-title").innerText = "VM sendo:";
+  document.getElementById(
+    "modal-message"
+  ).innerHTML = `O processo levará de 5 a 10 minutos. Quando finalizado você voltará para o painel automaticamente.`;
+  document.getElementById("modal-info").innerText =
+    "Se a stream não iniciar, tente reiniciar sua VM.";
+  document.getElementById("messageModal").classList.remove("d-none");
+  document.getElementById("messageModal").classList.add("d-show");
+}
+
 async function iniciarAppPainel() {
-  console.log("Antes Função");
   const computer = {
     address: document.getElementById("formdoip").value,
   };
   window.iniciarApp(computer, streamConfig);
   document.getElementById("modal-title").innerText = "Iniciando app:";
-  document.getElementById("modal-message").innerText =
-    "Aguarde até o app iniciar...";
+  document.getElementById(
+    "modal-message"
+  ).innerHTML = `<p>Aguarde até o app iniciar. Use a senha listada no modo "Use o RDP" para fazer o acesso!</p>`;
   document.getElementById("modal-info").innerText =
     "Se a stream não iniciar, tente reiniciar sua VM.";
   document.getElementById("messageModal").classList.remove("d-none");
@@ -425,7 +434,6 @@ function tryLaunch(game, vmType) {
   socket.emit("choose", "google");
 
   socket.on("vms", async function (msg) {
-    console.log(msg[0]);
     socket.emit("vmCommand", { evento: "CreateVM", game: game });
   });
 
