@@ -343,8 +343,6 @@ socket.on("assinatura", async function (msg) {
 async function checarAssinatura1() {
   parteCriar();
 
-  //console.log("Checando essa bucetinha.")
-
   document.getElementById("status_text").innerHTML = `Checando assinatura...`;
   window.checarAssinatura();
 
@@ -353,6 +351,47 @@ async function checarAssinatura1() {
     document.getElementsByTagName('body')[0].style.backgroundSize = "cover"
     document.getElementsByTagName('body')[0].style.backgroundRepeat = "no-repeat"*/
 }
+
+async function iniciarAppPainel() {
+  console.log("Antes Função");
+  const computer = {
+    address: document.getElementById("formdoip").value,
+  };
+  window.iniciarApp(computer, streamConfig);
+  document.getElementById("modal-title").innerText = "Iniciando app:";
+  document.getElementById("modal-message").innerText =
+    "Aguarde até o app iniciar...";
+  document.getElementById("modal-info").innerText =
+    "Se a stream não iniciar, tente reiniciar sua VM.";
+  document.getElementById("messageModal").classList.remove("d-none");
+  document.getElementById("messageModal").classList.add("d-show");
+}
+
+function openConfigModal() {
+  document.getElementById("modalConfigStream").classList.remove("d-none");
+  document.getElementById("modalConfigStream").classList.add("d-show");
+}
+
+function dimissConfigModal() {
+  document.getElementById("modalConfigStream").classList.remove("d-show");
+  document.getElementById("modalConfigStream").classList.add("d-none");
+}
+
+var streamConfig = {
+  bitrate: 6000,
+  width: 1920,
+  height: 1080,
+};
+
+function salvarConfigStream() {
+  streamConfig.bitrate = document.getElementById("bitrate").value || 6000;
+  streamConfig.width = document.getElementById("width").value || 1920;
+  streamConfig.height = document.getElementById("height").value || 1080;
+  document.getElementById("modalConfigStream").classList.remove("d-show");
+  document.getElementById("modalConfigStream").classList.add("d-none");
+}
+
+window.iniciarAppPainel = iniciarAppPainel;
 
 function fisicaLaunch() {
   //document.getElementsByClassName("btn btn-hover")[1].classList.remove("btn-hover--hidden")

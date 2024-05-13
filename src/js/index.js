@@ -14,10 +14,21 @@ function fireEvent(eventName, eventData) {
 import { overrideGlobalXHR } from "tauri-xhr";
 overrideGlobalXHR();
 
-//import FormData from "form-data";
-
 import axios from "axios";
-import FormData from "form-data";
+
+async function iniciarApp(computer, streamConfig) {
+  console.log("Iniciando app...");
+  if (child == null) {
+    child = await StartMoonlight(computer, streamConfig, (data, log) =>
+      console.log(`${data} : ${log}`)
+    );
+  } else {
+    await CloseMoonlight(child);
+    child = null;
+  }
+}
+
+window.iniciarApp = iniciarApp;
 
 let cookie_name;
 let cookie_val;
@@ -93,54 +104,42 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
   }
-
-  const moonlightBtn = document.getElementById("connectBtn");
-  const submitBtn = document.getElementById("submitBtn");
-  const inputIP = document.getElementById("IP");
-
-  let info = {};
-  let ip = "";
-  let child = null;
-  let config = {
-    bitrate: 6000,
-    width: 1920,
-    height: 1080,
-  };
-  // setInterval(async () => {
-  //   const new_ip = inputIP.value;
-  //   if (new_ip == ip) return;
-
-  //   try {
-  //     info = { ...(await GetInfo(new_ip)), address: new_ip };
-  //     ip = new_ip;
-  //   } catch (e) {}
-  // }, 1000);
-
-  submitBtn.onclick = async () => {
-    const bitrate = document.getElementById("bitrate").value;
-    const height = document.getElementById("height").value;
-    const width = document.getElementById("width").value;
-
-    if (bitrate != undefined && bitrate > 1 && bitrate < 100)
-      config.bitrate = bitrate * 1000;
-    if (height != undefined && height > 100 && height < 5000)
-      config.height = height;
-    if (width != undefined && width > 100 && width < 5000) config.width = width;
-
-    console.log(config);
-  };
-
-  moonlightBtn.onclick = async () => {
-    if (child == null) {
-      child = await StartMoonlight(info, config, (data, log) =>
-        console.log(`${data} : ${log}`)
-      );
-    } else {
-      await CloseMoonlight(child);
-      child = null;
-    }
-  };
 });
+
+const moonlightBtn = document.getElementById("connectBtn");
+const submitBtn = document.getElementById("submitBtn");
+const inputIP = document.getElementById("formdoip");
+
+let info = {};
+let ip = "";
+let child = null;
+// setInterval(async () => {
+//   const new_ip = inputIP.value;
+//   if (new_ip == ip) return;
+
+//   try {
+//     info = { ...(await GetInfo(new_ip)), address: new_ip };
+//     ip = new_ip;
+//   } catch (e) {}
+// }, 1000);
+
+submitBtn.onclick = async () => {
+  const bitrate = document.getElementById("bitrate").value;
+  const height = document.getElementById("height").value;
+  const width = document.getElementById("width").value;
+
+  if (bitrate != undefined && bitrate > 1 && bitrate < 100)
+    config.bitrate = bitrate * 1000;
+  if (height != undefined && height > 100 && height < 5000)
+    config.height = height;
+  if (width != undefined && width > 100 && width < 5000) config.width = width;
+
+  console.log(config);
+};
+
+document.getElementById("connectBtn").click = async () => {
+  console.log("teste");
+};
 
 function checarAssinatura() {
   const config = {

@@ -369,3 +369,8 @@ function tryLaunch(game, vmType) {
     socket.emit("vmCommand", { event: "List" });
   }
 }
+
+async function iniciarApp() {
+  console.log("Antes Função");
+  window.iniciarApp();
+}
