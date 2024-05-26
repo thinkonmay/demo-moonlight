@@ -91,8 +91,7 @@
                                 src="assets/images/server-logos/logo_google.svg">&nbsp;
                             <span id="google-disponivies"> Carregando...</span>
                         </a><a>&nbsp; </a><a>&nbsp; </a>
-                        <a class="nav-link"><script
-                                src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <a class="nav-link">
                             <lottie-player
                                 src="https://assets6.lottiefiles.com/packages/lf20_9qekka7a.json"
                                 background="transparent" speed="1"
@@ -102,14 +101,14 @@
                                 src="assets/images/server-logos/logo_azure.svg">&nbsp;
                             <span id="azure-disponivies"> Carregando...</span>
                         </a><a> &nbsp;</a><a> &nbsp;</a>
-                        <a class="nav-link"><script
-                                src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <a class="nav-link">
                             <lottie-player
                                 src="https://assets6.lottiefiles.com/packages/lf20_9qekka7a.json"
                                 background="transparent" speed="1"
                                 style="width: 20px; height: 20px;" loop
                                 autoplay></lottie-player><img width="20px"
-                                height="20px" src="images/favicon.ico">&nbsp;
+                                height="20px"
+                                src="assets/images/server-logos/logo.png">&nbsp;
                             <span id="priority-disponivies">
                                 Carregando...</span>
                         </a>
@@ -126,7 +125,8 @@
                         data-touch="false" data-close-existing="true"
                         data-small-btn="false" data-toolbar="false"> Entrar
                     </button>
-                    <button class="btn btn-link btn-icon-md d-md-none"
+                    <button id="icon-logar"
+                        class="btn btn-link btn-icon-md d-md-none"
                         data-fancybox data-src="#flq_popup_signin"
                         data-base-class="flq-fancybox-signin"
                         data-animation-duration="1000" data-keyboard="false"
@@ -145,26 +145,35 @@
                 </div>
                 <div
                     class="flq-dropdown flq-dropdown-nav ms-4 d-none d-sm-flex">
+                    <li class="nav-link d-none p-2" id="username"></li>
                     <button id="user-logo"
                         class="btn btn-link align-self-center">
-                        <span class="flq-image flq-navbar-top-user">
-                            <img src="assets/images/user-160x160.jpg" alt>
+                        <span
+                            class="flq-image flq-navbar-top-user d-flex"
+                            style="background-color: #111111; justify-content: center;">
+                            <p id="user-icon" class="align-self-center"></p>
                         </span>
                     </button>
                     <div class="dropdown-menu gy-2">
-                        <ul class="nav">
-
+                        <ul id="nav-dropdown" class="nav">
                             <li class="nav-item">
                                 <a
                                     href="https://grupobright.com/minha-conta/pedidos"
-                                    class="nav-link">
-                                    <span class="nav-link-name">Pedidos</span>
+                                    class="nav-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    <span class="nav-link-name">Pedidos <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="10" height="10"
+                                            style="filter: invert(100%);"
+                                            viewBox="0 0 24 24"><path
+                                                d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z" /></svg></span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a style='cursor:pointer' class="nav-link">
                                     <span
-                                        onclick="document.cookie = 'token=; max-age=0;'; location.reload()"
+                                        onclick=logout()
                                         class="nav-link-name">Logout</span>
                                 </a>
                             </li>
@@ -237,7 +246,7 @@
         </div>
         <style>
         .loader {
-            margin-top: 15rem;
+            margin-top: 7rem;
             margin-left: auto;
             margin-right: auto;
         }
@@ -329,49 +338,194 @@
             }
         }
     </style>
+        <style type="text/css">
+        #messageModal {
+            position: fixed;
+            z-index: 999999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 10% auto;
+            padding: 10px;
+        }
+
+        .modal-content {
+            background-color: #171717;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #353535;
+            border-radius: 1rem;
+        }
+
+        #messageModal .btn-close {
+            filter: invert(100%);
+        }
+    </style>
+        <!-- Modal de mensagem-->
+        <div class="d-none z-4" id="messageModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="modal-title"></h5>
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            onclick=dimissMessageModal()></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column"
+                        style="gap: .5rem;">
+                        <div id="modal-message" class="d-flex"
+                            style="flex-direction: column; gap: .5rem;"></div>
+                        <small id="modal-info"
+                            style="margin-top: 1rem;"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+        #changeRegion {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 10% auto;
+            padding: 10px;
+        }
+
+        .modal-content {
+            background-color: #171717;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #353535;
+            border-radius: 1rem;
+        }
+
+        #changeRegion .btn-close {
+            filter: invert(100%);
+        }
+
+        .changeregion-buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .action-buttons {
+            margin-bottom: 5rem;
+        }
+
+        .loadingscreen {
+            align-items: center;
+            align-content: center;
+        }
+    </style>
+        <!-- Modal de mudar a região-->
+        <div class="d-none" id="changeRegion">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Infraestrutura cheia</h5>
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            onclick=dimissChangeRegionModal()></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja iniciar sua máquina em outra zona ou
+                            região?</p>
+                        <div class="changeregion-buttons">
+                            <button style="display: inline;"
+                                id="deletar-btn deletar-btn-hide"
+                                onclick="mudarZona('yes')"
+                                class="btn btn-block">Brasil - Zona A</button>
+                            <button style="display: inline;"
+                                id="deletar-btn deletar-btn-hide"
+                                onclick="mudarZona('yes1')"
+                                class="btn btn-block">Brasil - Zona C</button>
+                            <button style="display: inline;"
+                                id="deletar-btn deletar-btn-hide"
+                                onclick="mudarZona('no')"
+                                class="btn btn-block">Estados Unidos - Zona
+                                C</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div>
-            <div class="loader loader-hide">
-                <script
-                    src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                <lottie-player class="lottieplayer" src="lf30_xwo73ffu.json"
-                    mode="normal" background="transparent"
-                    speed="1" style="width: 200px; height: 200px;" loop
-                    autoplay></lottie-player>
-            </div>
-            <div class="status_text status_text-hide">
-                <span
-                    style="font-size:2rem; font-weight:bold; padding-right:5px; padding-left:5px"
-                    id="status_text">Carregando...</span><br>&nbsp;</br>
-            <div class="tips-carousel">
-                <button class="prev-btn"><i
-                        class="fas fa-chevron-left"></i></button>
-                <span class="tip active">Está enfrentando quedas de FPS em sua
-                    máquina? Vá até o Gerenciador de Tarefas e experimente
-                    finalizar a tarefa "sunshine". OBS: Não faça isso se estiver
-                    usando o Moonlight disponibilizado através do nosso
-                    painel!</span>
-                <span class="tip">Está com algum problema relacionado ao
-                    serviço? Experimente visitar nosso servidor do Discord <a
-                        href="https://discord.gg/grupobright">clicando aqui</a>
-                    e por lá iremos te ajudar a resolver seu problema!</span>
-                <span class="tip">Se sua máquina estiver demorando muito para
-                    iniciar, a infraestrutura em questão pode estar instável,
-                    tente utilizando outra infraestrutura caso não queira
-                    aguardar.</span>
-                <button class="next-btn"><i
-                        class="fas fa-chevron-right"></i></button>
-            </div>
+            <div class="loadingscreen">
+                <div class="loader loader-hide">
+                    <iframe
+                        src="https://widgets.commoninja.com/iframe/07eb1fd0-ce4f-4da5-85cd-5d95d3b2b96f"
+                        width="100%" height="100%" frameborder="0"
+                        scrolling="no"></iframe>
+                </div>
+                <div class="status_text status_text-hide">
+                    <span
+                        style="font-size:2rem; font-weight:bold; padding-right:5px; padding-left:5px"
+                        id="status_text">Carregando...</span><br>&nbsp;</br>
+                <div class="tips-carousel">
+                    <button class="prev-btn"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <span class="tip active">Está enfrentando quedas de FPS
+                        em sua
+                        máquina? Vá até o Gerenciador de Tarefas e
+                        experimente
+                        finalizar a tarefa "sunshine". OBS: Não faça isso se
+                        estiver
+                        usando o Moonlight disponibilizado através do nosso
+                        painel!</span>
+                    <span class="tip">Está com algum problema relacionado ao
+                        serviço? Experimente visitar nosso servidor do
+                        Discord <a
+                            href="https://discord.gg/grupobright">clicando
+                            aqui</a>
+                        e por lá iremos te ajudar a resolver seu
+                        problema!</span>
+                    <span class="tip">Se sua máquina estiver demorando muito
+                        para
+                        iniciar, a infraestrutura em questão pode estar
+                        instável,
+                        tente utilizando outra infraestrutura caso não
+                        queira
+                        aguardar.</span>
+                    <button class="next-btn"><i
+                            class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="action-buttons">
+                    <button style="display: inline;"
+                        id="interromper-btn interromper-btn-hide"
+                        onclick="socket.emit('sair','sairFila')"
+                        class="btn btn-block interromper-btn interromper-btn-hide">Interromper</button>&nbsp;&nbsp;
+                    &nbsp;&nbsp; <button style="display: inline;"
+                        id="deletar-btn deletar-btn-hide"
+                        onclick="deletarVM();"
+                        class="btn btn-block deletar-btn deletar-btn-hide">Deletar
+                        VM</button>
+                </div>
 
-            <button style="display: inline;"
-                id="interromper-btn interromper-btn-hide"
-                onclick="socket.emit('sair','sairFila')"
-                class="btn btn-block interromper-btn interromper-btn-hide">Interromper</button>&nbsp;&nbsp;
-            &nbsp;&nbsp; <button style="display: inline;"
-                id="deletar-btn deletar-btn-hide"
-                onclick="socket.emit('deletar','delete'); alert('VM está sendo deletada. O processo levará de 5 a 10 minutos. Quando finalizado você voltará para o painel automaticamente.')"
-                class="btn btn-block deletar-btn deletar-btn-hide">Deletar
-                VM</button>
-
+            </div>
         </div>
         <div class="flq-swiper-wrapper flq-background">
             <div class="
@@ -404,7 +558,8 @@
                         <div class="swiper-slide flq-background">
                             <div class="flq-background-image">
                                 <span class="flq-image swiper-image"
-                                    data-speed=0.7 data-swiper-parallax-x="40%">
+                                    data-speed=0.7
+                                    data-swiper-parallax-x="40%">
                                     <img
                                         src="assets/images/movies/movie-2-3840x2160.jpg"
                                         alt>
@@ -422,13 +577,19 @@
                                             class="flq-subtitle badge badge-white badge-glass badge-translucent"
                                             data-animejs>Ação</span>
                                         <h2 class="display-5 mb-0"
-                                            data-animejs>Grand Theft Auto V</h2>
-                                        <p class="lead" data-animejs> Grand
-                                            Theft Auto V é um jogo eletrônico de
-                                            ação-aventura desenvolvido pela
-                                            Rockstar North e publicado pela
+                                            data-animejs>Grand Theft
+                                            Auto V</h2>
+                                        <p class="lead" data-animejs>
+                                            Grand
+                                            Theft Auto V é um jogo
+                                            eletrônico de
+                                            ação-aventura desenvolvido
+                                            pela
+                                            Rockstar North e publicado
+                                            pela
                                             Rockstar Games.
-                                            É o sétimo título principal da série
+                                            É o sétimo título principal
+                                            da série
                                             Grand Theft Auto. </p>
                                         <div>
                                             <span
@@ -443,7 +604,8 @@
                         <div class="swiper-slide flq-background">
                             <div class="flq-background-image">
                                 <span class="flq-image swiper-image"
-                                    data-speed=0.7 data-swiper-parallax-x="40%">
+                                    data-speed=0.7
+                                    data-swiper-parallax-x="40%">
                                     <img
                                         src="assets/images/movies/movie-1-3840x2160.jpg"
                                         alt>
@@ -465,17 +627,22 @@
                                             data-animejs> Ação </div>
                                         <p style="font-size:45px"
                                             class="display-5 mb-0"
-                                            data-animejs>Red Dead Redemption
+                                            data-animejs>Red Dead
+                                            Redemption
                                             2</p>
                                         <div
                                             class="flq-meta flq-color-opacity mt-3">
                                         </div>
-                                        <p class="lead" data-animejs> Red Dead
-                                            Redemption 2 é um jogo eletrônico de
+                                        <p class="lead" data-animejs>
+                                            Red Dead
+                                            Redemption 2 é um jogo
+                                            eletrônico de
                                             ação-aventura desenvolvido e
-                                            publicado pela Rockstar Games. É o
+                                            publicado pela Rockstar
+                                            Games. É o
                                             terceiro título
-                                            da série Red Dead e uma prequela de
+                                            da série Red Dead e uma
+                                            prequela de
                                             Red Dead Redemption. </p>
                                         <div>
                                         </div>
@@ -491,7 +658,8 @@
                         <div class="swiper-slide flq-background">
                             <div class="flq-background-image">
                                 <span class="flq-image swiper-image"
-                                    data-speed=0.7 data-swiper-parallax-x="40%">
+                                    data-speed=0.7
+                                    data-swiper-parallax-x="40%">
                                     <img
                                         src="assets/images/movies/movie-3-3840x2160.jpg"
                                         alt>
@@ -513,11 +681,15 @@
                                             class="flq-subtitle badge badge-white badge-glass badge-translucent"
                                             data-animejs>Ação</span>
                                         <h2 class="display-5 mb-0"
-                                            data-animejs>COD: Warzone</h2>
-                                        <p class="lead" data-animejs> Bem-vindo
-                                            ao Warzone™ 2.0, a grande arena de
+                                            data-animejs>COD:
+                                            Warzone</h2>
+                                        <p class="lead" data-animejs>
+                                            Bem-vindo
+                                            ao Warzone™ 2.0, a grande
+                                            arena de
                                             combate
-                                            free-to-play que apresenta agora um
+                                            free-to-play que apresenta
+                                            agora um
                                             novo mapa: Al Mazrah. </p>
                                         <div>
                                             <span
@@ -543,7 +715,8 @@
                 </div>
                 <div class="swiper flq-swiper-effect-touch"
                     data-sr-item=new-releases data-buttons=true
-                    data-pagination-custom=true data-gap=30 data-speed=800
+                    data-pagination-custom=true data-gap=30
+                    data-speed=800
                     data-touch-ratio=0.8 data-slides=1,
                     data-breakpoints=636:2,1072:3,1280:4>
                     <div class="swiper-container container">
@@ -553,7 +726,7 @@
                                 <div class="card flq-card-blog">
                                     <div class="card-img-wrap">
                                         <a href="javascript:void(0);"
-                                            onclick="checarAssinatura();checkAll()">
+                                            onclick="checarAssinatura1();checkAll()">
                                             <span
                                                 class="flq-image flq-rounded-xl flq-responsive flq-responsive-sm-3x4">
                                                 <img
@@ -607,7 +780,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>FIFA
                                                 23</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -634,10 +808,12 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Counter
+                                        <h5
+                                            class="card-title"><a>Counter
                                                 Strike: Global
                                                 Offensive</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -664,9 +840,12 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Horizon Zero
+                                        <h5
+                                            class="card-title"><a>Horizon
+                                                Zero
                                                 Dawn</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -693,9 +872,11 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Red Dead
+                                        <h5 class="card-title"><a>Red
+                                                Dead
                                                 Redemption 2</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -722,9 +903,11 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Overwatch
+                                        <h5
+                                            class="card-title"><a>Overwatch
                                                 2</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -753,7 +936,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>FIFA
                                                 22</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -780,9 +964,11 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Hogwarts
+                                        <h5
+                                            class="card-title"><a>Hogwarts
                                                 Legacy</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -811,7 +997,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>Rocket
                                                 League</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -839,7 +1026,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>God of
                                                 War</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -867,7 +1055,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>Elden
                                                 Ring</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -893,9 +1082,11 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Grand Theft
+                                        <h5 class="card-title"><a>Grand
+                                                Theft
                                                 Auto V</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -923,7 +1114,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>Lost
                                                 Ark</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -952,7 +1144,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><a>Black
                                                 Desert</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -979,9 +1172,11 @@
                                         </a>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><a>Call of Duty:
+                                        <h5 class="card-title"><a>Call
+                                                of Duty:
                                                 Warzone</a></h5>
-                                        <div class="flq-meta flq-meta-sm">
+                                        <div
+                                            class="flq-meta flq-meta-sm">
                                             <ul>
                                                 <li>
                                                     <a
@@ -998,56 +1193,66 @@
                 </div>
             </div>
 
-            <div class="container flq-swiper-wrapper mb-7"
-                data-sr="upcoming-movies" data-sr-interval="100"
-                data-sr-duration="1000" data-sr-distance="10">
-                <h2 class="mb-5" data-sr-item="upcoming-movies">Em breve</h2>
-                <div class="swiper flq-swiper-effect-touch mb-5"
-                    data-sr-item=upcoming-movies data-buttons=true
-                    data-pagination-progress=true data-gap=30 data-speed=800
-                    data-touch-ratio=0.8
-                    data-breakpoints=656:1,1072:2>
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-
-                        </div>
-                    </div>
+            <div class="flq-swiper-wrapper my-7" data-sr="new-releases"
+                data-sr-interval="100" data-sr-duration="1000"
+                data-sr-distance="10">
+                <div class="container mb-5" data-sr-item="new-releases">
+                    <h2>Utilitários</h2>
                 </div>
-                <div
-                    class="row align-items-center justify-content-between gy-4 gx-5">
-                    <div class="col-12 col-sm-6 order-sm-2"
-                        data-sr-item="upcoming-movies">
-                        <div
-                            class="swiper-pagination flq-swiper-pagination-progress"></div>
-                    </div>
-                    <div class="col-auto order-sm-1"
-                        data-sr-item="upcoming-movies">
-                        <div class="flq-swiper-pagination-custom"></div>
-                    </div>
-                    <div class="col-auto order-sm-3"
-                        data-sr-item="upcoming-movies">
-                        <div class="
-          flq-swiper-button-prev
-          btn btn-sm btn-square btn-dark btn-active btn-icon-sm
-          me-1
-        " data-sr-item="related">
-                            <svg width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15 18L9 12L15 6" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="
-          flq-swiper-button-next
-          btn btn-sm btn-square btn-dark btn-active btn-icon-sm
-        " data-sr-item="related">
-                            <svg width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 6L15 12L9 18" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
+                <div class="swiper flq-swiper-effect-touch"
+                    data-sr-item=new-releases data-buttons=true
+                    data-pagination-custom=true data-gap=30
+                    data-speed=800
+                    data-touch-ratio=0.8 data-slides=1,
+                    data-breakpoints=636:2,1072:3,1280:4>
+                    <div class="swiper-container container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="card flq-card-blog">
+                                    <div class="card-img-wrap">
+                                        <a
+                                            href="https://discord.com/invite/CuCJ9XckC3"
+                                            rel="noopener noreferrer"
+                                            target="_blank">
+                                            <span
+                                                class="flq-image flq-rounded-xl flq-responsive flq-responsive-sm-3x4">
+                                                <img
+                                                    src="assets/images/movies/suporte.jpg"
+                                                    alt>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5
+                                            class="card-title"><a>Precisa de
+                                                suporte?</a></h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="card flq-card-blog">
+                                    <div class="card-img-wrap">
+                                        <a
+                                            href="https://grupobright.com/"
+                                            rel="noopener noreferrer"
+                                            target="_blank">
+                                            <span
+                                                class="flq-image flq-rounded-xl flq-responsive flq-responsive-sm-3x4">
+                                                <img
+                                                    src="assets/images/movies/bright-vm.jpg"
+                                                    alt>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5
+                                            class="card-title"><a>Acesse o
+                                                Website</a></h5>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1060,23 +1265,30 @@
                 data-sr-distance="10">
                 <div class="container">
                     <div class="row align-items-center g-6">
-                        <div class="col-12 col-lg-5 flq-vertical-rhythm">
-                            <h1 class="mb-0" data-sr-item="movie">Tutorial
+                        <div
+                            class="col-12 col-lg-5 flq-vertical-rhythm">
+                            <h1 class="mb-0"
+                                data-sr-item="movie">Tutorial
                                 Painel</h1>
                             <p class="flq-color-opacity flq-color-text"
-                                data-sr-item="movie"> Tutorial de como utilizar
-                                corretamente o aplicativo da Bright Cloud. </p>
+                                data-sr-item="movie"> Tutorial de como
+                                utilizar
+                                corretamente o aplicativo da Bright
+                                Cloud. </p>
                             <div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-7" data-sr data-sr-delay="200"
+                        <div class="col-12 col-lg-7" data-sr
+                            data-sr-delay="200"
                             data-sr-duration="1500"
                             data-sr-distance="10">
-                            <div class="card flq-card-image flq-card-image-link
+                            <div
+                                class="card flq-card-image flq-card-image-link
         flq-card-image-play">
                                 <a href="https://youtu.be/ERK-9xYfQF0"
                                     class="card-image" data-fancybox>
-                                    <span class="flq-image flq-responsive">
+                                    <span
+                                        class="flq-image flq-responsive">
                                         <img
                                             src="assets/images/movies/movie-2-1290x1290.jpg"
                                             alt>
@@ -1087,15 +1299,18 @@
                                         class="btn btn-xl btn-round btn-play btn-glass btn-icon-md">
                                         <span class="btn-play-progress">
                                             <svg>
-                                                <circle stroke="currentColor"
+                                                <circle
+                                                    stroke="currentColor"
                                                     r="0" fill="none" />
                                             </svg>
                                         </span>
                                         <span class="btn-icon">
                                             <svg width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 19L19 12L8 5V19Z"
+                                                <path
+                                                    d="M8 19L19 12L8 5V19Z"
                                                     fill="currentColor" />
                                             </svg>
                                         </span>
@@ -1114,19 +1329,24 @@
       #f971fe 100%
     );
   ">
-                <div class="container text-center my-6" data-sr="start-30-days"
+                <div class="container text-center my-6"
+                    data-sr="start-30-days"
                     data-sr-interval="100"
                     data-sr-duration="1000" data-sr-distance="10">
                     <p style="font-size:45px" class="display-1 mb-4"
-                        data-sr-item="start-30-days"> Disponível na Web<br /> e
+                        data-sr-item="start-30-days"> Disponível na
+                        Web<br /> e
                         Android. </p>
                     <div class="row justify-content-center g-3">
                         <div class="col-12 col-sm-auto"
                             data-sr-item="start-30-days">
                             <a
                                 href="https://play.google.com/store/apps/details?id=br.com.app.gpu2858276.gpu87f2c78e489a0d75cbc7b9247e454a1b"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 class="btn btn-block btn-black btn-glass btn-icon-xl">
-                                <svg width="18" height="18" viewBox="0 0 18 18"
+                                <svg width="18" height="18"
+                                    viewBox="0 0 18 18"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -1154,7 +1374,8 @@
                 </div>
             </div>
             <!-- Footer -->
-            <footer class="flq-footer flq-background py-7" data-sr="footer"
+            <footer class="flq-footer flq-background py-7"
+                data-sr="footer"
                 data-sr-interval="60" data-sr-duration="1000"
                 data-sr-distance="10">
                 <div class="flq-background-image">
@@ -1168,7 +1389,8 @@
                 <div class="container">
                     <div
                         class="row gx-5 gy-5 mb-6 justify-content-center justify-content-sm-start">
-                        <div class="col-md-9 col-lg-3 text-center text-sm-start"
+                        <div
+                            class="col-md-9 col-lg-3 text-center text-sm-start"
                             data-sr-item="footer">
                             <a href="/">
                                 <span class="flq-image">
@@ -1177,16 +1399,19 @@
                                 </span>
                             </a>
                         </div>
-                        <div class="col-lg-1 col-xl d-none d-lg-block"></div>
+                        <div
+                            class="col-lg-1 col-xl d-none d-lg-block"></div>
                     </div>
                     <div class="row gy-4 justify-content-between"
-                        data-sr="footer-copyright" data-sr-interval="100"
+                        data-sr="footer-copyright"
+                        data-sr-interval="100"
                         data-sr-delay="200" data-sr-duration="1000"
                         data-sr-distance="10">
                         <div
                             class="col-12 col-sm-auto text-center text-sm-start"
                             data-sr-item="footer-copyright">
-                            <p>© 2023 BRIGHT - Todos os direitos reservados</p>
+                            <p>© 2023 BRIGHT - Todos os direitos
+                                reservados</p>
                         </div>
                         <div
                             class="col-12 col-sm-auto text-center text-sm-start"
@@ -1196,12 +1421,16 @@
                                     <li>
                                         <a
                                             href="https://www.instagram.com/grupobright/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flq-social-link"
                                             data-sr-item=footer-copyright>
                                             <svg width="20" height="20"
-                                                viewBox="0 0 24 24" fill="none"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
+                                                <path
+                                                    fill-rule="evenodd"
                                                     clip-rule="evenodd"
                                                     d="M6.22506 0.450134C3.03566 0.450134 0.450134 3.03566 0.450134 6.22506V17.7749C0.450134 20.9643 3.03566 23.5498 6.22506 23.5498H17.7749C20.9643 23.5498 23.5498 20.9643 23.5498 17.7749V6.22506C23.5498 3.03566 20.9643 0.450134 17.7749 0.450134H6.22506ZM5.5834 12C5.5834 15.5437 8.45621 18.4166 12 18.4166C15.5437 18.4166 18.4166 15.5437 18.4166 12C18.4166 8.45621 15.5437 5.5834 12 5.5834C8.45621 5.5834 5.5834 8.45621 5.5834 12ZM12 15.8499C14.1263 15.8499 15.8499 14.1263 15.8499 12C15.8499 9.87365 14.1263 8.15003 12 8.15003C9.87366 8.15003 8.15004 9.87365 8.15004 12C8.15004 14.1263 9.87366 15.8499 12 15.8499ZM19.6999 4.30008C19.6999 5.00883 19.1253 5.5834 18.4166 5.5834C17.7078 5.5834 17.1333 5.00883 17.1333 4.30008C17.1333 3.59133 17.7078 3.01677 18.4166 3.01677C19.1253 3.01677 19.6999 3.59133 19.6999 4.30008Z"
                                                     fill="currentColor" />
@@ -1210,17 +1439,22 @@
                                     </li>
 
                                     <li>
-                                        <a href="https://discord.gg/grupobright"
+                                        <a
+                                            href="https://discord.gg/grupobright"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flq-social-link"
                                             data-sr-item=footer-copyright>
-                                            <svg fill="#ffffff" width="20px"
+                                            <svg fill="#ffffff"
+                                                width="20px"
                                                 height="20px"
                                                 viewBox="0 0 24 24"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <g>
                                                     <path fill="none"
                                                         d="M0 0h24v24H0z" />
-                                                    <path fill-rule="nonzero"
+                                                    <path
+                                                        fill-rule="nonzero"
                                                         d="M10.076 11c.6 0 1.086.45 1.075 1 0 .55-.474 1-1.075 1C9.486 13 9 12.55 9 12s.475-1 1.076-1zm3.848 0c.601 0 1.076.45 1.076 1s-.475 1-1.076 1c-.59 0-1.075-.45-1.075-1s.474-1 1.075-1zm4.967-9C20.054 2 21 2.966 21 4.163V23l-2.211-1.995-1.245-1.176-1.317-1.25.546 1.943H5.109C3.946 20.522 3 19.556 3 18.359V4.163C3 2.966 3.946 2 5.109 2H18.89zm-3.97 13.713c2.273-.073 3.148-1.596 3.148-1.596 0-3.381-1.482-6.122-1.482-6.122-1.48-1.133-2.89-1.102-2.89-1.102l-.144.168c1.749.546 2.561 1.334 2.561 1.334a8.263 8.263 0 0 0-3.096-1.008 8.527 8.527 0 0 0-2.077.02c-.062 0-.114.011-.175.021-.36.032-1.235.168-2.335.662-.38.178-.607.305-.607.305s.854-.83 2.705-1.376l-.103-.126s-1.409-.031-2.89 1.103c0 0-1.481 2.74-1.481 6.121 0 0 .864 1.522 3.137 1.596 0 0 .38-.472.69-.871-1.307-.4-1.8-1.24-1.8-1.24s.102.074.287.179c.01.01.02.021.041.031.031.022.062.032.093.053.257.147.514.262.75.357.422.168.926.336 1.513.452a7.06 7.06 0 0 0 2.664.01 6.666 6.666 0 0 0 1.491-.451c.36-.137.761-.337 1.183-.62 0 0-.514.861-1.862 1.25.309.399.68.85.68.85z" />
                                                 </g>
                                             </svg>
@@ -1231,8 +1465,11 @@
                                     <li>
                                         <a
                                             href="https://twitter.com/grupobright"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flq-social-link">
-                                            <svg fill="#ffffff" width="20px"
+                                            <svg fill="#ffffff"
+                                                width="20px"
                                                 height="20px"
                                                 viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1245,8 +1482,11 @@
                                     <li>
                                         <a
                                             href="https://www.youtube.com/@GrupoBright"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flq-social-link">
-                                            <svg fill="#ffffff" width="20px"
+                                            <svg fill="#ffffff"
+                                                width="20px"
                                                 height="20px"
                                                 viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1259,10 +1499,14 @@
                                     <li>
                                         <a
                                             href="https://www.tiktok.com/@grupobright"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flq-social-link">
-                                            <svg fill="#ffffff" width="24px"
+                                            <svg fill="#ffffff"
+                                                width="24px"
                                                 height="24px"
-                                                viewBox="0 0 24 24" role="img"
+                                                viewBox="0 0 24 24"
+                                                role="img"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
@@ -1284,7 +1528,8 @@
         <!-- Scroll top button -->
         <div class="flq-scroll-top-wrapper">
             <a class="flq-scroll-top-button flq-anchor" href="#page">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                <svg width="24" height="24" viewBox="0 0 24 24"
+                    fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 6L15 12L9 18" stroke="currentColor"
                         stroke-width="3" stroke-linecap="round"
@@ -1299,12 +1544,14 @@
         </div>
         <!-- / Scroll top button -->
         <!-- Popup navbar mobile -->
-        <nav class="flq-navbar-mobile fancybox-content" id="flq_navbar_mobile">
+        <nav class="flq-navbar-mobile fancybox-content"
+            id="flq_navbar_mobile">
             <div class="flq-fancybox-head">
                 <div class="container-fluid">
                     <a href="/" class="flq-fancybox-brand me-auto">
                         <span class="flq-image">
-                            <img src="assets/images/logo.png" class="flq-logo"
+                            <img src="assets/images/logo.png"
+                                class="flq-logo"
                                 alt>
                         </span>
                     </a>
@@ -1321,7 +1568,8 @@
                             class="nav flex-column flq-navbar-nav accordion gy-3">
                             <li class="nav-item active">
                                 <a href="/" class="nav-link">
-                                    <span class="nav-link-name">Início</span>
+                                    <span
+                                        class="nav-link-name">Início</span>
                                 </a>
                             </li>
                         </ul>
@@ -1335,10 +1583,13 @@
                                 <form action="#">
                                     <input
                                         class="form-control flq-form-translucent"
-                                        type="search" placeholder="Search">
-                                    <button class="btn btn-link btn-icon-sm">
+                                        type="search"
+                                        placeholder="Search">
+                                    <button
+                                        class="btn btn-link btn-icon-sm">
                                         <svg width="22" height="22"
-                                            viewBox="0 0 22 22" fill="none"
+                                            viewBox="0 0 22 22"
+                                            fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M10.0833 17.4167C14.1334 17.4167 17.4167 14.1334 17.4167 10.0833C17.4167 6.03325 14.1334 2.75 10.0833 2.75C6.03325 2.75 2.75 6.03325 2.75 10.0833C2.75 14.1334 6.03325 17.4167 10.0833 17.4167Z"
@@ -1359,7 +1610,8 @@
                             <div class="flq-widget flq-widget-tag">
                                 <h4
                                     class="flq-widget-title h5 flq-color-opacity"><span>Tags</span></h4>
-                                <div class="flq-tags flq-tags-translucent">
+                                <div
+                                    class="flq-tags flq-tags-translucent">
                                     <ul>
                                         <li>
                                             <a href="#"
@@ -1374,7 +1626,8 @@
                                                 class="flq-tag">#Trailers</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flq-tag">#Movie
+                                            <a href="#"
+                                                class="flq-tag">#Movie
                                                 Trailers</a>
                                         </li>
                                         <li>
@@ -1386,7 +1639,8 @@
                                                 class="flq-tag">#Thriller</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flq-tag">#TV
+                                            <a href="#"
+                                                class="flq-tag">#TV
                                                 Shows</a>
                                         </li>
                                         <li>
@@ -1406,7 +1660,8 @@
                                                 class="flq-tag">#Travel</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flq-tag">#Car</a>
+                                            <a href="#"
+                                                class="flq-tag">#Car</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -1419,7 +1674,8 @@
                                     <li>
                                         <div class="card flq-card-blog">
                                             <div class="card-img-wrap">
-                                                <a href="single-post.html">
+                                                <a
+                                                    href="single-post.html">
                                                     <span
                                                         class="flq-image flq-responsive">
                                                         <img
@@ -1433,21 +1689,26 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title h5"><a
+                                                <h5
+                                                    class="card-title h5"><a
                                                         href="single-post.html">Girlfriend.
                                                         How and
                                                         why</a></h5>
-                                                <p>Earth first saw earth which
-                                                    seas void i thing said
+                                                <p>Earth first saw earth
+                                                    which
+                                                    seas void i thing
+                                                    said
                                                     bearing behold and
-                                                    can't unto. Blessed...</p>
+                                                    can't unto.
+                                                    Blessed...</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="card flq-card-blog">
                                             <div class="card-img-wrap">
-                                                <a href="single-post.html">
+                                                <a
+                                                    href="single-post.html">
                                                     <span
                                                         class="flq-image flq-responsive">
                                                         <img
@@ -1461,23 +1722,30 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title h5"><a
+                                                <h5
+                                                    class="card-title h5"><a
                                                         href="single-post.html">Years
                                                         is air whose
-                                                        lesser. You'll thing
+                                                        lesser. You'll
+                                                        thing
                                                         waters unto
                                                         brought.</a></h5>
-                                                <p>From said, our they're
-                                                    darkness void meat from,
-                                                    bearing. Void, beginning
-                                                    fruitful he were...</p>
+                                                <p>From said, our
+                                                    they're
+                                                    darkness void meat
+                                                    from,
+                                                    bearing. Void,
+                                                    beginning
+                                                    fruitful he
+                                                    were...</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="card flq-card-blog">
                                             <div class="card-img-wrap">
-                                                <a href="single-post.html">
+                                                <a
+                                                    href="single-post.html">
                                                     <span
                                                         class="flq-image flq-responsive">
                                                         <img
@@ -1491,14 +1759,21 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title h5"><a
+                                                <h5
+                                                    class="card-title h5"><a
                                                         href="single-post.html">Is
-                                                        under void created
-                                                        his hath. One moving
-                                                        Appear hath.</a></h5>
-                                                <p>Spirit herb subdue second
-                                                    form lights green isn't a
-                                                    sixth had creepeth is
+                                                        under void
+                                                        created
+                                                        his hath. One
+                                                        moving
+                                                        Appear
+                                                        hath.</a></h5>
+                                                <p>Spirit herb subdue
+                                                    second
+                                                    form lights green
+                                                    isn't a
+                                                    sixth had creepeth
+                                                    is
                                                     night spirit...</p>
                                             </div>
                                         </div>
@@ -1512,12 +1787,14 @@
         </nav>
         <!-- / Popup navbar mobile -->
         <!-- Popup navbar user -->
-        <nav class="flq-navbar-mobile fancybox-content" id="flq_popup_user">
+        <nav class="flq-navbar-mobile fancybox-content"
+            id="flq_popup_user">
             <div class="flq-fancybox-head">
                 <div class="container-fluid">
                     <a href="/" class="flq-fancybox-brand me-auto">
                         <span class="flq-image">
-                            <img src="assets/images/logo.png" class="flq-logo"
+                            <img src="assets/images/logo.png"
+                                class="flq-logo"
                                 alt>
                         </span>
                     </a>
@@ -1544,7 +1821,8 @@
                                 <a
                                     href="https://brightcloudgames.com.br/minha-conta/pedidos/"
                                     class="nav-link">
-                                    <span class="nav-link-name">Pedidos</span>
+                                    <span
+                                        class="nav-link-name">Pedidos</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -1565,10 +1843,13 @@
                                 <form action="#">
                                     <input
                                         class="form-control flq-form-translucent"
-                                        type="search" placeholder="Search">
-                                    <button class="btn btn-link btn-icon-sm">
+                                        type="search"
+                                        placeholder="Search">
+                                    <button
+                                        class="btn btn-link btn-icon-sm">
                                         <svg width="22" height="22"
-                                            viewBox="0 0 22 22" fill="none"
+                                            viewBox="0 0 22 22"
+                                            fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M10.0833 17.4167C14.1334 17.4167 17.4167 14.1334 17.4167 10.0833C17.4167 6.03325 14.1334 2.75 10.0833 2.75C6.03325 2.75 2.75 6.03325 2.75 10.0833C2.75 14.1334 6.03325 17.4167 10.0833 17.4167Z"
@@ -1589,7 +1870,8 @@
                             <div class="flq-widget flq-widget-tag">
                                 <h4
                                     class="flq-widget-title h5 flq-color-opacity"><span>Tags</span></h4>
-                                <div class="flq-tags flq-tags-translucent">
+                                <div
+                                    class="flq-tags flq-tags-translucent">
                                     <ul>
                                         <li>
                                             <a href="#"
@@ -1604,7 +1886,8 @@
                                                 class="flq-tag">#Trailers</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flq-tag">#Movie
+                                            <a href="#"
+                                                class="flq-tag">#Movie
                                                 Trailers</a>
                                         </li>
                                         <li>
@@ -1616,7 +1899,8 @@
                                                 class="flq-tag">#Thriller</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flq-tag">#TV
+                                            <a href="#"
+                                                class="flq-tag">#TV
                                                 Shows</a>
                                         </li>
                                         <li>
@@ -1636,7 +1920,8 @@
                                                 class="flq-tag">#Travel</a>
                                         </li>
                                         <li>
-                                            <a href="#" class="flq-tag">#Car</a>
+                                            <a href="#"
+                                                class="flq-tag">#Car</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -1649,7 +1934,8 @@
                                     <li>
                                         <div class="card flq-card-blog">
                                             <div class="card-img-wrap">
-                                                <a href="single-post.html">
+                                                <a
+                                                    href="single-post.html">
                                                     <span
                                                         class="flq-image flq-responsive">
                                                         <img
@@ -1663,21 +1949,26 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title h5"><a
+                                                <h5
+                                                    class="card-title h5"><a
                                                         href="single-post.html">Girlfriend.
                                                         How and
                                                         why</a></h5>
-                                                <p>Earth first saw earth which
-                                                    seas void i thing said
+                                                <p>Earth first saw earth
+                                                    which
+                                                    seas void i thing
+                                                    said
                                                     bearing behold and
-                                                    can't unto. Blessed...</p>
+                                                    can't unto.
+                                                    Blessed...</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="card flq-card-blog">
                                             <div class="card-img-wrap">
-                                                <a href="single-post.html">
+                                                <a
+                                                    href="single-post.html">
                                                     <span
                                                         class="flq-image flq-responsive">
                                                         <img
@@ -1691,23 +1982,30 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title h5"><a
+                                                <h5
+                                                    class="card-title h5"><a
                                                         href="single-post.html">Years
                                                         is air whose
-                                                        lesser. You'll thing
+                                                        lesser. You'll
+                                                        thing
                                                         waters unto
                                                         brought.</a></h5>
-                                                <p>From said, our they're
-                                                    darkness void meat from,
-                                                    bearing. Void, beginning
-                                                    fruitful he were...</p>
+                                                <p>From said, our
+                                                    they're
+                                                    darkness void meat
+                                                    from,
+                                                    bearing. Void,
+                                                    beginning
+                                                    fruitful he
+                                                    were...</p>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="card flq-card-blog">
                                             <div class="card-img-wrap">
-                                                <a href="single-post.html">
+                                                <a
+                                                    href="single-post.html">
                                                     <span
                                                         class="flq-image flq-responsive">
                                                         <img
@@ -1721,14 +2019,21 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title h5"><a
+                                                <h5
+                                                    class="card-title h5"><a
                                                         href="single-post.html">Is
-                                                        under void created
-                                                        his hath. One moving
-                                                        Appear hath.</a></h5>
-                                                <p>Spirit herb subdue second
-                                                    form lights green isn't a
-                                                    sixth had creepeth is
+                                                        under void
+                                                        created
+                                                        his hath. One
+                                                        moving
+                                                        Appear
+                                                        hath.</a></h5>
+                                                <p>Spirit herb subdue
+                                                    second
+                                                    form lights green
+                                                    isn't a
+                                                    sixth had creepeth
+                                                    is
                                                     night spirit...</p>
                                             </div>
                                         </div>
@@ -1742,8 +2047,14 @@
         </nav>
         <!-- / Popup navbar user -->
         <!-- Popup signin -->
-        <div class="flq-fancybox-content-signin fancybox-content"
-            id="flq_popup_signin">
+        <style>
+            #flq_popup_signin {
+                z-index: 9998 !important
+            }
+        </style>
+        <div class="flq-fancybox-content-signin fancybox-content z-3"
+            id="flq_popup_signin"
+            style="z-index: 998;">
             <div class="flq-signin">
                 <div class="flq-fancybox-head">
                     <div class="container-fluid">
@@ -1753,7 +2064,8 @@
                                     class="flq-logo" alt>
                             </span>
                         </a>
-                        <button class="flq-fancybox-close btn btn-link ms-4"
+                        <button
+                            class="flq-fancybox-close btn btn-link ms-4"
                             data-fancybox-close>
                             <span></span>
                         </button>
@@ -1776,13 +2088,14 @@
                             </div>
                             <div class="col-auto">
                                 <a
-                                    href="https://grupobright.com/wp-login.php?action=lostpassword"
+                                    href="https://grupobright.com/minha-conta/senha-perdida/"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
                                     class="flq-color-meta flq-color-title-hover">Esqueci
                                     a senha</a>
                             </div>
                             <div class="col-12">
                                 <button type="button" id="botn-logar"
-                                    onclick="logar()"
                                     class="btn btn-block">Login</button>
                             </div>
                             <div class="error error--hidden">
@@ -1795,6 +2108,7 @@
                 </div>
             </div>
         </div>
+        <!-- Popup signup -->
         <!-- / Popup signin -->
         <!-- Popup signup -->
         <div class="flq-fancybox-content-signup fancybox-content"
@@ -1808,7 +2122,8 @@
                                     class="flq-logo" alt>
                             </span>
                         </a>
-                        <button class="flq-fancybox-close btn btn-link ms-4"
+                        <button
+                            class="flq-fancybox-close btn btn-link ms-4"
                             data-fancybox-close>
                             <span></span>
                         </button>
@@ -1831,21 +2146,27 @@
                                     placeholder="Password">
                             </div>
                             <div class="col-12">
-                                <div class="form-check flq-form-translucent">
+                                <div
+                                    class="form-check flq-form-translucent">
                                     <input class="form-check-input"
-                                        type="checkbox" id="signupTerms"><label
+                                        type="checkbox"
+                                        id="signupTerms"><label
                                         class="form-check-label"
-                                        for="signupTerms">I have read and agree
+                                        for="signupTerms">I have read
+                                        and agree
                                         to the terms and
                                         conditions.</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-block">Sign Up</button>
+                                <button class="btn btn-block">Sign
+                                    Up</button>
                             </div>
-                            <div class="col-12 text-center mt-1">or</div>
+                            <div
+                                class="col-12 text-center mt-1">or</div>
                             <div class="col-12 mt-1">
-                                <div class="row justify-content-center gy-1">
+                                <div
+                                    class="row justify-content-center gy-1">
                                     <div class="col-auto">
                                         <a href="#"
                                             class="btn btn-link">Facebook</a>
@@ -1910,7 +2231,8 @@
                                         style="margin-top:10px"
                                         class="btn review"
                                         onclick="socket.emit('interromper',{'feedback':$(`[name='review']`)[0].value,'stars':document.querySelector(`input[name='star']:checked`).classList[1]})"
-                                        for="review">Enviar feedback</label>
+                                        for="review">Enviar
+                                        feedback</label>
                                 </div>
                             </form>
                         </div>
@@ -1932,7 +2254,8 @@
                                     class="flq-logo" alt>
                             </span>
                         </a>
-                        <button class="flq-fancybox-close btn btn-link ms-4"
+                        <button
+                            class="flq-fancybox-close btn btn-link ms-4"
                             data-fancybox-close>
                             <span></span>
                         </button>
@@ -1966,6 +2289,92 @@
                 </div>
             </div>
         </div>
+        <!-- Modal de configurações de Stream -->
+
+        <style type="text/css">
+            #modalConfigStream {
+                position: fixed;
+                z-index: 999999;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.4);
+                transition: ease-in-out 0.5s;
+            }
+    
+            .modal-dialog {
+                position: relative;
+                width: auto;
+                margin: 10% auto;
+                padding: 10px;
+            }
+    
+            .modal-content {
+                background-color: #171717;
+                margin: 5% auto;
+                padding: 20px;
+                border: 1px solid #353535;
+                border-radius: 1rem;
+            }
+    
+            #modalConfigStream .btn-close {
+                filter: invert(100%);
+            }
+
+            .bitrate {
+                margin-bottom: 1rem;
+            }
+
+            .configFields {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="d-none z-4" id="modalConfigStream">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Configure a sua conexão</h5>
+                        <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            onclick=dimissConfigModal()></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="configFields">
+                            <h5
+                                class="configLabel">Bitrate</h5>
+                            <input
+                                class="form-control flq-form-translucent"
+                                type="number" name="bitrate" id="bitrate"
+                                value="6000">
+                            <h5>Resolução:</h5>
+                            <label for="width"
+                                class="configLabel">Largura</label>
+                            <input
+                                class="form-control flq-form-translucent"
+                                type="number" name="width" id="width"
+                                value="1920">
+                            <label for="height"
+                                class="configLabel">Altura</label>
+                            <input
+                                class="form-control flq-form-translucent"
+                                type="number" name="height" id="height"
+                                value="1080">
+                        </div>
+                        <small>Caso não queira alterar, basta deixar os valores
+                            atuais como estão e clicar no X</small>
+                        <button class="btn btn-block"
+                            onclick="salvarConfigStream()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- / LAUNCHER -->
         <div class="flq-fancybox-content-signin fancybox-content"
             id="flq_popup_vm-created">
@@ -1985,7 +2394,8 @@
                         <div class="row justify-content-between gy-4">
 
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">IP:</h4><input
+                                <h4
+                                    class="mb-2 text-left">IP:</h4><input
                                     type="text"
                                     class="form-control flq-form-translucent"
                                     id="formdoip" readonly
@@ -2007,31 +2417,49 @@
                             </div>
                             <div class="col-12">
                                 <h4 class="mb-2 text-left">Insira o
-                                    PIN:</h4><input id="formdopin" type="text"
+                                    PIN:</h4><input id="formdopin"
+                                    type="text"
                                     placeholder="PIN"
                                     class="form-control flq-form-message flq-form-translucent">
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 d-flex"
+                                style="flex-direction: column;
+                            gap: .5rem;">
                                 <button type="button"
                                     onclick="authPin($('#formdopin')[0].value)"
                                     class="btn btn-block">Autenticar</button>
-                            </div>
-                            <div class="col-12 mt-3">
                                 <button type="button"
-                                    onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
-                                    class="btn btn-block">Desligar VM</button>
+                                    onclick="socket.emit('interromper','sair'); window.location.reload();"
+                                    class="btn btn-block">Desligar
+                                    VM</button>
                             </div>
+                            <div class="buttonsConnectApp d-flex mt-2" style="
+                            flex-direction: column;
+                            gap: .5rem;
+                        ">
+                                <div class="col-12">
+                                    <h5 class="mb-1">Conexão via App:</h5>
+                                    <button id="connectBtn" type="button"
+                                        onclick="iniciarAppPainel()"
+                                        class="btn btn-block">Conectar via
+                                        App</button>
+                                </div>
 
-                            <div class="col-12">
-                                <button id="beta-btn" type="button" onclick
-                                    class="btn btn-block">Bright Streaming
-                                    ᴮᴱᵀᴬ</button>
+                                <div class="col-12">
+                                    <button id="configBtn" type="button"
+                                        onclick="openConfigModal()"
+                                        class="btn btn-block">Configurar
+                                        conexão</button>
+                                </div>
                             </div>
 
                             <div class="col-12 mt-2 text-center">
-                                <h7>Não consegue acessar pelo Moonlight?</h7>
-                                <button type="button" onclick="transferData()"
-                                    class="btn btn-block">Use o RDP</button>
+                                <h7>Não consegue acessar pelo
+                                    Moonlight?</h7>
+                                <button type="button"
+                                    onclick="transferData()"
+                                    class="btn btn-block">Use o
+                                    RDP</button>
                             </div>
 
                         </div>
@@ -2056,7 +2484,8 @@
                     <form action="#" class="flq-signin-content">
                         <div class="row justify-content-between gy-4">
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">IP:</h4><input
+                                <h4
+                                    class="mb-2 text-left">IP:</h4><input
                                     type="text" placeholder="127.0.0.1"
                                     class="form-control flq-form-translucent"
                                     id="formdoip-fisica" readonly>
@@ -2076,14 +2505,17 @@
                                     </svg></a>
                             </div>
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">Usuário:</h4><input
+                                <h4
+                                    class="mb-2 text-left">Usuário:</h4><input
                                     class="form-control flq-form-user flq-form-translucent"
                                     type="text" value="BCG"
-                                    placeholder="Usuario" id="formdouser-fisica"
+                                    placeholder="Usuario"
+                                    id="formdouser-fisica"
                                     readonly>
                             </div>
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">Senha:</h4><input
+                                <h4
+                                    class="mb-2 text-left">Senha:</h4><input
                                     id="formdasenha-fisica"
                                     class="form-control flq-form-lock flq-form-translucent"
                                     type="text" placeholder="Senha"
@@ -2091,13 +2523,15 @@
                             </div>
                             <div class="col-12">
                                 <button type="button"
-                                    onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
-                                    class="btn btn-block">Desligar VM</button>
+                                    onclick="socket.emit('interromper','sair'); windoe.location.reload()"
+                                    class="btn btn-block">Desligar
+                                    VM</button>
                             </div>
                             <div class="col-12 mt-3">
                                 <button
                                     onclick="socket.emit('deletar','delete')"
-                                    class="btn btn-block">Deletar VM</button>
+                                    class="btn btn-block">Deletar
+                                    VM</button>
                             </div>
                             <div class="col-12 mt-3 text-center">
                             </div>
@@ -2124,7 +2558,8 @@
                     <form action="#" class="flq-signin-content">
                         <div class="row justify-content-between gy-4">
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">IP:</h4><input
+                                <h4
+                                    class="mb-2 text-left">IP:</h4><input
                                     type="text" placeholder="127.0.0.1"
                                     class="form-control flq-form-translucent"
                                     id="formdoip-back" readonly>
@@ -2144,14 +2579,17 @@
                                     </svg></a>
                             </div>
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">Usuário:</h4><input
+                                <h4
+                                    class="mb-2 text-left">Usuário:</h4><input
                                     class="form-control flq-form-user flq-form-translucent"
                                     type="text" value="BCG"
-                                    placeholder="Usuario" id="formdouser-fisica"
+                                    placeholder="Usuario"
+                                    id="formdouser-fisica"
                                     readonly>
                             </div>
                             <div class="col-12">
-                                <h4 class="mb-2 text-left">Senha:</h4><input
+                                <h4
+                                    class="mb-2 text-left">Senha:</h4><input
                                     id="formdasenha"
                                     class="form-control flq-form-lock flq-form-translucent"
                                     type="text" placeholder="Senha"
@@ -2160,7 +2598,8 @@
                             <div class="col-12">
                                 <button type="button"
                                     onclick="$('#entrar-feedback').click()//socket.emit('interromper','sair')"
-                                    class="btn btn-block">Desligar VM</button>
+                                    class="btn btn-block">Desligar
+                                    VM</button>
                             </div>
 
                             <div class="col-12 text-center">
@@ -2185,7 +2624,8 @@
                                     class="flq-logo" alt>
                             </span>
                         </a>
-                        <button class="flq-fancybox-close btn btn-link ms-4"
+                        <button
+                            class="flq-fancybox-close btn btn-link ms-4"
                             data-fancybox-close>
                             <span></span>
                         </button>
@@ -2213,7 +2653,7 @@
                             <div class="col-auto">
                                 <button class="btn btn-block"
                                     onclick="server='azure'; if (game=='rleague' || game=='gtav' || game=='reddead'){$('#entrar-launcher').trigger('click')}else{changePage()}"
-                                    data-fancybox-close>
+                                    data-fancybox-close disabled>
                                     <img width="50px" height="50px"
                                         src="assets/images/server-logos/logo_azure.svg">
                                 </button>
@@ -2236,12 +2676,14 @@
         <script
             src="assets/vendor/scrollreveal/dist/scrollreveal.min.js?v=4.0.9"></script>
         <!-- Rellax -->
-        <script src="assets/vendor/rellax/rellax.min.js?v=1.12.1"></script>
+        <script
+            src="assets/vendor/rellax/rellax.min.js?v=1.12.1"></script>
         <!-- Tilt -->
         <script
             src="assets/vendor/vanilla-tilt/dist/vanilla-tilt.min.js?v=1.7.2"></script>
         <!-- Animejs -->
-        <script src="assets/vendor/animejs/lib/anime.min.js?v=3.2.0"></script>
+        <script
+            src="assets/vendor/animejs/lib/anime.min.js?v=3.2.0"></script>
         <!-- Bootstrap -->
         <script
             src="assets/vendor/bootstrap/dist/js/bootstrap.min.js?v=5.1.3"></script>
@@ -2258,7 +2700,8 @@
         <script
             src="assets/vendor/jquery-countdown/dist/jquery.countdown.min.js?v=2.2.0"></script>
         <!-- Moment.js (needed for jquery countdown) -->
-        <script src="assets/vendor/moment/min/moment.min.js?v=2.29.1"></script>
+        <script
+            src="assets/vendor/moment/min/moment.min.js?v=2.29.1"></script>
         <script
             src="assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js?v=0.5.34"></script>
         <!-- ImagesLoaded -->
