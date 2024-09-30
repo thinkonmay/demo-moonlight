@@ -1,56 +1,157 @@
-import {CloseMoonlight, GetInfo, StartMoonlight } from "../../src-tauri/tauri.ts"
+import {
+  CloseMoonlight,
+  GetInfo,
+  StartMoonlight,
+} from "../../src-tauri/tauri.ts";
+
+function fireEvent(eventName, eventData) {
+  const event = new CustomEvent(eventName, {
+    detail: eventData,
+  });
+  document.dispatchEvent(event);
+}
+
+// import { overrideGlobalXHR } from "tauri-xhr";
+// overrideGlobalXHR();
+
+// import axios from "axios";
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const moonlightBtn = document.getElementById("connectBtn");
-  const submitBtn = document.getElementById("submitBtn");
-  const inputIP = document.getElementById("IP");
-
-  let info = {}
-  let ip = ''
-  let child = null
-  let config = {
-    bitrate: 6000,
-    width: 1920,  
-    height: 1080 
+let info = {};
+let ip = "";
+let child = null;
+async function iniciarApp(computer, streamConfig) {
+  if (child == null) {
+    child = await StartMoonlight(computer, streamConfig, (data, log) =>
+      console.log(`${data} : ${log}`)
+    );
+  } else {
+    await CloseMoonlight(child);
+    child = null;
   }
-  setInterval(async () => {
-    const new_ip = inputIP.value
-    if (new_ip == ip) 
-      return
-    
-    try {
-      info = { ...await GetInfo(new_ip), address: new_ip }
-      ip = new_ip
-    } catch (e) {}
-  },1000)
+}
 
 
+async function StartMoonlightz() {
 
-  submitBtn.onclick = async () => {
-    const bitrate = document.getElementById("bitrate").value;
-    const height = document.getElementById("height").value;
-    const width = document.getElementById("width").value;
+  console.log("hey i am here")
 
-    if (bitrate != undefined && bitrate > 1 && bitrate < 100)
-      config.bitrate = bitrate * 1000
-    if (height != undefined && height > 100 && height < 5000)
-      config.height = height
-    if (width != undefined && width > 100 && width < 5000)
-      config.width = width
+  const computer = { address: '10.20.20.14' }; 
+  const options = { bitrate: 8000, width: 1280, height: 720 };
 
-    console.log(config)
-  };
+  StartMoonlight(computer, options, (type, log) => {
+      console.log(type,log);
+  }).then(stream => {
+      console.log('Moonlight streaming started:', stream);
+  }).catch(error => {
+      console.error('Error starting Moonlight:', error);
+  });
+}
+window.StartMoonlightz = StartMoonlightz;
 
+let cookie_name;
+let cookie_val;
 
+document.addEventListener("DOMContentLoaded", async () => {
+  document
+    .getElementById("botn-logar")
+    .addEventListener("click", async () => await tryLogar());
 
-  moonlightBtn.onclick = async () => {
-    if (child == null) {
-      child = await StartMoonlight(info , config, (data, log) => console.log(`${data} : ${log}`))
+  async function tryLogar() {
+    var login = document.querySelector(".form-do-login1").value;
+    var senha = document.querySelector(".form-do-login2").value;
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailRegex.test(login)) {
+      var params = `?email=${login}&password=${senha}`;
     } else {
-      await CloseMoonlight(child)
-      child = null
+      var params = `?username=${login}&password=${senha}`;
+    }
+
+    // axios
+    //   .get(`https://grupobright.com/api/user/generate_auth_cookie/${params}`)
+    //   .then((response) => {
+    //     afterLogin(response);
+    //   })
+    //   .catch((error) => {
+    //     document.getElementById("modal-title").innerText =
+    //       "Credenciais Inválidas";
+    //     document.getElementById("modal-message").innerText =
+    //       "O usuário ou senha inseridos estão incorretos. Por favor, tente novamente.";
+    //     document.getElementById("modal-info").innerText =
+    //       "Se o erro persistir, crie um ticket no suporte!";
+    //     document.getElementById("messageModal").classList.remove("d-none");
+    //     document.getElementById("messageModal").classList.add("d-show");
+    //     document.querySelector("#botn-logar").disabled = false;
+    //     document.querySelector("#botn-logar").innerHTML = "Login";
+    //     new Promise((res) => setTimeout(res, 5000)).then(() => {
+    //       return;
+    //     });
+    //   });
+  }
+
+  async function afterLogin(response) {
+    if (response.data.status == "error") {
+      document.getElementById("modal-title").innerText =
+        "Credenciais Inválidas";
+      document.getElementById("modal-message").innerText =
+        "O usuário ou senha inseridos estão incorretos. Por favor, tente novamente.";
+      document.getElementById("messageModal").classList.remove("d-none");
+      document.getElementById("messageModal").classList.add("d-show");
+      document.querySelector("#botn-logar").disabled = false;
+      document.querySelector("#botn-logar").innerHTML = "Login";
+      new Promise((res) => setTimeout(res, 5000)).then(() => {
+        return;
+      });
+    } else {
+      localStorage.setItem("cookie_name", response.data.cookie_name);
+      localStorage.setItem("cookie_value", response.data.cookie);
+      window.userName = `${response.data.user.displayname}`;
+      const config = {
+        method: "GET",
+        url: "https://grupobright.com/check.php",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: `${response.data.cookie_name}=${response.data.cookie};`,
+        },
+      };
+      // axios.request(config).then((response2) => {
+      //   window.authToken = response2.data;
+      // });
     }
   }
 });
 
+const moonlightBtn = document.getElementById("connectBtn");
+const submitBtn = document.getElementById("submitBtn");
+const inputIP = document.getElementById("formdoip");
+
+// setInterval(async () => {
+//   const new_ip = inputIP.value;
+//   if (new_ip == ip) return;
+
+//   try {
+//     info = { ...(await GetInfo(new_ip)), address: new_ip };
+//     ip = new_ip;
+//   } catch (e) {}
+// }, 1000);
+
+function checarAssinatura() {
+  const config = {
+    method: "GET",
+    url: "https://grupobright.com/checkpriority.php",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Cookie: `${localStorage.getItem("cookie_name")}=${localStorage.getItem(
+        "cookie_value"
+      )};`,
+    },
+  };
+  // axios.request(config).then((response) => {
+  //   socket.emit("checarAssinatura", response.data);
+  // });
+  return;
+}
+
+window.checarAssinatura = checarAssinatura;

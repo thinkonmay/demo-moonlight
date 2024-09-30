@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button onclick="iniciarVm()">INICIAR VM</button>
+    <div id="reemodiv"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://static.reemo.io/reemo.min.js"></script> 
+<script>
+xhr1=new XMLHttpRequest();
+xhr1.open("GET","https://4.228.193.142/vmcontrol/statusVm_reemo")
+xhr1.onload = function () {
+    if (xhr1.status==200){
+	    var json = JSON.parse(xhr1.responseText);
+		const reemo = new Reemo.WebClient(); 
+		reemo.init('reemodiv'); 
+		reemo.connect(json);
+	}else {console.log("SEM VM ATIVA")}
+}
+		xhr1.send()
+
+        
+function iniciarVm(){
+    socket.emit("vmCommand",{"event":"list"})
+}
+
+
+const {token} = sessionStorage;
+const socket = io.connect();
+socket.on('connect', function (msg) {
+    console.log("CONECTADO")    
+    
+});
+
+socket.on("private",function(msg){
+    window.location.href="https://4.228.193.142/painel"
+    console.log(socket)
+})
+
+socket.on("vms",function(msg){
+    console.log(msg[0])
+    socket.emit("vmCommand",{"event":"createVm","game":"fortnite"})
+})
+socket.on("cookie",function(msg){
+    console.log("Cookie> ",msg)
+    document.cookie=`info=${msg};`
+})
+
+socket.on("created",function(msg){
+    const reemo = new Reemo.WebClient(); 
+    reemo.init('reemodiv'); 
+	reemo.connect(msg.pc);
+    console.log(msg)
+
+})
+
+</script>
+</body>
+</html>
