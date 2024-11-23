@@ -1,5 +1,6 @@
 import {
   CloseMoonlight,
+  DiscordRichPresence,
   StartMoonlight,
 } from "../../src-tauri/tauri.ts";
 
@@ -31,6 +32,9 @@ window.closeApp = async () => {
   await CloseMoonlight(window.moonlight);
   window.moonlight = null;
 }
+
+const appid = '1200358403885760522'
+window.discord = () => DiscordRichPresence(appid,'Thinkmay',`I'm using thinkmay`)
 
 
 document.addEventListener("DOMContentLoaded", async () => {
