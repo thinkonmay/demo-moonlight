@@ -1,6 +1,5 @@
 import {
   CloseMoonlight,
-  GetInfo,
   StartMoonlight,
 } from "../../src-tauri/tauri.ts";
 
@@ -17,24 +16,22 @@ overrideGlobalXHR();
 import axios from "axios";
 
 
-let info = {};
-let ip = "";
-let child = null;
-async function iniciarApp(computer, streamConfig) {
-  if (child == null) {
-    child = await StartMoonlight(computer, streamConfig, (data, log) =>
-      console.log(`${data} : ${log}`)
-    );
-  } else {
-    await CloseMoonlight(child);
-    child = null;
-  }
+
+window.moonlight = null
+window.initiateApp = async (computer, streamConfig) => {
+  window.moonlight = await StartMoonlight(computer, streamConfig, (data, log) =>
+    console.log(`${data} : ${log}`)
+  );
 }
 
-window.iniciarApp = iniciarApp;
+window.closeApp = async () => {
+  if (window.moonlight == null) 
+    throw new Error('moonlight not available')
 
-let cookie_name;
-let cookie_val;
+  await CloseMoonlight(window.moonlight);
+  window.moonlight = null;
+}
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   document

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --open --node-env development",
     "build": "webpack --node-env production",
-    "tauri": "tauri",
+    "tauri": "tauri build --debug",
     "iniciar": "npm run build && npm run tauri dev"
   },
   "devDependencies": {
