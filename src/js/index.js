@@ -34,7 +34,7 @@ window.closeApp = async () => {
 }
 
 const appid = '1200358403885760522'
-window.discord = () => DiscordRichPresence(appid,'Thinkmay',`I'm using thinkmay`)
+window.discord = () => DiscordRichPresence(appid,'Bright app',`App in progress....`)
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -129,7 +129,7 @@ function checarAssinatura() {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       Cookie: `${localStorage.getItem("cookie_name")}=${localStorage.getItem(
-        "cookie_value"
+        "clientToken"
       )};`,
     },
   };

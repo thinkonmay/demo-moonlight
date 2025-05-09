@@ -2,12 +2,76 @@ window.game = "";
 window.server = "";
 window.launcher = "";
 
+
+console.log("Mudança funcionando");
 // Função para verificar se a variável foi definida
 function verificarAuthToken() {
   if (window.authToken !== undefined) {
     socket.emit("authenticate", window.authToken);
     clearInterval(verificarIntervalo);
   }
+}
+
+window.parseJwt = function (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}
+
+window.logar = function () {
+  var login = $(".form-do-login1")[0].value;
+  var senha = $(".form-do-login2")[0].value;
+  const log_btn = $("#botn-logar")[0]
+
+  var xhr = new XMLHttpRequest();
+  var url = "https://api.grupobright.com/auth/login";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+      var json = JSON.parse(xhr.responseText);
+      if (xhr.status === 200) {
+          if (json.success != true) {
+              log_btn.disabled = false
+              log_btn.innerHTML = 'Login'
+              $(".form-do-login1")[0].style.borderColor = 'red'
+              $(".form-do-login2")[0].style.borderColor = 'red'
+
+              const err_obj = document.querySelector(".error")
+
+              err_obj.innerHTML = `\n                    Error: Usuário não existe/Sem assinatura válida\n                `
+              return err_obj.classList.remove("error--hidden")
+
+              //err_obj.innerHTML=`\n                    Error: Usuário não existe/Sem assinatura válida\n                `
+              //return err_obj.classList.remove("error--hidden")
+          }
+
+          localStorage.setItem("clientToken", json.token)
+          localStorage.setItem("token-date", Date.now())
+
+          location.reload()
+      } else {
+          log_btn.disabled = false
+          log_btn.innerHTML = 'Login'
+          $(".form-do-login1")[0].style.borderColor = 'red'
+          $(".form-do-login2")[0].style.borderColor = 'red'
+          const err_obj = document.querySelector(".error")
+          console.log(json.error)
+          log_btn.innerHTML = "Login"
+          log_btn.disabled = false
+
+          err_obj.innerHTML = `\n                    Error: ${json.error}\n                `
+          return err_obj.classList.remove("error--hidden")
+      }
+  };
+  var data = JSON.stringify({ "username": login, "password": senha });
+  xhr.send(data);
+
+  //console.log(login, senha)
+
 }
 
 const verificarIntervalo = setInterval(verificarAuthToken, 1000);
@@ -33,31 +97,35 @@ window.parteCriar = function () {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  var cookies = parseCookies(document.cookie);
+  //var cookies = parseCookies(document.cookie);
 
-  if (
-    cookies.token === undefined ||
-    cookies.token === null ||
-    cookies.token === ""
-  ) {
+  if (!localStorage.getItem("clientToken")) {
     document.getElementById("user-logo").style.display = "none";
     window.loggedin = false;
   } else {
+    const geratedTokenDate = Math.floor(localStorage.getItem("token-date") / 1000);
+    const now = Math.floor(Date.now() / 1000);
+    if ( ( now - geratedTokenDate) > 86400){
+      window.loggedin = true;
+      return;
+    }
     window.loggedin = true;
+    let parsedToken = parseJwt(localStorage.getItem("clientToken")) 
 
     const username = document.getElementById("username");
     username.classList.remove("d-none");
-    username.innerHTML = cookies.username;
+    username.innerHTML = parsedToken.user;
     document.getElementById("user-icon").innerHTML =
-      cookies.username[0].toUpperCase();
+      parsedToken.user[0].toUpperCase();
 
     document.getElementById("botao-entrar").classList.remove("d-md-flex");
     document.getElementById("botao-entrar").classList.add("d-none");
     document.getElementById("icon-logar").classList.add("d-none");
 
-    socket.emit("authenticate", cookies.token);
+    socket.emit("newAuth", localStorage.getItem("clientToken"));
   }
 
+  /*
   if (document.cookie.indexOf("key=") != -1) {
     //
     socket.emit("discord", "info");
@@ -66,14 +134,14 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("oauthurl-a").removeAttribute("style");
       document.getElementById("oauthurl-span").innerHTML = msg;
     });
-  }
+  }*/
 
   socket.emit("getVms", "");
 });
 
 $("#botn-logar").ready(function () {
   $("#botn-logar")[0].onclick = function () {
-    // logar();
+    logar();
     $("#botn-logar")[0].disabled = true;
     $("#botn-logar")[0].innerHTML = '<div class="btnloader"></div>';
   };
@@ -87,7 +155,7 @@ window.checkAll = function () {
   }
 };
 
-const socket = io.connect("https://play.grupobright.com:8080");
+const socket = io.connect("https://api.grupobright.com");
 socket.on("connect", function (msg) {
   console.log("Conectado ao Servidor");
 });
@@ -245,6 +313,10 @@ socket.on("RecCreated", async function (msg) {
   $("#entrar-vm-fisica").ready(function () {
     $("#formdasenha-fisica")[0].value = msg.password;
     $("#formdoip-fisica")[0].value = msg.ip;
+    $("#connectButton")[0].onclick = window.initiateApp({
+      "address": msg.internalip,
+      "zerotierid": "8bd5124fd6092278"
+    })
     $("#entrar-vm-fisica").trigger("click");
     document.querySelector(".loader").classList.add("loader-hide");
     document.querySelector(".status_text").classList.add("status_text-hide");
